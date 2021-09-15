@@ -1,0 +1,14 @@
+.stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.statsItem {
+    flex : 1;
+    margin: 5px 5px 5px 5px;
+    padding: 30px;
+    border-radius: 10px;
+    cursor : pointer;
+
+}
