@@ -1,3 +1,11 @@
+"""
+  Author : Ratan Singh
+  Email : [ratansingh648@gmail.com]
+  Date Created : 2021-09-18 21:20:31
+  Last Modified : 2021-09-18 21:20:31
+  Description : This file configures database, registers the blueprint and extensions
+"""
+
 from os import path
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
 from importlib import import_module

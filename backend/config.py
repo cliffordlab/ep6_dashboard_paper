@@ -1,3 +1,11 @@
+"""
+  Author : Ratan Singh
+  Email : [ratansingh648@gmail.com]
+  Date Created : 2021-09-18 21:21:09
+  Last Modified : 2021-09-18 21:21:09
+  Description : This is a configuration file holding different configurations for different environments.
+"""
+
 import os
 from decouple import config
 
