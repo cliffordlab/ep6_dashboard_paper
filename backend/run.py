@@ -17,6 +17,7 @@ from app import create_app, db
 
 # Fetching the environment from local configuration file .env
 ENV = config('ENV', default="UAT")
+PORT = config("PORT", default=9800)
 
 try:
     app_config = config_dict[ENV.upper()]
@@ -38,4 +39,4 @@ if DEBUG:
     app.logger.info('DBMS        = ' + app_config.SQLALCHEMY_DATABASE_URI)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=PORT)
