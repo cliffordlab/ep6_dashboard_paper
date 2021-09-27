@@ -1,19 +1,42 @@
 import React from 'react'
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+
 import NavBar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
-import Home from './components/home/Home'
+
+import Humidity from './pages/humidity/Humidity'
+import Visual from './pages/visual/Visual'
+import Audio from './pages/audio/Audio'
+
 
 import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <div className="container">
-        <SideBar />
-        <Home />
+    <Router>
+        <div className="App">
+          <NavBar />
+            <div className="container">
+              <SideBar />
+
+              <Switch>
+              
+              <Route path="/audio">
+                <Audio />
+              </Route>
+
+              <Route path="/visual">
+                <Visual />
+              </Route>
+
+              <Route path="/humidity">
+                <Humidity />
+              </Route>
+              </Switch>
+            </div>
       </div>
-    </div>
+    </Router>
+    
   );
 }
 
