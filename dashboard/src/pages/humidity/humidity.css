@@ -1,0 +1,8 @@
+.humidity {
+  flex: 4;
+}
+
+.humiditychart-wrapper {
+  height: 60vh;
+  margin-right: 15px;
+}
