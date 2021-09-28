@@ -16,9 +16,9 @@ function App() {
     <Router>
         <div className="App">
           <NavBar />
+
             <div className="container">
               <SideBar />
-
               <Switch>
               
               <Route path="/audio">
@@ -32,6 +32,7 @@ function App() {
               <Route path="/humidity">
                 <Humidity />
               </Route>
+
               </Switch>
             </div>
       </div>
