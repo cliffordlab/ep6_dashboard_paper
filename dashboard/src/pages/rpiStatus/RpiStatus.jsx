@@ -1,14 +1,12 @@
 import React from 'react'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import {Table, TableBody, TableCell, TableRow, TableHead, Tooltip, IconButton }from '@mui/material';
+
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import WarningIcon from '@mui/icons-material/Warning';
 import RestartAltTwoToneIcon from '@mui/icons-material/RestartAltTwoTone';
+
 
 import './rpiStatus.css'
 
@@ -21,12 +19,12 @@ export default function RpiStatus(props) {
 
     const statusIcon = (status) => {
         if(status == "connected"){
-            return(<CheckCircleIcon style={{fill:"green"}}/>)
+            return(<CheckCircleIcon style={{fill:"green", fontSize:20}}/>)
         }
         else if(status == "disconnected"){
-            return(<CancelIcon style={{fill:"red"}}/>)
+            return(<CancelIcon style={{fill:"red", fontSize:20}}/>)
         }
-        return(<WarningIcon style={{fill:"orange"}}/>)
+        return(<WarningIcon style={{fill:"orange", fontSize:20}}/>)
     }
 
     return (
@@ -50,7 +48,7 @@ export default function RpiStatus(props) {
                             <TableCell align="center">{row.location}</TableCell>
                             <TableCell align="center">{row.ipAddress}</TableCell>
                             <TableCell align="center">{statusIcon(row.status)}</TableCell>
-                            <TableCell align="center"><RestartAltTwoToneIcon style={{fill:"blue"}}/></TableCell>
+                            <TableCell align="center"> <Tooltip title="Reboot"><IconButton><RestartAltTwoToneIcon style={{fill:"blue", fontSize:25}}/></IconButton></Tooltip></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
