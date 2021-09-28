@@ -5,7 +5,7 @@ import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAnt
 import { NavLink, useLocation } from 'react-router-dom'
 import './sidebar.css'
 
-const ToggleBtn=(e, val)=>{
+const ToggleBtn = (e, val) => {
     console.log(val)
 }
 
