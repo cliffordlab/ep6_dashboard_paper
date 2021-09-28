@@ -1,7 +1,12 @@
 import React from 'react'
+
 import { GraphicEq, CameraAltTwoTone, WbSunnyTwoTone} from "@material-ui/icons"
+import Button from '@mui/material/Button';
 import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAntennaTwoTone';
 import { NavLink, useLocation } from 'react-router-dom'
+
+
+
 import './sidebar.css'
 
 
@@ -18,7 +23,7 @@ export default function SideBar() {
                     <h3 className="sidebarTitle">Status and Control</h3>
 
                     <ul className="sidebarList">
-                    <NavLink to="/audio" className="link"><li className={splitLocation[1] === "network" ? "sidebarListItem active" : "sidebarListItem"}><SettingsInputAntennaTwoToneIcon className="sidebarIcon" /> RPI Network</li></NavLink>
+                    <NavLink to="/status" className="link"><li className={splitLocation[1] === "status" ? "sidebarListItem active" : "sidebarListItem"}><SettingsInputAntennaTwoToneIcon className="sidebarIcon" /> RPI Network</li></NavLink>
                     </ul>
 
                     <h3 className="sidebarTitle">Dashboard</h3>

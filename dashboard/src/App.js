@@ -7,7 +7,7 @@ import SideBar from './components/sidebar/SideBar'
 import Humidity from './pages/humidity/Humidity'
 import Visual from './pages/visual/Visual'
 import Audio from './pages/audio/Audio'
-
+import RpiStatus from './pages/rpiStatus/RpiStatus'
 
 import './App.css'
 
@@ -20,7 +20,12 @@ function App() {
               <SideBar />
 
               <Switch>
-              
+
+              <Route path="/status">
+                <RpiStatus />
+              </Route>
+
+
               <Route path="/audio">
                 <Audio />
               </Route>
