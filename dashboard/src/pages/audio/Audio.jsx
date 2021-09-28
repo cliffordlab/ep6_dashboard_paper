@@ -26,8 +26,8 @@ const Audio = (props) => {
                         data :  audioData.data.y,
                         borderColor: 'brown',
                         borderWidth: 2,
-                        fill: true,
-                        lineTension: 0.5,
+                        fill: false,
+                        lineTension: 0,
                         pointRadius : 2,
                         pointHoverRadius : 5,
                         pointHoverBackgroundColor : 'rgb(127,127,127)'
