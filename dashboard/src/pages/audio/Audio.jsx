@@ -24,7 +24,7 @@ const Audio = (props) => {
          
          <Stats stats={audioData.stat}/>
 
-         <div className="audiochart-wrapper" style={{width: "900px", height: "400px", marginLeft: "auto", marginRight: "auto"}}>
+         <div className="audiochart-wrapper">
             <Line
                data = {{
                   labels:  audioData.data.x,
