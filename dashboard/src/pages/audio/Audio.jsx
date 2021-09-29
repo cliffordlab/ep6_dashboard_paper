@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import { Line } from 'react-chartjs-2'
+import React, {useEffect, useState} from 'react';
+import * as Zoom from 'chartjs-plugin-zoom';
+import { Line } from 'react-chartjs-2';
 import Stats from '../../components/stats/Stats';
-import ToolBar from '../../components/toolbar/ToolBar'
 
 import './audio.css'
 
@@ -13,6 +13,10 @@ const Audio = (props) => {
          setAudioData(data);
       });
    }, []);
+
+   const Chart = () => {
+      const [chartData, SetChartData] = useState({});
+   }
 
 
    return (
@@ -41,6 +45,8 @@ const Audio = (props) => {
                height = {400}
                width = {600}
                options = {{
+                  responsive: true,
+                  title: {text: "iron man", display: true},
                   maintainAspectRatio: false,
                   scales: {
                      yAxes: [
@@ -50,10 +56,28 @@ const Audio = (props) => {
                               labelString: 'Y-Axis'
                            },
                            ticks: {
+                              autoSkip: true,
+                              maxTicksLimit: 10,
                               beginAtZero: true
                            }
                         }
                      ]
+                  },
+                  pan: {
+                     enabled: true,
+                     mode: "xy",
+                     speed: 10,
+                  },
+                  zoom: {
+                     wheel: {
+                        enabled: true,
+                     },
+                     drag: false,
+                     mode: "xy",
+                     limits: {
+                        x: {min: 0, max: 400, minRange: 10},
+                        y: {min: -200, max: 400, minRange: 10}
+                      },
                   }
                }}
             /> 
