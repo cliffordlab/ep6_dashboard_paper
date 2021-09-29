@@ -28,11 +28,11 @@ const Audio = (props) => {
                      {
                         label: 'Audio 1',
                         data :  audioData.data.y,
-                        borderColor: 'black',
+                        borderColor: 'brown',
                         borderWidth: 2,
-                        fill: false,
-                        lineTension: 0,
-                        pointRadius : 1,
+                        fill: true,
+                        lineTension: 0.5,
+                        pointRadius : 2,
                         pointHoverRadius : 5,
                         pointHoverBackgroundColor : 'rgb(127,127,127)'
                      }
