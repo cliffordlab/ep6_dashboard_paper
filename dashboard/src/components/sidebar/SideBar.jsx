@@ -1,8 +1,12 @@
 import React from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
+
 import { GraphicEq, CameraAltOutlined, WbSunnyOutlined} from "@material-ui/icons"
 import {Switch} from '@material-ui/core'
 import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAntennaTwoTone';
-import { NavLink, useLocation } from 'react-router-dom'
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+
+
 import './sidebar.css'
 
 const ToggleBtn = (e, val) => {
@@ -22,7 +26,7 @@ export default function SideBar() {
                     <h3 className="sidebarTitle">Status and Control</h3>
 
                     <ul className="sidebarList">
-                    <NavLink to="/audio" className="link"><li className={splitLocation[1] === "network" ? "sidebarListItem active" : "sidebarListItem"}><SettingsInputAntennaTwoToneIcon className="sidebarIcon" /> RPI Network</li></NavLink>
+                    <NavLink to="/status" className="link"><li className={splitLocation[1] === "status" ? "sidebarListItem active" : "sidebarListItem"}><SettingsInputAntennaTwoToneIcon className="sidebarIcon" /> RPI Network</li></NavLink>
                     </ul>
 
                     <h3 className="sidebarTitle">Dashboard</h3>
@@ -33,11 +37,14 @@ export default function SideBar() {
                     <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyOutlined className="sidebarIcon" /> Temperature</li></NavLink>
                     </ul>
                 </div>
-                <Switch
-                color = "primary"
-                size = "medium"
-                onChange={ToggleBtn}
-                />
+                <div className="toggleTheme">
+                    <div className="darkMode">
+                        <DarkModeIcon className="darkMode"/>
+                        Dark Mode
+                    </div>
+                    <Switch color = "primary" size = "large" onChange={ToggleBtn} defaultChecked/>
+                </div>
+
             </div>
         </div>
     )

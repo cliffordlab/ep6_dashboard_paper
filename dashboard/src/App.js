@@ -7,7 +7,9 @@ import SideBar from './components/sidebar/SideBar'
 import Humidity from './pages/humidity/Humidity'
 import Visual from './pages/visual/Visual'
 import Audio from './pages/audio/Audio'
-
+import RpiStatus from './pages/rpiStatus/RpiStatus'
+import ToolBar from './components/toolbar/ToolBar'
+import Home from './pages/home/Home'
 
 import './App.css'
 
@@ -20,7 +22,12 @@ function App() {
             <div className="container">
               <SideBar />
               <Switch>
-              
+
+              <Route path="/status">
+                <RpiStatus />
+              </Route>
+
+
               <Route path="/audio">
                 <Audio />
               </Route>
@@ -32,6 +39,12 @@ function App() {
               <Route path="/humidity">
                 <Humidity />
               </Route>
+
+              <Route exact="/">
+                <Home/>
+              </Route>
+
+
 
               </Switch>
             </div>
