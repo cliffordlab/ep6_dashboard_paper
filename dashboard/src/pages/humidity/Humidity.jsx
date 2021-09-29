@@ -27,21 +27,21 @@ const Humidity = (props) => {
                   {
                      label: 'Humidity',
                      data :  humidityData.data.humidity,
-                     borderColor: 'brown',
+                     borderColor: 'red',
                      borderWidth: 2,
-                     fill: false,
-                     lineTension: 0,
-                     pointRadius : 2,
+                     fill: true,
+                     lineTension: 0.5,
+                     pointRadius : 1,
                      pointHoverRadius : 5,
                      pointHoverBackgroundColor : 'rgb(127,127,127)'
                   },
                   {
                      label: 'Temperature',
                      data :  humidityData.data.temperature,
-                     borderColor: 'red',
+                     borderColor: 'blue',
                      borderWidth: 2,
-                     fill: false,
-                     lineTension: 0,
+                     fill: true,
+                     lineTension: 0.5,
                      pointRadius : 2,
                      pointHoverRadius : 5,
                      pointHoverBackgroundColor : 'rgb(127,127,5)'

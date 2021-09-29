@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {Table, TableBody, TableCell, TableRow, TableHead, Tooltip, IconButton }from '@mui/material';
 
@@ -12,10 +12,15 @@ import './rpiStatus.css'
 
 export default function RpiStatus(props) {
 
-    const rows = [  {'name' : "Kitchen PI - 04", 'location' : 'Kitchen', 'ipAddress' : '192.168.0.13', 'status' : 'connected'}, 
-                    {"name" : "Kitchen PI - 01", 'location' : 'Kitchen', 'ipAddress' : '192.168.0.7', 'status' : 'disconnected'}, 
-                    {"name" : "Kitchen PI - 02", 'location' : 'Kitchen', 'ipAddress' : '192.168.0.19', 'status' : 'disconnected'}, 
-                    {"name" : "Kitchen PI - 03", 'location' : 'Kitchen', 'ipAddress' : '192.168.0.29', 'status' : 'booting'}]
+    const [statusData, setStatusData] = useState({data : []});
+    useEffect(() => {
+        fetch('/visual/get-status').then(res => res.json()).then(data => {
+            setStatusData(data);
+            console.log("response")
+            console.log(data)
+        });
+    }, []);
+                 
 
     const statusIcon = (status) => {
         if(status == "connected"){
@@ -26,6 +31,9 @@ export default function RpiStatus(props) {
         }
         return(<WarningIcon style={{fill:"orange", fontSize:20}}/>)
     }
+
+    console.log("Roger that")
+    console.log(statusData)
 
     return (
         <div className="rpistatus">    
@@ -42,7 +50,7 @@ export default function RpiStatus(props) {
                     </TableHead>
 
                     <TableBody>
-                        {rows.map((row) => (
+                        {statusData.data.map((row) => (
                             <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell align="center">{row.name}</TableCell>
                             <TableCell align="center">{row.location}</TableCell>

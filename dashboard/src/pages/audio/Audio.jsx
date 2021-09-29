@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { Line } from 'react-chartjs-2'
 import Stats from '../../components/stats/Stats';
+import ToolBar from '../../components/toolbar/ToolBar'
+
 import './audio.css'
 
 const Audio = (props) => {
@@ -15,7 +17,9 @@ const Audio = (props) => {
 
    return (
       <div className="audio">
+         
          <Stats stats={audioData.stat}/>
+
          <div className="audiochart-wrapper">
             <Line
                data = {{
@@ -26,8 +30,8 @@ const Audio = (props) => {
                         data :  audioData.data.y,
                         borderColor: 'brown',
                         borderWidth: 2,
-                        fill: false,
-                        lineTension: 0,
+                        fill: true,
+                        lineTension: 0.5,
                         pointRadius : 2,
                         pointHoverRadius : 5,
                         pointHoverBackgroundColor : 'rgb(127,127,127)'
@@ -41,6 +45,10 @@ const Audio = (props) => {
                   scales: {
                      yAxes: [
                         {
+                           scaleLabel: {
+                              display: true,
+                              labelString: 'Y-Axis'
+                           },
                            ticks: {
                               beginAtZero: true
                            }

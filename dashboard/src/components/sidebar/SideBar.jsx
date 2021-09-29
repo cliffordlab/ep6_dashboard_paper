@@ -1,14 +1,17 @@
 import React from 'react'
-
-import { GraphicEq, CameraAltTwoTone, WbSunnyTwoTone} from "@material-ui/icons"
-import Button from '@mui/material/Button';
-import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAntennaTwoTone';
 import { NavLink, useLocation } from 'react-router-dom'
 
+import { GraphicEq, CameraAltOutlined, WbSunnyOutlined} from "@material-ui/icons"
+import {Switch} from '@material-ui/core'
+import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAntennaTwoTone';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 
 import './sidebar.css'
 
+const ToggleBtn = (e, val) => {
+    console.log(val)
+}
 
 export default function SideBar() {
     const location = useLocation();
@@ -30,10 +33,18 @@ export default function SideBar() {
 
                     <ul className="sidebarList">
                     <NavLink to="/audio" className="link"><li className={splitLocation[1] === "audio" ? "sidebarListItem active" : "sidebarListItem"}><GraphicEq className="sidebarIcon" /> Audio</li></NavLink>
-                    <NavLink to="/visual" className="link"><li className={splitLocation[1] === "visual" ? "sidebarListItem active" : "sidebarListItem"}><CameraAltTwoTone className="sidebarIcon" /> Visuals</li></NavLink>
-                    <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyTwoTone className="sidebarIcon" /> Temperature</li></NavLink>
+                    <NavLink to="/visual" className="link"><li className={splitLocation[1] === "visual" ? "sidebarListItem active" : "sidebarListItem"}><CameraAltOutlined className="sidebarIcon" /> Visuals</li></NavLink>
+                    <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyOutlined className="sidebarIcon" /> Temperature</li></NavLink>
                     </ul>
                 </div>
+                <div className="toggleTheme">
+                    <div className="darkMode">
+                        <DarkModeIcon className="darkMode"/>
+                        Dark Mode
+                    </div>
+                    <Switch color = "primary" size = "large" onChange={ToggleBtn} defaultChecked/>
+                </div>
+
             </div>
         </div>
     )
