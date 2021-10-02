@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react'
-import { Line } from 'react-chartjs-2'
+import React, {useState} from 'react'
 import Stats from '../../components/stats/Stats'
 import './visual.css'
 
@@ -12,7 +11,8 @@ const Visual = (props) => {
       <div className="visual">
          <Stats stats={imageData}/>
          <div className="visualplot-wrapper">
-            <img src='/visual/get-data' alt="image"></img>
+            <img src='/visual/get-data' alt="home-map" useMap="#image-map">
+            </img>   
          </div>
       </div>
    )

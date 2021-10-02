@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import * as Zoom from 'chartjs-plugin-zoom';
 import { Line } from 'react-chartjs-2';
 import Stats from '../../components/stats/Stats';
 
@@ -13,11 +12,6 @@ const Audio = (props) => {
          setAudioData(data);
       });
    }, []);
-
-   const Chart = () => {
-      const [chartData, SetChartData] = useState({});
-   }
-
 
    return (
       <div className="audio">
