@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import NavBar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
@@ -8,7 +8,6 @@ import Humidity from './pages/humidity/Humidity'
 import Visual from './pages/visual/Visual'
 import Audio from './pages/audio/Audio'
 import RpiStatus from './pages/rpiStatus/RpiStatus'
-import ToolBar from './components/toolbar/ToolBar'
 import Home from './pages/home/Home'
 
 import './App.css'

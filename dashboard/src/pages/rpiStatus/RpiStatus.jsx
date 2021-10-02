@@ -23,10 +23,10 @@ export default function RpiStatus(props) {
                  
 
     const statusIcon = (status) => {
-        if(status == "connected"){
+        if(status === "connected"){
             return(<CheckCircleIcon style={{fill:"green", fontSize:20}}/>)
         }
-        else if(status == "disconnected"){
+        else if(status === "disconnected"){
             return(<CancelIcon style={{fill:"red", fontSize:20}}/>)
         }
         return(<WarningIcon style={{fill:"orange", fontSize:20}}/>)
