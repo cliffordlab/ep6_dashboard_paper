@@ -50,7 +50,7 @@ def get_points():
         "coords": [219, 118, 220, 210, 283, 210, 284, 119],
         "preFillColor": "transparent",
         "lineWidth": 5,
-        "strokeColor": "#0000ff"
+        "strokeColor": "#transparent"
     },
         {
         "name": "3",
@@ -58,7 +58,7 @@ def get_points():
         "coords": [381, 241, 383, 94, 462, 53, 457, 282],
         "preFillColor": "transparent",
         "lineWidth": 5,
-        "strokeColor": "#6afd09"
+        "strokeColor": "#transparent"
     },
         {
         "name": "4",
@@ -69,17 +69,26 @@ def get_points():
         {
         "name": "5",
         "shape": "circle",
-        "coords": [170, 100, 25],
+        "coords": [170, 100, 10],
         "preFillColor": "rgb(255,255,255,0.3)",
         "lineWidth": 2
     },
+        {
+        "name": "5.5",
+        "shape": "poly",
+        "coords": [170, 100, 170, 180, 246, 156],
+        "preFillColor": "transparent",
+        "fillColor": "#0000ff",
+        "strokeColor": "transparent"
+    },
+
         {
         "name": "6",
         "shape": "rect",
         "coords": [270, 100, 200, 50],
         "lineWidth": 2,
         "preFillColor": "rgba(255, 255, 255, 0.3)",
-        "strokeColor": "#6afd09"
+        "strokeColor": "transparent"
     }
     ]}
     return point_map
