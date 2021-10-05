@@ -10,7 +10,7 @@ export default function NavBar() {
     return (
         <div className="navbar">
             <div className="navbarWrapper">
-                <span className="logo">EP6 Dashboard</span>
+            <a href="/" className="link"><span className="logo">EP6 Dashboard</span></a>
                 <div>
                 <Tooltip title="Export Data"><IconButton><SaveAltIcon style={{fill:"white",fontSize:25}}/></IconButton></Tooltip>
                 <Tooltip title="Settings"><IconButton><SettingsIcon style={{fill:"white", fontSize:25}}/></IconButton></Tooltip>
