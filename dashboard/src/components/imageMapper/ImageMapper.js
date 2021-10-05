@@ -38,7 +38,8 @@ export default class ImageMapper extends Component {
 		const propChanged = this.watchedProps.some(
 			prop => this.props[prop] !== nextProps[prop]
 		);
-		return !isEqual(this.props.map, this.state.map) || propChanged;
+		const map_len = (this.props.map.areas.length != nextProps.map.areas.length);
+		return !isEqual(this.props.map, this.state.map) || propChanged || map_len;
 	}
 
 	componentWillMount() {
