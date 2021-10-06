@@ -1,0 +1,9 @@
+.rpistatus {
+  flex: 4;
+}
+
+.table-wrapper {
+  padding-left: 10px;
+  padding-right: 50px;
+  padding-top: 50px;
+}

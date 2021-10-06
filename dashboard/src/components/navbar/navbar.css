@@ -1,0 +1,24 @@
+.navbar{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(20, 24, 51);
+    position: sticky;
+    top: 0;
+}
+
+.navbarWrapper{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 0px 20px;
+    z-index: 999;
+}
+
+
+.logo{
+    font-size: 30px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}

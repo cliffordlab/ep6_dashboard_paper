@@ -1,0 +1,8 @@
+.audio {
+  flex: 4;
+}
+
+.audiochart-wrapper {
+  height: 60vh;
+  margin-right: 15px;
+}
