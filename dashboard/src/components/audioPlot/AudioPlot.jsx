@@ -1,6 +1,11 @@
 import React from 'react'
 
 import { Line } from 'react-chartjs-2';
+import zoomPlugin from "chartjs-plugin-zoom";
+
+
+Chart.register(zoomPlugin);
+
 
 
 export default function AudioPlot(props) {
@@ -64,39 +69,43 @@ export default function AudioPlot(props) {
                width = {props.width}
                options = {{
                   responsive: true,
-                  title: {text: "Audio", display: true},
                   maintainAspectRatio: false,
                   scales: {
-                     yAxes: [
-                        {
-                           scaleLabel: {
-                              display: true,
-                              labelString: 'dB'
-                           },
-                           ticks: {
-                              autoSkip: true,
-                              maxTicksLimit: 10,
-                              beginAtZero: true
-                           }
-                        }
-                     ]
+                      yAxes: [
+                          {
+                              scaleLabel: {
+                                  display: true,
+                                  labelString: "Average Personal Income",
+                                  fontColor: "#546372",
+                              },
+                              ticks: {
+                                  autoSkip: true,
+                                  maxTicksLimit: 10,
+                                  beginAtZero: true,
+                              },
+                              title: {
+                                  display: true,
+                                  text: "Y axis title",
+                              },
+                          },
+                      ],
                   },
-                  pan: {
-                     enabled: true,
-                     mode: "xy",
-                     speed: 10,
-                  },
-                  zoom: {
-                     wheel: {
-                        enabled: true,
-                     },
-                     drag: false,
-                     mode: "xy",
-                     limits: {
-                        x: {min: 0, max: 400, minRange: 10},
-                        y: {min: -200, max: 400, minRange: 10}
+                  plugins: {
+                      zoom: {
+                          pan: {
+                              enabled: true,
+                              mode: "xy",
+                          },
+                          zoom: {
+                              wheel: {
+                                  enabled: true,
+                              },
+                              mode: "x",
+                              speed: 100,
+                          },
                       },
-                  }
+                  },
+
                }}
             /> 
         </div>

@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import Stats from '../../components/stats/Stats'
 import CameraMap from '../../components/cameraMap/CameraMap';
+
 import './visual.css'
 
 const Visual = (props) => {
