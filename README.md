@@ -2,8 +2,11 @@
 
 ## Requirements 
 
+Install the necessary python packages for the backend
+
 ```bash
-pip install flask flask Flask-Migrate python-decouple
+cd backend
+pip install -r requirements.txt
 ```
 
 Install the NPM packages necessary
