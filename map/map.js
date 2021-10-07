@@ -185,8 +185,8 @@ async function cams_map(file){
 
 
     
-    // Plot the microphones
-    var mics = cam_svg.selectAll("circle")
+    // Plot the cameras
+    var cams = cam_svg.selectAll("circle")
                   .data(loc_data)
                   .enter()
                   .append("circle")
@@ -203,6 +203,7 @@ async function cams_map(file){
                   .on("mouseout", function(d) {
                     d3.select(this).attr("r",6)
                 })
+
 
     // Put the texts
     var nums = cam_svg.selectAll("text")
