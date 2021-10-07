@@ -2,10 +2,16 @@ import React, {useEffect, useState} from 'react'
 
 import {Table, TableBody, TableCell, TableRow, TableHead, Tooltip, IconButton }from '@mui/material';
 
+import SettingsInputAntennaOutlinedIcon from '@mui/icons-material/SettingsInputAntennaOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import WarningIcon from '@mui/icons-material/Warning';
 import RestartAltTwoToneIcon from '@mui/icons-material/RestartAltTwoTone';
+import Typography from '@mui/material/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import HomeIcon from '@mui/icons-material/Home';
+import AirplayIcon from '@mui/icons-material/Airplay';
 
 
 import './rpiStatus.css'
@@ -37,6 +43,14 @@ export default function RpiStatus(props) {
 
     return (
         <div className="rpistatus">    
+
+         <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
+            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
+            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <AirplayIcon sx={{ mr: 0.5 }} fontSize="inherit" />Status and Control</Link>
+            <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary">
+            <SettingsInputAntennaOutlinedIcon sx={{ mr: 1 }} fontSize="inherit" />RPI Network </Typography>
+         </Breadcrumbs>
+
             <div className="table-wrapper">
                 <Table size="small">
                     <TableHead>
