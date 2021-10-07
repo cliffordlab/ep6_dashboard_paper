@@ -22,7 +22,6 @@ async function main(file){
     for (const prop in objdata) {
         obj = objdata[prop]
         obj["device"] = prop
-        console.log(obj.num_polys)
         for (let i = 0; i < obj.num_polys; i++) {
 
             obj["poly"] = obj["polys"][i]
@@ -36,12 +35,13 @@ async function main(file){
     // TODO Implement D3 vis here
     var xscale = d3.scaleLinear().domain([-35,35]).range([0,svg_w]);
     var yscale = d3.scaleLinear().domain([-15,25]).range([svg_h,0]);
-    
+
+    // TODO Get a better color space
+    var cscale = d3.scaleSequential(["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#ff9da7","#9c755f","#bab0ab"]).domain([0,40])
 
     for (let k = 0; k<data.length; k++) {
         poly_coords =  data[k].poly
         path = "M "
-        console.log(poly_coords.length)
         for (let i = 0; i < poly_coords.length; i++) {
             x = xscale(poly_coords[i][0])
             y = yscale(poly_coords[i][1])
@@ -58,7 +58,7 @@ async function main(file){
                   .append('path')
                   .attr('d',(d,i) => {
                       return d.path})
-                  .style("fill","blue")
+                  .style("fill",(d,i) => {return cscale(i)})
                   .attr("stroke","white")
                   .attr("stroke-width",2)
     
@@ -73,6 +73,7 @@ async function main(file){
                   .attr('fill',"yellow")
                   .attr("stroke","black")
                   .attr("stroke-width", 3)
+                  .attr("alpha",0.5)
 
     // Put the texts
     var nums = svg.selectAll("text")
@@ -82,8 +83,8 @@ async function main(file){
                   .attr("x", (d,i) => {return xscale(d.state[0])})
                   .attr("y", (d,i) => {return yscale(d.state[1])})
                   .text((d,i) => {return d.device})
-                  .attr('fill',"white")
-                  .attr("stroke","grey")
+                  .attr('fill',"black")
+                  .attr("stroke","black")
                   .attr("stroke-width", 2)
                   .attr('font-size', 25)
     
