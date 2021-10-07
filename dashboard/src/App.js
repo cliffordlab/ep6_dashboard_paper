@@ -9,6 +9,7 @@ import Visual from './pages/visual/Visual'
 import Audio from './pages/audio/Audio'
 import RpiStatus from './pages/rpiStatus/RpiStatus'
 import Home from './pages/home/Home'
+import Map from './pages/map/Map'
 
 import './App.css'
 
@@ -39,10 +40,15 @@ function App() {
                 <Humidity />
               </Route>
 
+              <Route path="/map">
+                <Map />
+              </Route>
+
               <Route exact="/">
                 <Home/>
               </Route>
 
+              
 
 
               </Switch>

@@ -2,6 +2,8 @@ import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import { GraphicEq, CameraAltOutlined, WbSunnyOutlined} from "@material-ui/icons"
+import MapIcon from '@mui/icons-material/Map';
+import HomeIcon from '@mui/icons-material/Home';
 import {Switch} from '@material-ui/core'
 import SettingsInputAntennaTwoToneIcon from '@material-ui/icons/SettingsInputAntennaTwoTone';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -32,9 +34,12 @@ export default function SideBar() {
                     <h3 className="sidebarTitle">Dashboard</h3>
 
                     <ul className="sidebarList">
+                    <NavLink to="/" className="link"><li className={splitLocation[1] === "home" ? "sidebarListItem active" : "sidebarListItem"}><HomeIcon className="sidebarIcon" />Home</li></NavLink>
                     <NavLink to="/visual" className="link"><li className={splitLocation[1] === "visual" ? "sidebarListItem active" : "sidebarListItem"}><CameraAltOutlined className="sidebarIcon" /> Visuals</li></NavLink>
                     <NavLink to="/audio" className="link"><li className={splitLocation[1] === "audio" ? "sidebarListItem active" : "sidebarListItem"}><GraphicEq className="sidebarIcon" /> Audio</li></NavLink>
                     <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyOutlined className="sidebarIcon" /> Temperature</li></NavLink>
+                    <NavLink to="/map" className="link"><li className={splitLocation[1] === "map" ? "sidebarListItem active" : "sidebarListItem"}><MapIcon className="sidebarIcon" />Map</li></NavLink>
+                    
                     </ul>
                 </div>
                 <div className="toggleTheme">
