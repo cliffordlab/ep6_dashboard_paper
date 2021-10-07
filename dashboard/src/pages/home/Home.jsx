@@ -15,10 +15,10 @@ export default function Home() {
     return (
         <div className="home">
             <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-                <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Dashboard</Link>
-                <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Visuals</Link>
+                <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
+                <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
                 <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary">
-                <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Breadcrumb </Typography>
+                <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />Deck</Typography>
             </Breadcrumbs>
 
             <Layout/>
