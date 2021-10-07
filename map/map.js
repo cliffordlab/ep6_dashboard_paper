@@ -66,6 +66,18 @@ async function main(file){
                   .attr("stroke","black")
                   .attr("stroke-width", 3)
 
+    // Put the texts
+    var nums = svg.selectAll("text")
+                  .data(loc_data)
+                  .enter()
+                  .append("text")
+                  .attr("x", (d,i) => {return xscale(d.state[0])})
+                  .attr("y", (d,i) => {return yscale(d.state[1])})
+                  .text((d,i) => {return d.device})
+                  .attr('fill',"white")
+                  .attr("stroke","grey")
+                  .attr("stroke-width", 2)
+                  .attr('font-size', 25)
     
 }
 
