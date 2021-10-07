@@ -19,8 +19,9 @@ async function mics_map(file){
 
     data = [];
     loc_data = [];
-    for (const prop in objdata) {
+    for (var prop in objdata) {
         obj = objdata[prop]
+        if (prop >= 13) {prop = parseInt(prop) + 1}
         obj["device"] = prop
         for (let i = 0; i < obj.num_polys; i++) {
 
