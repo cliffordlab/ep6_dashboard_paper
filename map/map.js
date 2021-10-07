@@ -52,7 +52,15 @@ async function main(file){
     }
 
 
-    
+    var regs = svg.selectAll("path")
+                  .data(data)
+                  .enter()
+                  .append('path')
+                  .attr('d',(d,i) => {
+                      return d.path})
+                  .style("fill","blue")
+                  .attr("stroke","white")
+                  .attr("stroke-width",2)
     
     // Plot the microphones
     var mics = svg.selectAll("circle")
