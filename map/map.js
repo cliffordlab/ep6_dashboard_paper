@@ -61,6 +61,10 @@ async function main(file){
                   .style("fill",(d,i) => {return cscale(i)})
                   .attr("stroke","white")
                   .attr("stroke-width",2)
+                  .attr("fill-opacity",0.6)
+                  .attr("id",(d,i) => {return "reg_"+d.device})
+
+
     
     // Plot the microphones
     var mics = svg.selectAll("circle")
@@ -73,7 +77,13 @@ async function main(file){
                   .attr('fill',"yellow")
                   .attr("stroke","black")
                   .attr("stroke-width", 3)
-                  .attr("alpha",0.5)
+                  .attr("id",(d,i) => {return "dev_"+d.device})
+                  .on("mouseover", function(d) {
+                      d3.select(this).attr("r",10)
+                  })
+                  .on("mouseout", function(d) {
+                    d3.select(this).attr("r",6)
+                })
 
     // Put the texts
     var nums = svg.selectAll("text")
@@ -86,8 +96,34 @@ async function main(file){
                   .attr('fill',"black")
                   .attr("stroke","black")
                   .attr("stroke-width", 2)
-                  .attr('font-size', 25)
+                  .attr("id",(d,i) => {return "txt_"+d.device})
+                  .attr('font-size', 18)
     
+    // Add Interactivity
+    
+    regs.on("mouseover", function(d){
+            d3.select(this).attr("fill-opacity",1)
+            dev = d.target.id.slice(4)
+            d3.select("#dev_"+dev).attr("r",10)
+            d3.select("#reg_"+dev).attr("fill-opacity",1)
+            d3.select("#txt_"+dev).attr("font-size",30).attr("fill","white")
+        })
+        .on("mouseout", function(d){
+            dev = d.target.id.slice(4)
+            d3.select(this).attr("fill-opacity",0.6)
+            d3.select("#dev_"+dev).attr("r",6)
+            d3.select("#reg_"+dev).attr("fill-opacity",0.6)
+            d3.select("#txt_"+dev).attr("font-size",18).attr("fill","black")
+        })
+        .on("click", function(d) {
+            // TODO React Hook
+            console.log(this.id)
+
+
+            
+        })
+
+
 }
 
 console.log("Ho")
