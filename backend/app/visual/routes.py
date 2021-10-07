@@ -8,6 +8,7 @@
 
 from flask import jsonify, render_template, redirect, request, url_for, send_file
 import numpy as np
+import os
 
 from app import db
 from app.visual import blueprint
@@ -27,7 +28,8 @@ This data will be consumed by chart component and stats components
 @blueprint.route('/get-data')
 def visual_data():
     print("Roger that")
-    return send_file("visual//static//images//map.jpg", mimetype='image/jpg')
+    path = os.path.join("visual","static","images","map.JPG")
+    return send_file(path, mimetype='image/jpg')
 
 
 @blueprint.route('/get-status')
