@@ -5,14 +5,23 @@ import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
+import Tooltip from '@mui/material/Tooltip';
+
 
 import Stats from '../../components/stats/Stats'
+import CameraMap from '../../components/cameraMap/CameraMap';
 import './visual.css'
 
 const Visual = (props) => {
 
-   const [imageData, setImageData ] = useState({ stats :  { mean : 0, median : 0, variance : 0, correlation : 0 } 
-   });
+   const [imageData, setImageData ] = useState({ stats :  { mean : 0, median : 0, variance : 0, correlation : 0 }});
+   const [showPosnet, setShowPosnet] = useState(false)
+   
+   const regionClickHandler = (data) => {
+      setShowPosnet(data.showMap);
+   }
 
    return (
       <div className="visual">
@@ -23,10 +32,12 @@ const Visual = (props) => {
             <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary"> <CameraAltIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Visuals </Typography>
          </Breadcrumbs>
 
-         <Stats stats={imageData}/>
+         {showPosnet && <Tooltip title="Close Graph"><IconButton aria-label="Close Image" className="close-button" onClick={() => setShowPosnet(false)}> <CancelIcon /> </IconButton></Tooltip> }  
+         
          <div className="visualplot-wrapper">
-            <img src='/visual/get-data' alt="home-map" useMap="#image-map">
-            </img>   
+            { !showPosnet && <CameraMap height={550} width={800}  onclick={(e) => {regionClickHandler(e)}} /> }
+            { showPosnet && <img src="/visual/get-data" style={{"margin-top":"30px"}} />}
+            
          </div>
       </div>
    )
