@@ -7,6 +7,12 @@ import './micmap.css'
 
 export default function MicMap(props) {
 
+    const mapClickHandler = (region_id) => {
+        console.log(region_id)     
+        props.onclick({region_id : region_id, showMap : true});
+    }
+
+
     const svg_h = props.height
     const svg_w = props.width
 
@@ -129,6 +135,7 @@ export default function MicMap(props) {
                 .on("click", function(d) {
                     // TODO React Hook
                     console.log(this.id)
+                    mapClickHandler(this.id);
                     // Send commands to Flask to perform queries
 
 
