@@ -69,7 +69,6 @@ export default function AudioPlot(props) {
                height = {350}
                width = {600}
                options = {{
-
                   responsive: false,
                   title: {text: "Audio", display: true},
                   maintainAspectRatio: false,
