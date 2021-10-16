@@ -11,7 +11,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Tooltip from '@mui/material/Tooltip';
 
 
-import Stats from '../../components/stats/Stats';
 import HumidityPlot from '../../components/humidityPlot/HumidityPlot';
 import MicMap from '../../components/micMap/MicMap';
 
@@ -50,9 +49,8 @@ const Humidity = (props) => {
 
          <div className="humiditychart-wrapper">
             { !showHumidityPlot && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
-            { showHumidityPlot && <Stats stats={humidityData.stats}/> }
 
-            { showHumidityPlot && <HumidityPlot height={400} width={600} data={humidityData.data} /> }
+            { showHumidityPlot && <HumidityPlot height={550} width={1200} data={humidityData.data} /> }
          </div>
       </div>
    )
