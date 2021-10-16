@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import {Table, TableBody, TableCell, TableRow, TableHead, Tooltip, IconButton }from '@mui/material';
 
+
 import SettingsInputAntennaOutlinedIcon from '@mui/icons-material/SettingsInputAntennaOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -13,8 +14,12 @@ import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import AirplayIcon from '@mui/icons-material/Airplay';
 
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
 import './rpiStatus.css'
+import CameraMap from '../../components/cameraMap/CameraMap';
 
 export default function RpiStatus(props) {
 
@@ -26,6 +31,13 @@ export default function RpiStatus(props) {
             console.log(data)
         });
     }, []);
+
+    const [tab, setTab] = React.useState('table');
+
+    const handleTabChange = (event, newValue) => {
+      setTab(newValue);
+    };
+  
                  
 
     const statusIcon = (status) => {
@@ -38,9 +50,6 @@ export default function RpiStatus(props) {
         return(<WarningIcon style={{fill:"orange", fontSize:20}}/>)
     }
 
-    console.log("Roger that")
-    console.log(statusData)
-
     return (
         <div className="rpistatus">    
 
@@ -51,7 +60,17 @@ export default function RpiStatus(props) {
             <SettingsInputAntennaOutlinedIcon sx={{ mr: 1 }} fontSize="inherit" />RPI Network </Typography>
          </Breadcrumbs>
 
-            <div className="table-wrapper">
+                <Box sx={{ width: '100%', mt:'20px', ml: "60px"}}>
+                    <Tabs value={tab} onChange={handleTabChange} textColor="primary" indicatorColor="primary" aria-label="Status Tabs">
+                        <Tab value="map" label="Map" />
+                        <Tab value="table" label="Table" />
+                    </Tabs>
+                </Box>
+
+
+            {tab === "map" ?  <CameraMap height={550} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
+                
+
                 <Table size="small">
                     <TableHead>
                         <TableRow> 
@@ -76,7 +95,7 @@ export default function RpiStatus(props) {
                     </TableBody>
                 </Table>
 
-            </div>
+            </div>) }
         </div>
     )
 }
