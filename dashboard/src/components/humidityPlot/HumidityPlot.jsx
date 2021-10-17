@@ -1,5 +1,5 @@
 import React from 'react'
-import { Line } from 'react-chartjs-2';
+import { Chart, Line } from 'react-chartjs-2';
 import zoomPlugin from "chartjs-plugin-zoom";
 
 Chart.register(zoomPlugin);
