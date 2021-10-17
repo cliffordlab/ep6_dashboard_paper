@@ -20,6 +20,7 @@ import Box from '@mui/material/Box';
 
 import './rpiStatus.css'
 import CameraMap from '../../components/cameraMap/CameraMap';
+import RpiMap from '../../components/rpiMap/RpiMap';
 
 export default function RpiStatus(props) {
 
@@ -68,7 +69,7 @@ export default function RpiStatus(props) {
                 </Box>
 
 
-            {tab === "map" ?  <CameraMap height={550} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
+            {tab === "map" ?  <RpiMap height={600} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
                 
 
                 <Table size="small">
