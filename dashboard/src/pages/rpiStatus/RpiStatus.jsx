@@ -44,6 +44,7 @@ export default function RpiStatus(props) {
     return (
         <div className="rpistatus">    
 
+
          <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <AirplayIcon sx={{ mr: 0.5 }} fontSize="inherit" />Status and Control</Link>

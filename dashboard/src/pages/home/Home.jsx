@@ -22,6 +22,7 @@ export default function Home() {
             </Breadcrumbs>
 
             <Layout/>
+
         </div>
     )
 }

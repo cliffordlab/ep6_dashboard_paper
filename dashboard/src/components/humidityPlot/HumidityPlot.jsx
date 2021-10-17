@@ -1,6 +1,8 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
+import zoomPlugin from "chartjs-plugin-zoom";
 
+Chart.register(zoomPlugin);
 
 export default function HumidityPlot(props) {
 
@@ -37,42 +39,33 @@ export default function HumidityPlot(props) {
          height = {props.height}
          width = {props.width}
          options = {{
-            responsive: true,
-            title: {text: "Audio", display: true},
-            maintainAspectRatio: false,
-            scales: {
-               yAxes: [
-                  {
-                     scaleLabel: {
-                        display: true,
-                        labelString: 'dB'
+                     maintainAspectRatio: false,
+                     scales: {
+                         yAxes: [
+                             {
+                                 ticks: {
+                                     beginAtZero: true,
+                                 },
+                             },
+                         ],
                      },
-                     ticks: {
-                        autoSkip: true,
-                        maxTicksLimit: 10,
-                        beginAtZero: true
-                     }
-                  }
-               ]
-            },
-            pan: {
-               enabled: true,
-               mode: "xy",
-               speed: 10,
-            },
-            zoom: {
-               wheel: {
-                  enabled: true,
-               },
-               drag: false,
-               mode: "xy",
-               limits: {
-                  x: {min: 0, max: 400, minRange: 10},
-                  y: {min: -200, max: 400, minRange: 10}
-                },
-            }
-         }}
-      /> 
-  </div>
+                     plugins: {
+                         zoom: {
+                             pan: {
+                                 enabled: true,
+                                 mode: "xy",
+                             },
+                             zoom: {
+                                 wheel: {
+                                     enabled: true,
+                                 },
+                                 mode: "x",
+                                 speed: 100,
+                             },
+                         },
+                     },
+                  }}
+               /> 
+      </div>
     )
 }
