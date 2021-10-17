@@ -13,7 +13,7 @@ export default function HumidityPlot(props) {
             labels:  props.data.x,
             datasets: [
                {
-                  label: "Channel 1",
+                  label: "Humidity",
                   data :  props.data.humidity,
                   borderColor: '#7a5195',
                   borderWidth: 2,
@@ -23,7 +23,7 @@ export default function HumidityPlot(props) {
                   pointHoverRadius : 5,
                   pointHoverBackgroundColor : 'rgb(127,127,127)'
                },                     {
-                  label: "Channel 2",
+                  label: "Temperature",
                   data :  props.data.temperature,
                   borderColor: '#202020',
                   borderWidth: 2,
@@ -39,15 +39,15 @@ export default function HumidityPlot(props) {
          height = {props.height}
          width = {props.width}
          options = {{
-                     maintainAspectRatio: false,
-                     scales: {
-                         yAxes: [
-                             {
-                                 ticks: {
-                                     beginAtZero: true,
-                                 },
-                             },
-                         ],
+            responsive: false,
+            title: {text: "Humidity", display: true},
+            maintainAspectRatio: false,
+            scales: {
+               yAxes: [
+                  {
+                     scaleLabel: {
+                        display: true,
+                        labelString: 'dB'
                      },
                      plugins: {
                          zoom: {
