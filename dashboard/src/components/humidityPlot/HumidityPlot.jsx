@@ -63,6 +63,9 @@ export default function HumidityPlot(props) {
                                  speed: 100,
                              },
                          },
+                        }
+                       }
+                     ]
                      },
                   }}
                /> 
