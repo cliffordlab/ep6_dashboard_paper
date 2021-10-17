@@ -56,7 +56,7 @@ export default function SideBar() {
                 </div>
                 <div style={styles.toggleTheme}>
                     <div style={styles.darkMode}>
-                        <DarkModeIcon {styles.darkMode} className="darkMode"/>
+                        <DarkModeIcon style={styles.darkMode} className="darkMode"/>
                         Dark Mode
                     </div>
                     <Switch color = "primary" size = "large" onChange={ToggleBtn} defaultChecked/>
