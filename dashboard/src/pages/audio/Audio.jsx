@@ -36,10 +36,12 @@ const Audio = (props) => {
 
             {showAudioGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowAudioGraph(false)}> <CancelIcon style={{fill: styles.audio.color}} /> </IconButton></Tooltip> }  
   
-         <div style={styles.audiochartWrapper}>
-            { !showAudioGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
+
+
+         <div className="audiochart-wrapper">
+            { !showAudioGraph && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
             
-            { showAudioGraph && <AudioPlot height={350} width={600} data={audioData.data} style={styles.audioPlot}/> }
+            { showAudioGraph && <AudioPlot height={550} width={1200} data={audioData.data} /> }
          </div>
       </div>
    )
