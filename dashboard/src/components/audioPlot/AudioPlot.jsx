@@ -69,8 +69,11 @@ export default function AudioPlot(props) {
                width = {props.width}
                options = {{
 <<<<<<< HEAD
+<<<<<<< HEAD
                   responsive: true,
 =======
+=======
+>>>>>>> e7d0c0e14a68f312d0be9944db9a5b50114756af
                   responsive: false,
                   title: {text: "Audio", display: true},
 >>>>>>> 721605e... DAS-20: Removing Stats
