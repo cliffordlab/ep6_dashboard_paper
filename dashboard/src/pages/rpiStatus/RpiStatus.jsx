@@ -70,7 +70,7 @@ export default function RpiStatus(props) {
                 </Box>
 
 
-            {tab === "map" ?  <CameraMap height={550} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
+            {tab === "map" ?  <RpiMap height={600} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
                 
 
                 <Table size="small">
