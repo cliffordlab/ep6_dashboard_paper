@@ -11,7 +11,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Tooltip from '@mui/material/Tooltip';
 
 
-import Stats from '../../components/stats/Stats';
 import MicMap from '../../components/micMap/MicMap';
 import AudioPlot from '../../components/audioPlot/AudioPlot';
 
@@ -47,9 +46,8 @@ const Audio = (props) => {
 
          <div className="audiochart-wrapper">
             { !showAudioGraph && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
-
-            { showAudioGraph && <Stats stats={audioData.stat}/> }
-            { showAudioGraph && <AudioPlot height={400} width={600} data={audioData.data} /> }
+            
+            { showAudioGraph && <AudioPlot height={550} width={1200} data={audioData.data} /> }
          </div>
       </div>
    )
