@@ -67,8 +67,7 @@ export default function HumidityPlot(props) {
                        }
                      ]
                      },
-                  }]} 
-               }}
+                  }}
                /> 
       </div>
     )
