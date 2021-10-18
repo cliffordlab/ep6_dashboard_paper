@@ -31,12 +31,9 @@ This data will be consumed by chart component and stats components
 @blueprint.route('/get-data')
 def audio_data():
     region_id = request.args.get("region_id")
-    device_location = "pi105.pi.bmi.emory.edu"
+    device_location = "pi160.pi.bmi.emory.edu"
 
     response = db.query_audio(location=device_location)
-
-    print("-"*20)
-    print(len(response))
 
     ch1 = list(filter(lambda x: x['channel'] == 0, response))
     ch2 = list(filter(lambda x: x['channel'] == 1, response))
