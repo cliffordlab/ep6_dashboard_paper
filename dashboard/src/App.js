@@ -5,6 +5,7 @@ import NavBar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
 
 import Humidity from './pages/humidity/Humidity'
+import Illuminance from './pages/illuminance/Illuminance'
 import Visual from './pages/visual/Visual'
 import Audio from './pages/audio/Audio'
 import RpiStatus from './pages/rpiStatus/RpiStatus'
@@ -38,6 +39,11 @@ function App() {
 
               <Route path="/humidity">
                 <Humidity />
+              </Route>
+
+
+              <Route path="/illuminance">
+                <Illuminance />
               </Route>
 
               <Route path="/map">
