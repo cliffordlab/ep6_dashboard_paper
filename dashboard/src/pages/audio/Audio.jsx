@@ -16,9 +16,12 @@ import AudioPlot from '../../components/audioPlot/AudioPlot';
 
 import './audio.css'
 
+import { theme } from "../../theme/Themes";
+import { ThemeContext } from "../../theme/ThemeProvider";
+
 const Audio = (props) => {
 
-   const [audioData, setAudioData] = useState({ data : { x : [], y: [] } , stat: { mean : 0, median : 0, variance : 0, last10 : 0 } });
+   const [audioData, setAudioData] = useState({ data: { x: [], Channel1: [], Channel2: [], Channel3: [], Channel4: [] }});
    const [showAudioGraph, setShowAudioGraph] = useState(false);
 
    const regionClickHandler = (data) => {
@@ -29,28 +32,52 @@ const Audio = (props) => {
       fetch('/audio/get-data').then(res => res.json()).then(data => {
          setAudioData(data);
       }); }, []);
+
+ 
+   const { mode } = React.useContext(ThemeContext);
+   const styles = audioStyles(mode);
    
 
    return (
-      <div className="audio">
+      <div style={styles.audio}>
 
             <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
-               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
-               <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary"> <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Audio </Typography>
+               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color} href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
+               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color} href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
+               <Typography sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color}> <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Audio </Typography>
             </Breadcrumbs>
 
-            {showAudioGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowAudioGraph(false)}> <CancelIcon /> </IconButton></Tooltip> }  
+            {showAudioGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowAudioGraph(false)}> <CancelIcon style={{fill: styles.audio.color}} /> </IconButton></Tooltip> }  
   
 
 
-         <div className="audiochart-wrapper">
+         <div style={styles.audiochartWrapper}>
             { !showAudioGraph && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
             
-            { showAudioGraph && <AudioPlot height={550} width={1200} data={audioData.data} /> }
+            { showAudioGraph && <AudioPlot height={550} width={1200} data={audioData.data} style={styles.audioPlot}/> }
          </div>
       </div>
    )
 }
 
 export default Audio
+
+
+const audioStyles = (mode) => ({
+   audio: {
+       flex: 4,
+       backgroundColor: theme[mode].backgroundColor,
+       color: theme[mode].color
+   },
+
+   audiochartWrapper: {
+       height: "60vh",
+       width: "96%",
+       marginRight: "15px",
+   },
+
+   audioPlot: {
+      color: theme[mode].color
+   }
+
+});

@@ -50,6 +50,9 @@ def audio_data():
     print("-"*10)
 
     return {"data": {'x': x,
-                     'y': [y0, y1, y2, y3]
+                     'Channel1': y0,
+                     'Channel2': y1,
+                     'Channel3': y2,
+                     'Channel4': y3
                      }
             }

@@ -7,31 +7,32 @@ import zoomPlugin from "chartjs-plugin-zoom";
 Chart.register(zoomPlugin);
 
 
-
 export default function AudioPlot(props) {
 
+    console.log(props)
+
     return (
-        <div>
+        <div style={props.style}>
             <Line
                data = {{
                   labels:  props.data.x,
                   datasets: [
                      {
                         label: "Channel 1",
-                        data :  props.data.y[0],
-                        borderColor: '#7a5195',
+                        data :  props.data.Channel1,
+                        borderColor: 'maroon',
                         borderWidth: 2,
-                        fill: true,
+                        fill: false,
                         lineTension: 0.5,
                         pointRadius : 2,
                         pointHoverRadius : 5,
                         pointHoverBackgroundColor : 'rgb(127,127,127)'
                      },                     {
                         label: "Channel 2",
-                        data :  props.data.y[1],
-                        borderColor: '#202020',
+                        data :  props.data.Channel2,
+                        borderColor: 'green',
                         borderWidth: 2,
-                        fill: true,
+                        fill: false,
                         lineTension: 0.5,
                         pointRadius : 2,
                         pointHoverRadius : 5,
@@ -40,10 +41,10 @@ export default function AudioPlot(props) {
                      }, 
                     {
                         label: "Channel 3",
-                        data :  props.data.y[2],
-                        borderColor: '#ef5675',
+                        data :  props.data.Channel3,
+                        borderColor: 'yellow',
                         borderWidth: 2,
-                        fill: true,
+                        fill: false,
                         lineTension: 0.5,
                         pointRadius : 2,
                         pointHoverRadius : 5,
@@ -52,10 +53,10 @@ export default function AudioPlot(props) {
                      },
                      {
                         label: "Channel 4",
-                        data :  props.data.y[3],
-                        borderColor: '#ffa600',
+                        data :  props.data.Channel4,
+                        borderColor: 'blue',
                         borderWidth: 2,
-                        fill: true,
+                        fill: false,
                         lineTension: 0.5,
                         pointRadius : 2,
                         pointHoverRadius : 5,
@@ -68,34 +69,43 @@ export default function AudioPlot(props) {
                height = {props.height}
                width = {props.width}
                options = {{
-                  responsive: false,
-                  title: {text: "Audio", display: true},
+                  responsive: true,
                   maintainAspectRatio: false,
                   scales: {
-                      yAxes: [
-                          {
-                              scaleLabel: {
-                                  display: true,
-                                  labelString: "Average Personal Income",
-                                  fontColor: "#546372",
-                              },
-                              ticks: {
-                                  autoSkip: true,
-                                  maxTicksLimit: 10,
-                                  beginAtZero: true,
-                              },
-                              title: {
-                                  display: true,
-                                  text: "Y axis title",
-                              },
-                          },
-                      ],
+                    yAxes: {
+                        title: {
+                            padding: {
+                                top: 5,
+                            },
+                            display: true,
+                            text: " Power (dB) ",
+                            color: props.style.color,
+                            font: {
+                                size: 12,
+                                weight: 500,
+                            },
+                        },
+                    },
+                    xAxes: {
+                        title: {
+                            padding: {
+                                top: 5,
+                            },
+                            display: true,
+                            text: "Time Sample",
+                            color: props.style.color,
+                            font: {
+                                size: 12,
+                                weight: 500,
+                            },
+                        },
+                    },
                   },
                   plugins: {
                       zoom: {
                           pan: {
                               enabled: true,
-                              mode: "xy",
+                              mode: "x",
                           },
                           zoom: {
                               wheel: {
@@ -106,7 +116,6 @@ export default function AudioPlot(props) {
                           },
                       },
                   },
-
                }}
             /> 
         </div>
