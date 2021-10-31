@@ -16,11 +16,13 @@ import MicMap from '../../components/micMap/MicMap';
 
 import './humidity.css'
 
+import { theme } from "../../theme/Themes";
+import { ThemeContext } from "../../theme/ThemeProvider";
+
+
 const Humidity = (props) => {
 
-   const [humidityData, setHumidityData ] = useState({   data : { x : [], humidity: [], temperature : [] },
-                                                         stats :  { mean : 0, median : 0, variance : 0, correlation : 0 } 
-                                                      });
+   const [humidityData, setHumidityData ] = useState({   data : { x : [], humidity: [], temperature : [] } });
    const [showHumidityPlot, setShowHumidityPlot] = useState(false)
 
    useEffect(() => {
@@ -33,10 +35,14 @@ const Humidity = (props) => {
       setShowHumidityPlot(data.showMap);
    }
 
+   const { mode } = React.useContext(ThemeContext);
+   const styles = humidityStyles(mode);
+
+
    console.log(humidityData)
 
    return (
-      <div className="humidity">
+      <div style={styles.humidity}>
          <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
@@ -44,16 +50,35 @@ const Humidity = (props) => {
             <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Temperature </Typography>
          </Breadcrumbs>
 
-         {showHumidityPlot && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowHumidityPlot(false)}> <CancelIcon /> </IconButton></Tooltip> }  
+         {showHumidityPlot && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowHumidityPlot(false)}> <CancelIcon style={{fill: styles.humidity.color}} /> </IconButton></Tooltip> }  
 
 
-         <div className="humiditychart-wrapper">
+         <div style={styles.humidityChartWrapper}>
             { !showHumidityPlot && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
 
-            { showHumidityPlot && <HumidityPlot height={550} width={1200} data={humidityData.data} /> }
+            { showHumidityPlot && <HumidityPlot height={550} width={1200} data={humidityData.data} style={styles.HumidityPlot} /> }
          </div>
       </div>
    )
 }
 
 export default Humidity
+
+const humidityStyles = (mode) => ({
+   humidity: {
+       flex: 4, 
+       backgroundColor: theme[mode].backgroundColor,
+       color: theme[mode].color
+   },
+   
+   humidityChartWrapper: {
+       height: "60vh",
+       width: "96%",
+       marginRight: "15px",
+   },
+
+   HumidityPlot: {
+      color: theme[mode].color
+   }
+
+});
