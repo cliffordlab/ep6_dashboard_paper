@@ -22,6 +22,9 @@ import './rpiStatus.css'
 import CameraMap from '../../components/cameraMap/CameraMap';
 import RpiMap from '../../components/rpiMap/RpiMap';
 
+import { theme } from "../../theme/Themes";
+import { ThemeContext } from "../../theme/ThemeProvider";
+
 export default function RpiStatus(props) {
 
     const [statusData, setStatusData] = useState({data : []});
@@ -51,8 +54,11 @@ export default function RpiStatus(props) {
         return(<WarningIcon style={{fill:"orange", fontSize:20}}/>)
     }
 
+    const { mode } = React.useContext(ThemeContext);
+    const styles = rpiStatusStyles(mode);
+
     return (
-        <div className="rpistatus">    
+        <div style={styles.rpiStatus}>    
 
 
          <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
@@ -62,36 +68,36 @@ export default function RpiStatus(props) {
             <SettingsInputAntennaOutlinedIcon sx={{ mr: 1 }} fontSize="inherit" />RPI Network </Typography>
          </Breadcrumbs>
 
-                <Box sx={{ width: '100%', mt:'20px', ml: "60px"}}>
-                    <Tabs value={tab} onChange={handleTabChange} textColor="primary" indicatorColor="primary" aria-label="Status Tabs">
-                        <Tab value="map" label="Map" />
-                        <Tab value="table" label="Table" />
-                    </Tabs>
-                </Box>
+        <Box sx={{ width: '100%', mt:'20px', ml: "60px"}}>
+            <Tabs value={tab} onChange={handleTabChange} textColor="primary" indicatorColor="primary" aria-label="Status Tabs">
+                <Tab value="map" label="Map" />
+                <Tab value="table" label="Table" />
+            </Tabs>
+        </Box>
 
 
-            {tab === "map" ?  <RpiMap height={600} width={800} onclick={(e) => {}}/> : (<div className="table-wrapper">
+            {tab === "map" ?  <RpiMap height={500} width={700} onclick={(e) => {}}/> : (<div style={styles.tableWrapper}>
                 
 
                 <Table size="small">
                     <TableHead>
                         <TableRow> 
-                            <TableCell align="center">Node Name</TableCell>
-                            <TableCell align="center">Location</TableCell>
-                            <TableCell align="center">IP Address</TableCell>
-                            <TableCell align="center">Status</TableCell>
-                            <TableCell align="center">Action</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray", fontSize: 15 }}>Node Name</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray", fontSize: 15 }}>Location</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray", fontSize: 15 }}>IP Address</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray", fontSize: 15 }} >Status</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray", fontSize: 15 }}>Action</TableCell>
                         </TableRow>
                     </TableHead>
 
                     <TableBody>
                         {statusData.data.map((row) => (
-                            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell align="center">{row.name}</TableCell>
-                            <TableCell align="center">{row.location}</TableCell>
-                            <TableCell align="center">{row.ipAddress}</TableCell>
-                            <TableCell align="center">{statusIcon(row.status)}</TableCell>
-                            <TableCell align="center"> <Tooltip title="Reboot"><IconButton><RestartAltTwoToneIcon style={{fill:"blue", fontSize:25}}/></IconButton></Tooltip></TableCell>
+                            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0, color: "gray" } }}>
+                            <TableCell align="center" sx = {{ color: "gray" }}>{row.name}</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray" }}>{row.location}</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray" }}>{row.ipAddress}</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray" }}>{statusIcon(row.status)}</TableCell>
+                            <TableCell align="center" sx = {{ color: "gray" }}> <Tooltip title="Reboot"><IconButton><RestartAltTwoToneIcon style={{fill:"blue", fontSize:25}}/></IconButton></Tooltip></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -101,3 +107,17 @@ export default function RpiStatus(props) {
         </div>
     )
 }
+
+
+const rpiStatusStyles = (mode) => ({
+    rpiStatus: {
+        flex: 4,
+        backgroundColor: theme[mode].backgroundColor,
+    },
+    tableWrapper: {
+        paddingLeft: "10px",
+        paddingRight: "50px",
+        paddingTop: "50px",
+        //backgroundColor: theme[mode].altColor,
+    },
+});
