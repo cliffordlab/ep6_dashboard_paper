@@ -7,6 +7,7 @@
 """
 
 import os
+from smtplib import SMTP_PORT
 from decouple import config
 
 
@@ -20,6 +21,12 @@ class Config(object):
     # This will create a file in <app> FOLDER
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Defining Server for the Mail Service
+    SMTP_SERVER = config('SMTP_SERVER', default="smtp-mail.outlook.com")
+    SMTP_PORT = int(config('SMTP_PORT', 465))
+    EMAIL_SENDER = config('EMAIL_SENDER', '')
+    EMAIL_PASSWORD = config('EMAIL_PASSWORD', '')
 
 
 # Production environment specific configurations go here
