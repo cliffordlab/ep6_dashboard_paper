@@ -80,7 +80,7 @@ class Database():
             print(str(e))
         return result
 
-    def query_audio(self, location, bucket="audio_features", start="-13h", measurement=["dBA"], fields=["1", "2", "3", "4"]):
+    def query_audio(self, location, bucket="audio_features", start="-2m", measurement=["dBA"], fields=["1", "2", "3", "4"]):
         query = self.__create_query(location, bucket, start, measurement, fields)
         response = self.__query(query)
         result = self.__process_audio_data(response)
