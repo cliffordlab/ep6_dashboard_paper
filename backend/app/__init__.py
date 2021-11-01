@@ -67,7 +67,7 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    for module_name in ('base', 'audio', 'visual', 'humidity', 'illuminance'):
+    for module_name in ('base', 'audio', 'visual', 'humidity', 'illuminance', 'mail'):
         module = import_module('app.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
@@ -90,4 +90,7 @@ def create_app(config):
     register_blueprints(app)
     configure_database(app)
     return app
+<<<<<<< HEAD
 >>>>>>> bffa53b... DAS-20 : Integrating the DB with Flask
+=======
+>>>>>>> 86ee27a... DAS - 20 : Adding Configuration for Email Service
