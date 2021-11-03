@@ -37,6 +37,8 @@ const navBarStyles = (mode) => ({
     },
     logo: {
         fontSize: "30px",
+        fontAlign: "center",
+        fontFamily: "roboto",
         fontWeight: 700,
         color: theme[mode].color,
         cursor: "pointer",

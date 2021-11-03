@@ -67,13 +67,13 @@ export default function RpiStatus(props) {
 
         <Box sx={{ width: '100%', mt:'20px', ml: "60px"}}>
             <Tabs value={tab} onChange={handleTabChange} textColor="primary" indicatorColor="primary" aria-label="Status Tabs">
-                <Tab value="map" label="Map"/>
-                <Tab value="table" label="Table" />
+                <Tab value="map" label="Map" sx = {{ color: theme[mode].color}}/>
+                <Tab value="table" label="Table" sx = {{ color: theme[mode].color}}/>
             </Tabs>
         </Box>
 
 
-            {tab === "map" ?  <RpiMap height={500} width={700} onclick={(e) => {}}/> : (<div style={styles.tableWrapper}>
+            {tab === "map" ?  <RpiMap height={350} width={450} onclick={(e) => {}}/> : (<div style={styles.tableWrapper}>
                 
 
                 <Table size="small">

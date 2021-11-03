@@ -197,7 +197,7 @@ function MUISwitch(props) {
       <SwitchTrack>
         <SwitchThumb className={clsx(stateClasses)} />
       </SwitchTrack>
-      <SwitchInput {...getInputProps()} aria-label="Demo switch" />
+      <SwitchInput {...getInputProps()} aria-label="Switch" />
     </SwitchRoot>
   );
 }
