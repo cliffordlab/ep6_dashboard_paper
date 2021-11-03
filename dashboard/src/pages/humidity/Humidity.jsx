@@ -43,20 +43,23 @@ const Humidity = (props) => {
 
    return (
       <div style={styles.humidity}>
+
+{/*
          <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
             <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
             <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary">
             <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Temperature </Typography>
          </Breadcrumbs>
+*/}
 
          {showHumidityPlot && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowHumidityPlot(false)}> <CancelIcon style={{fill: styles.humidity.color}} /> </IconButton></Tooltip> }  
 
 
          <div style={styles.humidityChartWrapper}>
-            { !showHumidityPlot && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
+            { !showHumidityPlot && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
 
-            { showHumidityPlot && <HumidityPlot height={550} width={1200} data={humidityData.data} style={styles.HumidityPlot} /> }
+            { showHumidityPlot && <HumidityPlot height={350} width={600} data={humidityData.data} style={styles.HumidityPlot} /> }
          </div>
       </div>
    )
@@ -72,8 +75,8 @@ const humidityStyles = (mode) => ({
    },
    
    humidityChartWrapper: {
-       height: "60vh",
-       width: "96%",
+       height: "50vh",
+       width: "95%",
        marginRight: "15px",
    },
 

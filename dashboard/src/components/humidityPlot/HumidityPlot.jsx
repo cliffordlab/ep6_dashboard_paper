@@ -37,11 +37,12 @@ export default function HumidityPlot(props) {
                   },
               ],
           }}
-          height={props.height}
-          width={props.width}
+          height={350}
+          width={600}
           options={{
               responsive: true,
               maintainAspectRatio: false,
+              color: props.style.color,
               scales: {
                   yAxes: {
                       title: {
@@ -83,7 +84,7 @@ export default function HumidityPlot(props) {
                               enabled: true,
                           },
                           mode: "x",
-                          speed: 100,
+                          speed: 50,
                       },
                   },
               },
