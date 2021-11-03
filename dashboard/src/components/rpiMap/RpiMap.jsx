@@ -13,8 +13,7 @@ export default function RpiMap(props) {
         console.log(region_id)     
         props.onclick({region_id : region_id, showMap : true});
     }
-
-
+ 
     const svg_h = props.height
     const svg_w = props.width
 
