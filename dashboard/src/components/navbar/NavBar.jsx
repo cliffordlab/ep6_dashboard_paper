@@ -1,10 +1,6 @@
 import * as React from "react";
 import "./navbar.css";
 
-import RestartAltTwoToneIcon from "@mui/icons-material/RestartAltTwoTone";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { Tooltip, IconButton } from "@mui/material";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import { theme } from "../../theme/Themes";
@@ -15,24 +11,9 @@ export default function NavBar() {
     return (
         <div style={styles.navbar}>
             <div style={styles.navbarWrapper}>
-                <span style={styles.logo}>EP6 Dashboard</span>
-                <div>
-                    <Tooltip title="Export Data">
-                        <IconButton>
-                            <SaveAltIcon style={styles.icons} />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Settings">
-                        <IconButton>
-                            <SettingsIcon style={styles.icons} />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Profile">
-                        <IconButton>
-                            <AccountCircleIcon style={styles.icons} />
-                        </IconButton>
-                    </Tooltip>
-                </div>
+                <span style={styles.logo}>
+                    EP6 Dashboard
+                </span>
             </div>
         </div>
     );
@@ -41,7 +22,7 @@ export default function NavBar() {
 const navBarStyles = (mode) => ({
     navbar: {
         height: "50px",
-        width: "100%",
+        width: "10",
         backgroundColor: theme[mode].backgroundColor,
         position: "sticky",
         top: 0,
