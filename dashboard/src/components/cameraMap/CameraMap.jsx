@@ -52,8 +52,10 @@ export default function CameraMap(props) {
             var xscale = scaleLinear().domain([-35,35]).range([0,svg_w]);
             var yscale = scaleLinear().domain([-15,25]).range([svg_h,0]);
 
-            // TODO Get a better color space
-            var cscale = scaleSequential(["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#ff9da7","#9c755f","#bab0ab"]).domain([0,40])
+            // Forward VIRIDIS:
+            // var cscale = scaleSequential(["#fde725","#b5de2b","#6ece58","#35b779","#1f9e89","#26828e","#31688e","#3e4989","#482878","#440154"]).domain([0,40])
+            // Backward VIRIDIS:
+            var cscale = scaleSequential(["#440154","#482878","#3e4a89","#31688e","#26828e","#1f9e89","#35b779","#6dcd59","#b4de2c","#fde725"]).domain([0,40])
 
             for (let k = 0; k<data.length; k++) {
                 var poly_coords =  data[k].poly
