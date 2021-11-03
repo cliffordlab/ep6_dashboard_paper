@@ -2,17 +2,15 @@ import React, {useContext} from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import clsx from 'clsx';
 
-import {Switch} from '@material-ui/core'
+import {
+  GraphicEq,
+  CameraAltOutlined,
+  WbSunnyOutlined,
+} from "@material-ui/icons";
 
-import MapIcon from '@mui/icons-material/Map';
-import HomeIcon from '@mui/icons-material/Home';
-import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-import KeyboardVoiceOutlinedIcon from '@mui/icons-material/KeyboardVoiceOutlined';
+import NetworkCheckOutlinedIcon from '@mui/icons-material/NetworkCheckOutlined';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import SettingsInputAntennaOutlinedIcon from '@mui/icons-material/SettingsInputAntennaOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import { styled } from '@mui/system';
 import { useSwitch } from '@mui/core/SwitchUnstyled';
@@ -46,24 +44,22 @@ export default function SideBar() {
                     <h3 style={styles.sidebarTitle}>Status and Control</h3>
 
                     <ul style={styles.sidebarList}>
-                    <NavLink to="/status" className="link"><li className={splitLocation[1] === "status" ? "sidebarListItem active" : "sidebarListItem"}><SettingsInputAntennaOutlinedIcon style={styles.sidebarIcon}/> RPI Network</li></NavLink>
+                    <NavLink to="/status" className="link"><li className={splitLocation[1] === "status" ? "sidebarListItem active" : "sidebarListItem"}><NetworkCheckOutlinedIcon style={styles.sidebarIcon}/> RPI Network</li></NavLink>
                     </ul>
 
-                    <h3 style={styles.sidebarTitle}>Dashboard</h3>
+                    <h3 style={styles.sidebarTitle}>Select Component</h3>
 
                     <ul className="sidebarList">
-                    <NavLink to="/" className="link"><li className={splitLocation[1] === "home" ? "sidebarListItem active" : "sidebarListItem"}><HomeIcon style={styles.sidebarIcon} />Home</li></NavLink>
-                    <NavLink to="/visual" className="link"><li className={splitLocation[1] === "visual" ? "sidebarListItem active" : "sidebarListItem"}><CameraAltOutlinedIcon style={styles.sidebarIcon} /> Visuals</li></NavLink>
-                    <NavLink to="/audio" className="link"><li className={splitLocation[1] === "audio" ? "sidebarListItem active" : "sidebarListItem"}><KeyboardVoiceOutlinedIcon style={styles.sidebarIcon} /> Audio</li></NavLink>
-                    <NavLink to="/illuminance" className="link"><li className={splitLocation[1] === "illuminance" ? "sidebarListItem active" : "sidebarListItem"}><LightbulbOutlinedIcon style={styles.sidebarIcon} /> Illuminance</li></NavLink>
-                    <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyOutlinedIcon style={styles.sidebarIcon} /> Temperature</li></NavLink>
-                    <NavLink to="/map" className="link"><li className={splitLocation[1] === "map" ? "sidebarListItem active" : "sidebarListItem"}><MapIcon style={styles.sidebarIcon} />Map</li></NavLink>
+                    <NavLink to="/audio" className="link"><li className={splitLocation[1] === "audio" ? "sidebarListItem active" : "sidebarListItem"}><GraphicEq style={styles.sidebarIcon} />Audio</li></NavLink>
+                    <NavLink to="/humidity" className="link"><li className={splitLocation[1] === "humidity" ? "sidebarListItem active" : "sidebarListItem"}><WbSunnyOutlined style={styles.sidebarIcon} />Temperature</li></NavLink>
+                    <NavLink to="/illuminance" className="link"><li className={splitLocation[1] === "illuminance" ? "sidebarListItem active" : "sidebarListItem"}><LightbulbOutlinedIcon style={styles.sidebarIcon} />Illuminance</li></NavLink>
+                    <NavLink to="/visual" className="link"><li className={splitLocation[1] === "visual" ? "sidebarListItem active" : "sidebarListItem"}><CameraAltOutlined style={styles.sidebarIcon} />Visuals</li></NavLink>
                     </ul>
 
                     <h3 style={styles.sidebarTitle}>Summarized View</h3>
 
                     <ul style={styles.sidebarList}><NavLink to="/dashboard" className="link">
-                    <li className={splitLocation[1] === "dashboard" ? "sidebarListItem active" : "sidebarListItem"}><DashboardOutlinedIcon style={styles.sidebarIcon}/> Dashboard </li> </NavLink>
+                    <li className={splitLocation[1] === "dashboard" ? "sidebarListItem active" : "sidebarListItem"}><DashboardOutlinedIcon style={styles.sidebarIcon}/>Dashboard </li> </NavLink>
                     </ul>
 
                 </div>
@@ -81,21 +77,19 @@ const sideBarStyles = (mode) => ({
     sidebar: {
         flex: 1,
         backgroundColor: theme[mode].backgroundColor,
-        height: "calc(100vh - 50px)",
-        position: "sticky",
+        height: "100vh",
+        position: "static",
         top: "50px",
     },
     sidebarWrapper: {
         padding: "20px",
         color: theme[mode].color,
-        // "rgb(255, 255, 255)"
     },
     sidebarMenu: {
         marginBottom: "10px",
     },
     sidebarTitle: {
         color: theme[mode].text,
-        // "rgb(187, 186, 186)",
         fontSize: "13px",
     },
     sidebarList: {
@@ -120,8 +114,6 @@ const sideBarStyles = (mode) => ({
         alignItems: "center",
     },
 });
-
-
 
 const SwitchRoot = styled('span')(`
   display: inline-block;
