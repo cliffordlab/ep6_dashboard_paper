@@ -79,9 +79,11 @@ export default function IlluminancePlot(props) {
                }}
                height = {350}
                width = {600}
+               scaleFontColor = {'red'} // this here should work but its not
                options = {{
                   responsive: true,
                   maintainAspectRatio: false,
+                  scaleFontColor: 'red', // this here should work but its not
                   color: props.style.color,
                   scales: {
                     yAxes: {
@@ -99,6 +101,9 @@ export default function IlluminancePlot(props) {
                         },
                     },
                     xAxes: {
+                        ticks: {
+                            Color: 'red', // this here should work but its not
+                          },
                         title: {
                             padding: {
                                 top: 5,
