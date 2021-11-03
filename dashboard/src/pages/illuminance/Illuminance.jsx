@@ -34,18 +34,8 @@ const Illuminance = (props) => {
    return (
       <div style={styles.illuminance}>
 
-{/*}
-            <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.illuminance.color} href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
-               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.illuminance.color} href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
-               <Typography sx={{ display: 'flex', alignItems: 'center' }} color={styles.illuminance.color}> <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Illuminance </Typography>
-            </Breadcrumbs>
-*/}
-
             {showIlluminanceGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowIlluminanceGraph(false)}> <CancelIcon style={{fill: styles.illuminance.color}} /> </IconButton></Tooltip> }  
   
-
-
          <div style={styles.illuminancechartWrapper}>
             { !showIlluminanceGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
             
