@@ -11,7 +11,9 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
+import logging
+import logging.config
+import os
 
 from app import db
 from app.mail import blueprint
@@ -19,6 +21,7 @@ from app.mail import blueprint
 
 @blueprint.route('/send-mail', methods=["post"])
 def send_mail():
+
     subject = request.form.get("subject", "").strip()
     msg = request.form.get("msg", "").strip()
     receiver_email = request.form.get("recipients", "")
@@ -44,5 +47,5 @@ def send_mail():
         return "Mail Sent Successfully"
 
     except Exception as e:
-        print(str(e))
+        current_app.logger.error("Exception Occured", exc_info=True)
         return "Sending mail failed : {}".format(str(e))
