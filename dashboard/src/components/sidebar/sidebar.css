@@ -1,68 +1,3 @@
-<<<<<<< HEAD
-.sidebar {
-    flex: 1;
-    background-color: rgb(20, 24, 51);
-    height: calc(100vh - 50px);
-    position: fixed;
-    top: 50px;
-}
-
-.sidebarWrapper {
-    padding: 20px;
-    color: rgb(255, 255, 255);
-}
-
-.sidebarMenu {
-    margin-bottom: 10px;
-}
-
-.sidebarTitle {
-    color: rgb(187, 186, 186);
-    font-size: 13px;
-}
-
-.sidebarList {
-    list-style: none;
-    padding: 5px 0;
-    margin: 0;
-}
-
-.sidebarListItem {
-    display: flex;
-    padding: 5px;
-    margin-bottom: 4px;
-    cursor: pointer;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.sidebarListItem.active,
-.sidebarListItem:hover {
-    background-color: rgb(66, 85, 212);
-}
-
-.sidebarIcon {
-    margin-right: 5px;
-    font-size: 20px !important;
-}
-
-.toggleTheme {
-    display: flex;
-    flex-direction: column;
-    margin-left: 70px;
-    position: fixed;
-    bottom: 20px;
-    align-items: center;
-}
-
-.darkMode {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-=======
 .sidebar {
   flex: 1;
   background-color: rgb(20, 24, 51);
@@ -125,4 +60,3 @@
   justify-content: space-around;
   align-items: center;
 }
->>>>>>> c1fa376... Adding components on Sidebar - Illuminance and Dashboard

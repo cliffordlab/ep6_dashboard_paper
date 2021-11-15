@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-node_modules
-*.pyc 
-settings.json
-=======
 node_modules
 *.pyc 
 settings.json
 *.log
->>>>>>> 1fd4116... DAS - 15 : Updating gitignore for log files

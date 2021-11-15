@@ -93,11 +93,7 @@ export default function AudioPlot(props) {
                                 top: 5,
                             },
                             display: true,
-<<<<<<< HEAD
                             text: "Time (sec)",
-=======
-                            text: "Time Sample",
->>>>>>> 0c4641d... Migrating code from page to component for audio and humidity
                             color: props.style.color,
                             font: {
                                 size: 12,

@@ -13,33 +13,6 @@ export default function HumidityPlot(props) {
               labels: props.data.x,
               datasets: [
                   {
-<<<<<<< HEAD
-                     scaleLabel: {
-                        display: true,
-                        labelString: 'dB'
-                     },
-                     plugins: {
-                         zoom: {
-                             pan: {
-                                 enabled: true,
-                                 mode: "xy",
-                             },
-                             zoom: {
-                                 wheel: {
-                                     enabled: true,
-                                 },
-                                 mode: "x",
-                                 speed: 100,
-                             },
-                         },
-                        }
-                       }
-                     ]
-                     },
-                  }}
-               /> 
-      </div>
-=======
                       label: "Temperature",
                       data: props.data.humidity,
                       borderColor: "brown",
@@ -117,6 +90,5 @@ export default function HumidityPlot(props) {
           }}
       />
   </div>
->>>>>>> 0c4641d... Migrating code from page to component for audio and humidity
     )
 }
