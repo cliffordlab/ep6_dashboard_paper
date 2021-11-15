@@ -28,6 +28,10 @@ class Config(object):
     EMAIL_SENDER = config('EMAIL_SENDER', '')
     EMAIL_PASSWORD = config('EMAIL_PASSWORD', '')
 
+    # Defining the log directory
+    LOG_CONFIG = os.path.join(basedir, "logging.conf")
+    LOG_DIRECTORY = os.path.join(basedir, "logs")
+
 
 # Production environment specific configurations go here
 class ProductionConfig(Config):
