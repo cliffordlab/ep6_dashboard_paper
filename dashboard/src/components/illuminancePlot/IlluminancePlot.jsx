@@ -7,7 +7,7 @@ import zoomPlugin from "chartjs-plugin-zoom";
 Chart.register(zoomPlugin);
 
 
-export default function AudioPlot(props) {
+export default function IlluminancePlot(props) {
 
     console.log(props)
 
@@ -62,15 +62,28 @@ export default function AudioPlot(props) {
                         pointHoverRadius : 5,
                         pointHoverBackgroundColor : 'rgb(127,127,127)',
                         hidden: true
+                     },
+                     {
+                        label: "Channel 5",
+                        data :  props.data.Channel5,
+                        borderColor: 'gray',
+                        borderWidth: 2,
+                        fill: false,
+                        lineTension: 0.5,
+                        pointRadius : 2,
+                        pointHoverRadius : 5,
+                        pointHoverBackgroundColor : 'rgb(127,127,127)',
+                        hidden: true
                      }
-
                   ]
                }}
                height = {350}
                width = {600}
+               scaleFontColor = {'red'} // this here should work but its not
                options = {{
                   responsive: true,
                   maintainAspectRatio: false,
+                  scaleFontColor: 'red', // this here should work but its not
                   color: props.style.color,
                   scales: {
                     yAxes: {
@@ -79,7 +92,7 @@ export default function AudioPlot(props) {
                                 top: 5,
                             },
                             display: true,
-                            text: " Power (dB) ",
+                            text: " Illuminance (lm) ",
                             color: props.style.color,
                             font: {
                                 size: 12,
@@ -88,6 +101,9 @@ export default function AudioPlot(props) {
                         },
                     },
                     xAxes: {
+                        ticks: {
+                            Color: 'red', // this here should work but its not
+                          },
                         title: {
                             padding: {
                                 top: 5,

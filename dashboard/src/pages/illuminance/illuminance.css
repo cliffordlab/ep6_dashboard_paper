@@ -1,0 +1,12 @@
+.illuminance {
+  flex: 4;
+}
+
+.illuminancechart-wrapper {
+  height: 10vh;
+  margin-right: 15px;
+}
+
+.close-button {
+  float: right;
+}

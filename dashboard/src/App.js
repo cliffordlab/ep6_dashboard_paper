@@ -1,68 +1,79 @@
-import React from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+} from "react-router-dom";
 
-import NavBar from './components/navbar/NavBar'
-import SideBar from './components/sidebar/SideBar'
+import NavBar from "./components/navbar/NavBar";
+import SideBar from "./components/sidebar/SideBar";
 
-import Humidity from './pages/humidity/Humidity'
-import Illuminance from './pages/illuminance/Illuminance'
-import Visual from './pages/visual/Visual'
-import Audio from './pages/audio/Audio'
-import RpiStatus from './pages/rpiStatus/RpiStatus'
-import Home from './pages/home/Home'
-import Map from './pages/map/Map'
+import Humidity from "./pages/humidity/Humidity";
+import Visual from "./pages/visual/Visual";
+import Audio from "./pages/audio/Audio";
+import RpiStatus from "./pages/rpiStatus/RpiStatus";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Illuminance from "./pages/illuminance/Illuminance";
 
-import './App.css'
+import "./App.css";
+
+import { ThemeContext } from "./theme/ThemeProvider";
+import { theme } from "./theme/Themes";
 
 function App() {
-  return (
-    <Router>
-        <div className="App">
-          <NavBar />
+    const { mode } = React.useContext(ThemeContext);
+    const styles = appStyles(mode);
+    return (
+        <Router>
+            <div className="App">
+                <NavBar />
+                <div className="container">
+                    <SideBar />
+                    <div style={styles.body}>
+                        <Switch>
+                            <Route path="/status">
+                                <RpiStatus />
+                            </Route>
 
-            <div className="container">
-              <SideBar />
-              <Switch>
+                            <Route path="/audio">
+                                <Audio />
+                            </Route>
 
-              <Route path="/status">
-                <RpiStatus />
-              </Route>
+                            <Route path="/visual">
+                                <Visual />
+                            </Route>
 
+                            <Route path="/humidity">
+                                <Humidity />
+                            </Route>
 
-              <Route path="/audio">
-                <Audio />
-              </Route>
+                            <Route path="/illuminance">
+                                <Illuminance />
+                            </Route>
 
-              <Route path="/visual">
-                <Visual />
-              </Route>
+                            <Route path="/">
+                                <Redirect to="/status" />
+                            </Route>
 
-              <Route path="/humidity">
-                <Humidity />
-              </Route>
-
-
-              <Route path="/illuminance">
-                <Illuminance />
-              </Route>
-
-              <Route path="/map">
-                <Map />
-              </Route>
-
-              <Route exact="/">
-                <Home/>
-              </Route>
-
-              
-
-
-              </Switch>
+                            {/* <Route path="/dashboard">
+                          <Dashboard />
+                      </Route> */}
+                        </Switch>
+                    </div>
+                </div>
             </div>
-      </div>
-    </Router>
-    
-  );
+        </Router>
+    );
 }
 
 export default App;
+
+const appStyles = (mode) => ({
+    body: {
+        backgroundColor: theme[mode].backgroundColor,
+        paddingTop: "50px",
+        paddingLeft: "85px",
+        width: "100%",
+    },
+});

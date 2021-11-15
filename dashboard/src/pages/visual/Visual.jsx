@@ -1,47 +1,246 @@
-import React, {useState} from 'react'
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import HomeIcon from '@mui/icons-material/Home';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
-import Tooltip from '@mui/material/Tooltip';
+import React, { useEffect, useRef, useState } from "react";
 
+import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
 
-import Stats from '../../components/stats/Stats'
-import CameraMap from '../../components/cameraMap/CameraMap';
-
-import './visual.css'
+import { theme } from "../../theme/Themes";
+import { ThemeContext } from "../../theme/ThemeProvider";
+import CameraMap from "../../components/cameraMap/CameraMap";
 
 const Visual = (props) => {
+    const [imageData, setImageData] = useState({
+        stats: { mean: 0, median: 0, variance: 0, correlation: 0 },
+    });
+    const [showPosnet, setShowPosnet] = useState(false);
 
-   const [imageData, setImageData ] = useState({ stats :  { mean : 0, median : 0, variance : 0, correlation : 0 }});
-   const [showPosnet, setShowPosnet] = useState(false)
-   
-   const regionClickHandler = (data) => {
-      setShowPosnet(data.showMap);
-   }
+    const regionClickHandler = (data) => {
+        setShowPosnet(data.showMap);
+    };
 
-   return (
-      <div className="visual">
+    const { mode } = React.useContext(ThemeContext);
+    const styles = visualStyles(mode);
 
-         <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
-            <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary"> <CameraAltIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Visuals </Typography>
-         </Breadcrumbs>
+    // For slider Color
+    const test = {
+        mode: mode,
+    };
+    const classes = useStyles(test);
 
-         {showPosnet && <Tooltip title="Close Graph"><IconButton aria-label="Close Image" className="close-button" onClick={() => setShowPosnet(false)}> <CancelIcon /> </IconButton></Tooltip> }  
-         
-         <div className="visualplot-wrapper">
-            { !showPosnet && <CameraMap height={550} width={800}  onclick={(e) => {regionClickHandler(e)}} /> }
-            { showPosnet && <img src="/visual/get-data" style={{"margin-top":"30px"}} />}
-            
-         </div>
-      </div>
-   )
-}
+    // Reference
+    const [widthRef, setWidthRef] = React.useState();
+    const ref = useRef(null);
 
-export default Visual
+    useEffect(() => {
+        const width = ref.current.offsetWidth;
+        setWidthRef(width);
+    }, [widthRef]);
+
+    // For slider
+
+    const [value, setValue] = React.useState([0, 6]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const valuetext = (value) => {
+        return `${value}`;
+    };
+
+    const valueLabelFormat = (value) => {
+        return value;
+    };
+
+    return (
+        <div style={styles.visual}>
+            <Grid container>
+                <Grid item xs={12} className="item-padding">
+                    <Container>
+                        <Paper
+                            style={styles.itemContainer}
+                            className="item-padding"
+                        >
+                            <Slider
+                                getAriaLabel={() => "Temperature range"}
+                                value={value}
+                                onChange={handleChange}
+                                valueLabelFormat={valueLabelFormat}
+                                getAriaValueText={valuetext}
+                                step={null}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                                min={0}
+                                max={24}
+                                className={classes.sliderRoot}
+                            />
+                        </Paper>
+                    </Container>
+                </Grid>
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.itemContainer} ref={ref}>
+                        {widthRef && (
+                            <CameraMap
+                                width={widthRef}
+                                height={560}
+                                onclick={(e) => {
+                                    regionClickHandler(e);
+                                }}
+                            />
+                        )}
+                    </Paper>
+                </Grid>
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.itemContainer}>Heat Map Space</Paper>
+                </Grid>
+                <Grid item xs={12} className="item-padding">
+                    <Paper style={styles.bigCard}> Big Card Space</Paper>
+                </Grid>
+            </Grid>
+        </div>
+    );
+};
+
+export default Visual;
+
+const visualStyles = (mode) => ({
+    visual: {
+        flexGrow: 1,
+        backgroundColor: theme[mode].backgroundColor,
+        color: theme[mode].color,
+    },
+    visualPlot: {
+        color: theme[mode].color,
+    },
+    heatMapCard: {
+        width: "100%",
+        height: "100%",
+    },
+    markers: {
+        color: theme[mode].color,
+    },
+    itemContainer: {
+        backgroundColor: theme[mode].opposite,
+        height: "100%",
+        color: theme[mode].backgroundColor,
+    },
+    bigCard: {
+        height: "768px",
+        backgroundColor: theme[mode].opposite,
+        color: theme[mode].backgroundColor,
+    },
+});
+
+const useStyles = makeStyles({
+    sliderRoot: {
+        // color: "black",
+        color: (props) => props.mode === "light" && "white",
+        "& .MuiSlider-markLabel": {
+            color: (props) => props.mode === "light" && "white",
+        },
+        "& .PrivateValueLabel-label-8": {
+            color: (props) => props.mode === "light" && "black",
+        },
+    },
+});
+
+const marks = [
+    {
+        value: 0,
+        label: "0",
+    },
+    {
+        value: 1,
+        label: "1",
+    },
+    {
+        value: 2,
+        label: "2",
+    },
+    {
+        value: 3,
+        label: "3",
+    },
+    {
+        value: 4,
+        label: "4",
+    },
+    {
+        value: 5,
+        label: "5",
+    },
+    {
+        value: 6,
+        label: "6",
+    },
+    {
+        value: 7,
+        label: "7",
+    },
+    {
+        value: 8,
+        label: "8",
+    },
+    {
+        value: 9,
+        label: "9",
+    },
+    {
+        value: 10,
+        label: "10",
+    },
+    {
+        value: 11,
+        label: "11",
+    },
+    {
+        value: 12,
+        label: "12",
+    },
+    {
+        value: 13,
+        label: "13",
+    },
+    {
+        value: 14,
+        label: "14",
+    },
+    {
+        value: 15,
+        label: "15",
+    },
+    {
+        value: 16,
+        label: "16",
+    },
+    {
+        value: 17,
+        label: "17",
+    },
+    {
+        value: 18,
+        label: "18",
+    },
+    {
+        value: 19,
+        label: "19",
+    },
+    {
+        value: 20,
+        label: "20",
+    },
+    {
+        value: 21,
+        label: "21",
+    },
+    {
+        value: 22,
+        label: "22",
+    },
+    {
+        value: 23,
+        label: "23",
+    },
+    {
+        value: 24,
+        label: "24",
+    },
+];
