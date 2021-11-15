@@ -79,6 +79,7 @@ This data will be consumed by chart component and stats components
 @blueprint.route('/get-data')
 def humidity_temperature_data():
 <<<<<<< HEAD
+<<<<<<< HEAD
     region_id = request.args.get("region_id")
     device_location = "pi106.pi.bmi.emory.edu"
 
@@ -98,6 +99,8 @@ def humidity_temperature_data():
             }
 >>>>>>> bffa53b... DAS-20 : Integrating the DB with Flask
 =======
+=======
+>>>>>>> 971943b... DAS - 15 : Adding Logs to the files
     try:
         region_id = request.args.get("region_id")
         device_location = "pi106.pi.bmi.emory.edu"
@@ -118,4 +121,7 @@ def humidity_temperature_data():
                 }
     except Exception as e:
         current_app.logger.error("Exception ocurred", exc_info=True)
+<<<<<<< HEAD
 >>>>>>> 0fe7c71... DAS - 15 : Adding Logs to the files
+=======
+>>>>>>> 971943b... DAS - 15 : Adding Logs to the files

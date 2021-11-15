@@ -223,4 +223,7 @@ def get_status():
         current_app.logger.exception("Exception occued in sending the data rows", exc_info=True)
         rows = {"data": []}
         return rows
+<<<<<<< HEAD
 >>>>>>> 0fe7c71... DAS - 15 : Adding Logs to the files
+=======
+>>>>>>> 971943b... DAS - 15 : Adding Logs to the files

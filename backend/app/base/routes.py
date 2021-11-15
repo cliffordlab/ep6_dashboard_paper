@@ -29,4 +29,7 @@ from flask import jsonify, render_template, redirect, request, url_for
 
 from app import db
 from app.base import blueprint
+<<<<<<< HEAD
 >>>>>>> 0fe7c71... DAS - 15 : Adding Logs to the files
+=======
+>>>>>>> 971943b... DAS - 15 : Adding Logs to the files
