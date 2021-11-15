@@ -34,12 +34,20 @@ const Audio = (props) => {
    return (
       <div style={styles.audio}>
 
+            <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
+               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color} href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
+               <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color} href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
+               <Typography sx={{ display: 'flex', alignItems: 'center' }} color={styles.audio.color}> <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Audio </Typography>
+            </Breadcrumbs>
+
             {showAudioGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowAudioGraph(false)}> <CancelIcon style={{fill: styles.audio.color}} /> </IconButton></Tooltip> }  
   
+
+
          <div style={styles.audiochartWrapper}>
-            { !showAudioGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
+            { !showAudioGraph && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
             
-            { showAudioGraph && <AudioPlot height={350} width={600} data={audioData.data} style={styles.audioPlot}/> }
+            { showAudioGraph && <AudioPlot height={550} width={1200} data={audioData.data} style={styles.audioPlot}/> }
          </div>
       </div>
    )
@@ -56,8 +64,8 @@ const audioStyles = (mode) => ({
    },
 
    audiochartWrapper: {
-       height: "50vh",
-       width: "95%",
+       height: "60vh",
+       width: "96%",
        marginRight: "15px",
    },
 

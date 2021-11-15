@@ -8,9 +8,11 @@
 
 from flask_migrate import Migrate
 from os import environ
+import os
 from sys import exit
 from decouple import config
 import logging
+import logging.config
 
 from config import config_dict
 from app import create_app, db
@@ -28,6 +30,8 @@ try:
 except:
     DEBUG = False
 
+
+logging.config.fileConfig(app_config.LOG_CONFIG)
 
 app = create_app(app_config)
 Migrate(app, db)
