@@ -1,0 +1,67 @@
+2021-11-15 03:39:08,960 INFO app MainThread : DEBUG       = True
+2021-11-15 03:39:08,960 INFO app MainThread : Environment = DEV
+2021-11-15 03:39:08,960 INFO app MainThread : DBMS        = sqlite:///C:\Users\ratan\Documents\ep6_dashboard\backend\db.sqlite3
+2021-11-15 03:39:08,991 INFO werkzeug MainThread :  * Restarting with stat
+2021-11-15 03:39:10,191 INFO app MainThread : DEBUG       = True
+2021-11-15 03:39:10,191 INFO app MainThread : Environment = DEV
+2021-11-15 03:39:10,191 INFO app MainThread : DBMS        = sqlite:///C:\Users\ratan\Documents\ep6_dashboard\backend\db.sqlite3
+2021-11-15 03:39:10,211 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-15 03:39:10,222 INFO werkzeug MainThread :  * Debugger PIN: 796-626-758
+2021-11-15 03:39:10,327 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:9800/ (Press CTRL+C to quit)
+2021-11-15 03:39:37,675 ERROR root Thread-2 : Exception occured querying the database
+Traceback (most recent call last):
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\util\connection.py", line 96, in create_connection
+    raise err
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\util\connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ratan\Documents\ep6_dashboard\backend\app\utils\Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\client\query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\service\query_service.py", line 260, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\service\query_service.py", line 355, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\api_client.py", line 393, in request
+    **urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\rest.py", line 309, in POST
+    **urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\influxdb_client\rest.py", line 187, in request
+    **urlopen_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\util\retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "C:\Users\ratan\anaconda3\envs\bmi\lib\site-packages\urllib3\connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x0000019F7A9D6D48>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 03:39:37,698 INFO werkzeug Thread-2 : 127.0.0.1 - - [15/Nov/2021 03:39:37] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 03:40:59,117 INFO werkzeug MainThread :  * Detected change in 'C:\\Users\\ratan\\Documents\\ep6_dashboard\\backend\\run.py', reloading
+2021-11-15 03:40:59,208 INFO werkzeug MainThread :  * Restarting with stat
