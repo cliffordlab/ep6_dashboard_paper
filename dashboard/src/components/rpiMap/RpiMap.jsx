@@ -4,6 +4,9 @@ import {select, scaleLinear, scaleSequential} from 'd3';
 import swarm_data from './swarm_regions.json'; 
 import './rpimap.css'
 
+import { theme } from "../../theme/Themes";
+import { ThemeContext } from "../../theme/ThemeProvider";
+
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
 
@@ -14,6 +17,8 @@ export default function RpiMap(props) {
         props.onclick({region_id : region_id, showMap : true});
     }
 
+    const { mode } = React.useContext(ThemeContext);
+    const styles = rpimapStyles(mode);
 
     const svg_h = props.height
     const svg_w = props.width
@@ -49,8 +54,10 @@ export default function RpiMap(props) {
             var xscale = scaleLinear().domain([-35,35]).range([0,svg_w]);
             var yscale = scaleLinear().domain([-15,25]).range([svg_h,0]);
 
-            // TODO Get a better color space
-            var cscale = scaleSequential(["#4e79a7","#f28e2c","#e15759","#76b7b2","#59a14f","#edc949","#af7aa1","#ff9da7","#9c755f","#bab0ab"]).domain([0,40])
+            // Forward VIRIDIS:
+            // var cscale = scaleSequential(["#fde725","#b5de2b","#6ece58","#35b779","#1f9e89","#26828e","#31688e","#3e4989","#482878","#440154"]).domain([0,40])
+            // Backward VIRIDIS:
+            var cscale = scaleSequential(["#440154","#482878","#3e4a89","#31688e","#26828e","#1f9e89","#35b779","#6dcd59","#b4de2c","#fde725"]).domain([0,40])
 
 
             for (let k = 0; k<data.length; k++) {
@@ -73,9 +80,9 @@ export default function RpiMap(props) {
                         .attr('d',(d,i) => {
                             return d.path})
                         .style("fill",(d,i) => {return cscale(i)})
-                        .attr("stroke","white")
+                        .attr("stroke", theme[mode].color)
                         .attr("stroke-width",2)
-                        .attr("fill-opacity",0.6)
+                        .attr("fill-opacity",0.5)
                         .attr("id",(d,i) => {return "reg_"+d.device})
 
 
@@ -87,10 +94,10 @@ export default function RpiMap(props) {
                         .append("circle")
                         .attr("cx", (d,i) => {return xscale(d.state[0])})
                         .attr("cy", (d,i) => {return yscale(d.state[1])})
-                        .attr("r", 6)
+                        .attr("r", 5)
                         .attr('fill',"yellow")
-                        .attr("stroke","black")
-                        .attr("stroke-width", 3)
+                        .attr("stroke", theme[mode].color)
+                        .attr("stroke-width", 1)
                         .attr("id",(d,i) => {return "dev_"+d.device})
                         .on("mouseover", function(d) {
                             select(this).attr("r",10)
@@ -108,9 +115,9 @@ export default function RpiMap(props) {
              .attr("x", (d,i) => {return xscale(d.state[0])})
              .attr("y", (d,i) => {return yscale(d.state[1])})
              .text((d,i) => {return d.device})
-             .attr('fill',"black")
-             .attr("stroke","black")
-             .attr("stroke-width", 2)
+             .attr('fill', theme[mode].color)
+             .attr("stroke", theme[mode].color)
+             .attr("stroke-width", 0.5)
              .attr("id",(d,i) => {return "txt_"+d.device})
              .attr('font-size', 18)
 
@@ -150,3 +157,17 @@ export default function RpiMap(props) {
         </div>
     )
 }
+
+const rpimapStyles = (mode) => ({
+    rpimap: {
+        flex: 4,
+        backgroundColor: theme[mode].backgroundColor,
+        color: theme[mode].color
+    },
+ 
+    rpimapchartWrapper: {
+        height: "50vh",
+        width: "95%",
+        marginRight: "15px",
+    },
+ });

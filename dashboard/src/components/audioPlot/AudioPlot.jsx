@@ -42,7 +42,7 @@ export default function AudioPlot(props) {
                     {
                         label: "Channel 3",
                         data :  props.data.Channel3,
-                        borderColor: 'yellow',
+                        borderColor: 'gold',
                         borderWidth: 2,
                         fill: false,
                         lineTension: 0.5,
