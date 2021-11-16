@@ -9,13 +9,12 @@ import {
 import NavBar from "./components/navbar/NavBar";
 import SideBar from "./components/sidebar/SideBar";
 
-import Humidity from './pages/humidity/Humidity'
-import Illuminance from './pages/illuminance/Illuminance'
-import Visual from './pages/visual/Visual'
-import Audio from './pages/audio/Audio'
-import RpiStatus from './pages/rpiStatus/RpiStatus'
-import Home from './pages/home/Home'
-import Map from './pages/map/Map'
+import Humidity from "./pages/humidity/Humidity";
+import Visual from "./pages/visual/Visual";
+import Audio from "./pages/audio/Audio";
+import RpiStatus from "./pages/rpiStatus/RpiStatus";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Illuminance from "./pages/illuminance/Illuminance";
 
 import "./App.css";
 
