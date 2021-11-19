@@ -16,7 +16,7 @@ cd ../dashboard
 npm install .
 ```
 
-## Run the Servers
+## Run the Servers on localhost
 
 
 Run the Flask server at 
@@ -31,4 +31,16 @@ Run the Dashboard at
 ```bash
 cd dashboard
 npm start
+```
+
+## Run the Server with multiple workers
+You should have gunicorn installed before using this feature.
+This helps in serving multiple worker nodes to handle incoming concurrent requests.
+
+You can specify the number of worker threads with parameter **--workers**.
+We are using 5 in this example.
+
+```
+cd backend
+gunicorn --workers 5 --bind 0.0.0.0:9800 run:app
 ```
