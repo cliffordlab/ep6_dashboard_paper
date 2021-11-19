@@ -40,7 +40,7 @@ This helps in serving multiple worker nodes to handle incoming concurrent reques
 You can specify the number of worker threads with parameter **--workers**.
 We are using 5 in this example.
 
-```
+```bash
 cd backend
 gunicorn --workers 5 --bind 0.0.0.0:9800 run:app
 ```
