@@ -6,7 +6,7 @@ After=network.target
 User=root
 Group=root
 WorkingDirectory=/mnt/c/Users/ratan/Documents/ep6_dashboard/backend
-ExecStart=gunicorn --workers 5 --bind 0.0.0.0:8001 run:app
+ExecStart=gunicorn --workers 5 --bind 0.0.0.0:9800 run:app
  
 [Install]
 WantedBy=multi-user.target
