@@ -9,6 +9,7 @@ Flask-SQLAlchemy==2.5.1
 greenlet==1.1.1
 importlib-metadata==4.8.1
 importlib-resources==5.2.2
+influxdb-client==1.21.0
 itsdangerous==2.0.1
 Jinja2==3.0.1
 Mako==1.1.5
