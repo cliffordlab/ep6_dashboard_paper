@@ -7,6 +7,7 @@
 """
 
 from flask_migrate import Migrate
+from flask_cors import CORS
 from os import environ
 import os
 from sys import exit
@@ -34,6 +35,7 @@ except:
 logging.config.fileConfig(app_config.LOG_CONFIG)
 
 app = create_app(app_config)
+CORS(app)
 Migrate(app, db)
 
 

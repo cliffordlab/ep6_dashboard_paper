@@ -5,6 +5,7 @@ import zoomPlugin from "chartjs-plugin-zoom";
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
+import {config} from "../../environment";
 
 Chart.register(zoomPlugin);
 
@@ -16,7 +17,7 @@ const Humidity = (props) => {
         data: { x: [], humidity: [], temperature: [] },
     });
     useEffect(() => {
-        fetch("/humidity/get-data")
+        fetch(config.url.API_HOST + "/humidity/get-data")
             .then((res) => res.json())
             .then((data) => {
                 setHumidityData(data);

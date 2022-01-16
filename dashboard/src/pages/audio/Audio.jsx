@@ -18,6 +18,7 @@ import './audio.css'
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
+import {config} from "../../environment";
 
 const Audio = (props) => {
 
@@ -29,7 +30,7 @@ const Audio = (props) => {
    }
 
    useEffect(() => {
-      fetch('/audio/get-data').then(res => res.json()).then(data => {
+      fetch(config.url.API_HOST + '/audio/get-data').then(res => res.json()).then(data => {
          setAudioData(data);
       }); }, []);
 
