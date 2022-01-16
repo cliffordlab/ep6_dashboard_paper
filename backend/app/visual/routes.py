@@ -34,7 +34,8 @@ def visual_data():
 @blueprint.route('/get-layout')
 def get_layout():
     try:
-        return send_file("visual//static//images//layout.jpg", mimetype="image/jpg")
+        file_path = os.path.join(current_app.config['POSNET_DIR'], "ep6_map_positions.jpg")
+        return send_file(file_path, mimetype="image/jpg")
     except Exception as e:
         current_app.logger.exception("Exception occured", exc_info=True)
         return
