@@ -5,11 +5,10 @@
   Last Modified : 2021-09-18 21:21:28
   Description : This file wraps all of the configuration, database extension and executes Flask server
 """
-
+from cache import cache
 from flask_migrate import Migrate
 from flask_cors import CORS
 from os import environ
-import os
 from sys import exit
 from decouple import config
 import logging
@@ -37,7 +36,7 @@ logging.config.fileConfig(app_config.LOG_CONFIG)
 app = create_app(app_config)
 CORS(app)
 Migrate(app, db)
-
+cache.init_app(app, config={'CACHE_TYPE': app_config.CACHE_TYPE, 'CACHE_DEFAULT_TIMEOUT': app_config.CACHE_DEFAULT_TIMEOUT})
 
 if DEBUG:
     app.logger.info('DEBUG       = ' + str(DEBUG))
