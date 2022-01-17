@@ -6,6 +6,7 @@
   Description : This is the file defining the routes for audio services.
 """
 
+from cache import cache
 from flask import jsonify, render_template, redirect, request, url_for, send_file, current_app
 import numpy as np
 import os
@@ -106,6 +107,7 @@ def get_points():
 
 
 @ blueprint.route('/get-status')
+@cache.cached(timeout=300)
 def get_status():
     try:
         rows = {"data": [{"name": "Kitchen PI - 04", "location": "Kitchen", "ipAddress": "192.168.0.13", "status": "connected"},
