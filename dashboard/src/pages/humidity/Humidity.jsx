@@ -26,7 +26,7 @@ const Humidity = (props) => {
     const [showHumidityPlot, setShowHumidityPlot] = useState(false);
 
     useEffect(() => {
-        fetch(config.url.API_HOST +"humidity/get-data")
+        fetch(config.url.API_HOST +"/humidity/get-data")
             .then((res) => res.json())
             .then((data) => {
                 setHumidityData(data);
