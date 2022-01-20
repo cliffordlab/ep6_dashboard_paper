@@ -7,29 +7,23 @@
 """
 
 from flask import jsonify, render_template, redirect, request, url_for, current_app
-import logging
-import logging.config
-import os
 
-
-from app import db
 from app.humidity import blueprint
-from ..utils.Database import Database
+from app.utils.Database import Database
 
 
 db = Database()
 
-"""
-API to fetch the data from database depending on parameter from queryPanel
-This data will be consumed by chart component and stats components
-"""
-
 
 @blueprint.route('/get-data')
 def humidity_temperature_data():
+    """
+    API to fetch the data from database depending on parameter from queryPanel
+    This data will be consumed by chart component and stats components
+    """
     try:
         region_id = request.args.get("region_id")
-        device_location = "pi106.pi.bmi.emory.edu"
+        device_location = "pi160.pi.bmi.emory.edu"
 
         response = db.query_humidity(location=device_location)
 
