@@ -7,39 +7,51 @@
 """
 
 from flask import jsonify, render_template, redirect, request, url_for, current_app
-import numpy as np
-import os
-import logging
-import logging.config
 
-
-from app import db
 from app.illuminance import blueprint
+from app.utils.Database import Database
 
 
-"""
-API to fetch the data from database depending on parameter from queryPanel
-This data will be consumed by chart component and stats components
-"""
+db = Database()
 
 
 @blueprint.route('/get-data')
 def illuminance_data():
+    """
+    API to fetch the data from database depending on parameter from queryPanel
+    This data will be consumed by chart component and stats components
+    """
     try:
-        x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,
-             192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361]
-        Channel1 = list(np.random.uniform(100, 200) + 100*np.sin(2*(3.14/np.random.uniform(2, 64))*np.array(x) + np.random.normal(0, 3.14)) + 15*np.random.normal(0, 5, len(x)))
-        Channel2 = list(np.random.uniform(100, 200) + 100*np.sin(2*(3.14/np.random.uniform(2, 64))*np.array(x) + np.random.normal(0, 3.14)) + 15*np.random.normal(0, 5, len(x)))
-        Channel3 = list(np.random.uniform(100, 200) + 100*np.sin(2*(3.14/np.random.uniform(2, 64))*np.array(x) + np.random.normal(0, 3.14)) + 15*np.random.normal(0, 5, len(x)))
-        Channel4 = list(np.random.uniform(100, 200) + 100*np.sin(2*(3.14/np.random.uniform(2, 64))*np.array(x) + np.random.normal(0, 3.14)) + 15*np.random.normal(0, 5, len(x)))
-        Channel5 = list(np.random.uniform(100, 200) + 100*np.sin(2*(3.14/np.random.uniform(2, 64))*np.array(x) + np.random.normal(0, 3.14)) + 15*np.random.normal(0, 5, len(x)))
+        region_id = request.args.get("region_id")
+        device_location = "pi160.pi.bmi.emory.edu"
+
+        response = db.query_illuminance(location=device_location)
+
+        R_channel = list(filter(lambda x: x['channel'] == 0, response))
+        G_channel = list(filter(lambda x: x['channel'] == 1, response))
+        B_channel = list(filter(lambda x: x['channel'] == 2, response))
+        CT_channel = list(filter(lambda x: x['channel'] == 3, response))
+        Lux_channel = list(filter(lambda x: x['channel'] == 4, response))
+        Luxnc_channel = list(filter(lambda x: x['channel'] == 5, response))
+
+        x = list(map(lambda x: x['time'], R_channel))
+        y0 = list(map(lambda x: x['value'], R_channel))
+        y1 = list(map(lambda x: x['value'], G_channel))
+        y2 = list(map(lambda x: x['value'], B_channel))
+        y3 = list(map(lambda x: x['value'], CT_channel))
+        y4 = list(map(lambda x: x['value'], Lux_channel))
+        y5 = list(map(lambda x: x['value'], Luxnc_channel))
+
         return {"data": {'x': x,
-                         'Channel1': Channel1,
-                         'Channel2': Channel2,
-                         'Channel3': Channel3,
-                         'Channel4': Channel4,
-                         'Channel5': Channel5,
+                         'Channel1': y0,
+                         'Channel2': y1,
+                         'Channel3': y2,
+                         'Channel4': y3,
+                         'Channel5': y4,
+                         'Channel6': y5
                          }
                 }
+
     except Exception as e:
         current_app.logger.error("Exception occured", exc_info=True)
+        return str(e)
