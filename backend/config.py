@@ -36,8 +36,12 @@ class Config(object):
     CACHE_TYPE = "SimpleCache"
     CACHE_DEFAULT_TIMEOUT = 300
 
+    # PosNet Dir
+    POSNET_DIR = config('POSNET_DIR', "visual/static/images")
 
 # Production environment specific configurations go here
+
+
 class ProductionConfig(Config):
     DEBUG = False
     ENV = "PROD"
