@@ -6,26 +6,23 @@
   Description : This is the file defining the routes for audio services.
 """
 
+from cache import cache
 from flask import jsonify, render_template, redirect, request, url_for, send_file, current_app
-import numpy as np
+import json
 import os
-import logging
-import logging.config
+import subprocess
 
-from app import db
 from app.visual import blueprint
-
-
-"""
-API to fetch the data from database depending on parameter from queryPanel
-This data will be consumed by chart component and stats components
-"""
 
 
 @blueprint.route('/get-data')
 def visual_data():
+    """
+    API to fetch the data from database depending on parameter from queryPanel
+    This data will be consumed by chart component and stats components
+    """
     try:
-        path = os.path.join("visual", "static", "images", "map.JPG")
+        path = os.path.join("visual", "static", "images", "ep6_map_positions.jpg")
         return send_file(path, mimetype='image/jpg')
     except Exception as e:
         current_app.logger.error("Exception Occured", exc_info=True)
@@ -34,10 +31,11 @@ def visual_data():
 @blueprint.route('/get-layout')
 def get_layout():
     try:
-        return send_file("visual//static//images//layout.jpg", mimetype="image/jpg")
+        file_path = os.path.join(current_app.config['POSNET_DIR'], "ep6_map_positions.jpg")
+        return send_file(file_path, mimetype="image/jpg")
     except Exception as e:
         current_app.logger.exception("Exception occured", exc_info=True)
-        return
+        return str(e)
 
 
 @blueprint.route('/get-points')
@@ -105,14 +103,29 @@ def get_points():
 
 
 @ blueprint.route('/get-status')
+@cache.cached(timeout=300)
 def get_status():
+    rows = {"data": [{"name": "Kitchen PI - 04", "location": "Kitchen", "ipAddress": "192.168.0.13", "status": "connected"},
+                     {"name": "Kitchen PI - 01", 'location': 'Kitchen', 'ipAddress': '192.168.0.7', 'status': 'disconnected'},
+                     {"name": "Kitchen PI - 02", 'location': 'Kitchen', 'ipAddress': '192.168.0.19', 'status': 'disconnected'},
+                     {"name": "Kitchen PI - 03", 'location': 'Kitchen', 'ipAddress': '192.168.0.29', 'status': 'booting'}]}
+
     try:
-        rows = {"data": [{"name": "Kitchen PI - 04", "location": "Kitchen", "ipAddress": "192.168.0.13", "status": "connected"},
-                         {"name": "Kitchen PI - 01", 'location': 'Kitchen', 'ipAddress': '192.168.0.7', 'status': 'disconnected'},
-                         {"name": "Kitchen PI - 02", 'location': 'Kitchen', 'ipAddress': '192.168.0.19', 'status': 'disconnected'},
-                         {"name": "Kitchen PI - 03", 'location': 'Kitchen', 'ipAddress': '192.168.0.29', 'status': 'booting'}]}
+        fileHandle = open("device_mapping.json", "r")
+        devices = json.load(fileHandle)
+
+        status = []
+        for device_id, ip in devices.items():
+            output = subprocess.check_output(["ping", ip, "-c", str(1)])
+            # If all packets are reached then PI is ok
+            device_status = "disconnected"
+            if("1 received" in str(output)):
+                device_status = "connected"
+            status.append({"name": "Device - {}".format(device_id), "location": "-", "ipAddress": ip, "status": device_status})
+
+        rows = {"data": status, }
         return rows
     except Exception as e:
         current_app.logger.exception("Exception occued in sending the data rows", exc_info=True)
-        rows = {"data": []}
+        rows = {"data": rows["data"]}
         return rows

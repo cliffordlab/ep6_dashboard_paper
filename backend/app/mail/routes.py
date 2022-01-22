@@ -11,11 +11,7 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import logging
-import logging.config
-import os
 
-from app import db
 from app.mail import blueprint
 
 

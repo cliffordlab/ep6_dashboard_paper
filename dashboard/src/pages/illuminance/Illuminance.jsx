@@ -8,6 +8,8 @@ import "./illuminance.css";
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import { Container, Grid, Paper, makeStyles, Slider } from "@material-ui/core";
+import {config} from "../../environment";
+
 
 const Illuminance = (props) => {
     const [illuminanceData, setIlluminanceData] = useState({
@@ -27,7 +29,7 @@ const Illuminance = (props) => {
     };
 
     useEffect(() => {
-        fetch("/illuminance/get-data")
+        fetch(config.url.API_HOST +"/illuminance/get-data")
             .then((res) => res.json())
             .then((data) => {
                 setIlluminanceData(data);

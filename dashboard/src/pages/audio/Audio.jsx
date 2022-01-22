@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState , useContext} from "react";
 
 import MicMap from "../../components/micMap/MicMap";
 import AudioPlot from "../../components/audioPlot/AudioPlot";
@@ -8,6 +8,7 @@ import "./audio.css";
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
+import {config} from "../../environment";
 
 const Audio = (props) => {
     const [audioData, setAudioData] = useState({
@@ -20,14 +21,14 @@ const Audio = (props) => {
     };
 
     useEffect(() => {
-        fetch("/audio/get-data")
+        fetch(config.url.API_HOST + '/audio/get-data')
             .then((res) => res.json())
             .then((data) => {
                 setAudioData(data);
             });
     }, []);
 
-    const { mode } = React.useContext(ThemeContext);
+    const { mode } = useContext(ThemeContext);
     const styles = audioStyles(mode);
 
     // For slider Color
@@ -37,7 +38,7 @@ const Audio = (props) => {
     const classes = useStyles(test);
 
     // Reference
-    const [widthRef, setWidthRef] = React.useState();
+    const [widthRef, setWidthRef] = useState();
     const ref = useRef(null);
 
     useEffect(() => {

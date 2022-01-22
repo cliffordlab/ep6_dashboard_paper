@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import Typography from '@mui/material/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import HomeIcon from '@mui/icons-material/Home';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MicIcon from '@mui/icons-material/Mic';
 
 import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
-
 import HumidityPlot from "../../components/humidityPlot/HumidityPlot";
 import MicMap from "../../components/micMap/MicMap";
 
@@ -9,6 +14,7 @@ import "./humidity.css";
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
+import {config} from "../../environment";
 
 const Humidity = (props) => {
     const [humidityData, setHumidityData] = useState({
@@ -17,7 +23,7 @@ const Humidity = (props) => {
     const [showHumidityPlot, setShowHumidityPlot] = useState(false);
 
     useEffect(() => {
-        fetch("/humidity/get-data")
+        fetch(config.url.API_HOST +"/humidity/get-data")
             .then((res) => res.json())
             .then((data) => {
                 setHumidityData(data);
@@ -28,7 +34,7 @@ const Humidity = (props) => {
         setShowHumidityPlot(data.showMap);
     };
 
-    const { mode } = React.useContext(ThemeContext);
+    const { mode } = useContext(ThemeContext);
     const styles = humidityStyles(mode);
 
     console.log(humidityData);

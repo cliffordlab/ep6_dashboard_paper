@@ -26,16 +26,22 @@ import RpiMap from "../../components/rpiMap/RpiMap";
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
+import {config} from "../../environment";
 
 export default function RpiStatus(props) {
     const [statusData, setStatusData] = useState({ data: [] });
+    console.log("Starman");
+    console.log(process.env);
+    console.log(config.url.API_HOST + "/visual/get-status");
     useEffect(() => {
-        fetch("/visual/get-status")
+        fetch(config.url.API_HOST + "/visual/get-status")
             .then((res) => res.json())
             .then((data) => {
                 setStatusData(data);
                 console.log("response");
                 console.log(data);
+                console.log("Lightyear");
+                console.log(process.env);
             });
     }, []);
 
@@ -136,7 +142,7 @@ export default function RpiStatus(props) {
                             <TableBody>
                                 {statusData.data.map((row) => (
                                     <TableRow
-                                    key={row.name}
+                                        key={row.name}
                                         sx={{
                                             "&:last-child td, &:last-child th":
                                                 {

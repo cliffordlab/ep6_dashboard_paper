@@ -10,7 +10,6 @@ from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 import logging
 
-import socket
 from datetime import datetime
 
 
@@ -82,10 +81,32 @@ class Database():
                     result.append({"measurement": record["_measurement"], "time": record["_time"].strftime("%H:%M:%S"), "value": record["_value"]})
         except Exception as e:
             logging.error("Exception Occured in processing the humidity data", exc_info=True)
-        return result
+        finally:
+            return result
 
-    def query_audio(self, location, bucket="audio_features", start="-2m", measurement=["dBA"], fields=["1", "2", "3", "4"]):
+    def __process_illuminance_data(self, data):
+        result = []
         try:
+            for index, table in enumerate(data):
+                for record in table.records:
+                    result.append({"channel": index, "time": record["_time"].strftime("%H:%M:%S"), "value": record["_value"]})
+        except Exception as e:
+            logging.error("Exception occured in processing illuminance data", exc_info=True)
+        finally:
+            return result
+
+    def query_audio(self, location, start="-1m"):
+        """
+        Fetches Audio of given RPIs. Extracts the dBA for all four microphone array
+        Args:
+        [location] : (RPIs hostname) e.g. pi106.pi.bmi.emory.edu
+        [start] : Point of start of the data (-7d)
+        """
+        try:
+            bucket = "audio_features"
+            measurement = ["dBA"]
+            fields = ["1", "2", "3", "4"]
+
             query = self.__create_query(location, bucket, start, measurement, fields)
             response = self.__query(query)
             result = self.__process_audio_data(response)
@@ -93,11 +114,44 @@ class Database():
         except Exception as e:
             logging.error("Exception Occured querying the audio data", exc_info=True)
 
-    def query_humidity(self, location, bucket="temp_hum_light", start="-2m", measurement=["humidity", "temperature"], fields=["celcius", "rel_humidity"]):
+    def query_humidity(self, location, start="-7d"):
+        """
+        Fetches Humidity and Temperature of given RPIs
+        Args:
+        [location] : (RPIs hostname) e.g. pi106.pi.bmi.emory.edu
+        [start] : Point of start of the data (default = -7d)
+        """
         try:
+            bucket = "temp_hum_light"
+            measurement = ["humidity", "temperature"]
+            fields = ["celcius", "rel_humidity"]
+
             query = self.__create_query(location, bucket, start, measurement, fields)
             response = self.__query(query)
             result = self.__process_humidity_data(response)
             return result
-        except Exception as e:
+        except:  # pylint: disable=bare-except
             logging.error("Exception Occured humidity data", exc_info=True)
+            return []
+
+    def query_illuminance(self, location, start="-7d"):
+        """
+        Fetches illuminance for the Photo sensor
+        Args: 
+        [location] : (RPIs hostname) e.g. pi106.pi.bmi.emory.edu
+        [start] : Point of start of the data (-7d)
+        """
+        try:
+            # InfluxDB Data Location
+            bucket = "temp_hum_light"
+            measurement = ["illuminance"]
+            fields = ["illum_R", "illum_G", "illum_B", "illum_CT", "illum_lux", "illum_luxnc"]
+
+            query = self.__create_query(location, bucket, start, measurement, fields)
+            response = self.__query(query)
+            result = self.__process_illuminance_data(response)
+            return result
+        except Exception as e:  # pylint: disable=bare-except
+            print(str(e))
+            logging.error("Exception occured in fetching Illuminance data", exc_info=True)
+            return {"data": []}

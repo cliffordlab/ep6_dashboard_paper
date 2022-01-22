@@ -12,6 +12,7 @@ from importlib import import_module
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, url_for
 
+# SQL Alchemy database to register minor status if needed
 db = SQLAlchemy()
 
 

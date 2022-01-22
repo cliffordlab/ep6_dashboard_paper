@@ -6,6 +6,7 @@ import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import CameraMap from "../../components/cameraMap/CameraMap";
 
+
 const Visual = (props) => {
     const [imageData, setImageData] = useState({
         stats: { mean: 0, median: 0, variance: 0, correlation: 0 },
