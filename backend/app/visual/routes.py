@@ -22,7 +22,7 @@ def visual_data():
     This data will be consumed by chart component and stats components
     """
     try:
-        path = os.path.join("visual", "static", "images", "map.JPG")
+        path = os.path.join("visual", "static", "images", "ep6_map_positions.jpg")
         return send_file(path, mimetype='image/jpg')
     except Exception as e:
         current_app.logger.error("Exception Occured", exc_info=True)
@@ -35,7 +35,7 @@ def get_layout():
         return send_file(file_path, mimetype="image/jpg")
     except Exception as e:
         current_app.logger.exception("Exception occured", exc_info=True)
-        return
+        return str(e)
 
 
 @blueprint.route('/get-points')
