@@ -147,37 +147,37 @@ export default function RpiStatus(props) {
                                             "&:last-child td, &:last-child th":
                                                 {
                                                     border: 0,
-                                                    color: theme[mode].color,
+                                                    color: theme[mode].backgroundColor,
                                                 },
                                         }}
                                     >
                                         <TableCell
                                             align="center"
-                                            sx={{ color: theme[mode].color }}
+                                            sx={{ color: theme[mode].backgroundColor }}
                                         >
                                             {row.name}
                                         </TableCell>
                                         <TableCell
                                             align="center"
-                                            sx={{ color: theme[mode].color }}
+                                            sx={{ color: theme[mode].backgroundColor }}
                                         >
                                             {row.location}
                                         </TableCell>
                                         <TableCell
                                             align="center"
-                                            sx={{ color: theme[mode].color }}
+                                            sx={{ color: theme[mode].backgroundColor }}
                                         >
                                             {row.ipAddress}
                                         </TableCell>
                                         <TableCell
                                             align="center"
-                                            sx={{ color: theme[mode].color }}
+                                            sx={{ color: theme[mode].backgroundColor }}
                                         >
                                             {statusIcon(row.status)}
                                         </TableCell>
                                         <TableCell
                                             align="center"
-                                            sx={{ color: theme[mode].color }}
+                                            sx={{ color: theme[mode].backgroundColor }}
                                         >
                                             {" "}
                                             <Tooltip title="Reboot">
