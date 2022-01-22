@@ -6,6 +6,7 @@ export const theme = {
         toggleBorder: "#FFF",
         backgroundColor: "white",
         blackColor: "#000000",
+        opposite: "rgb(20, 24, 51)",
     },
     dark: {
         body: "#363537",
@@ -14,5 +15,6 @@ export const theme = {
         toggleBorder: "#6B8096",
         backgroundColor: "rgb(20, 24, 51)",
         blackColor: "#000000",
+        opposite: "#FFF",
     },
 };

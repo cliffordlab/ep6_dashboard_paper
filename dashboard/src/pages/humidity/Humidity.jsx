@@ -1,84 +1,261 @@
-import React, {useEffect, useState} from 'react'
-import { Line } from 'react-chartjs-2'
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import MicIcon from '@mui/icons-material/Mic';
-import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
-import Tooltip from '@mui/material/Tooltip';
+import React, { useEffect, useRef, useState } from "react";
 
+import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
 
-import HumidityPlot from '../../components/humidityPlot/HumidityPlot';
-import MicMap from '../../components/micMap/MicMap';
+import HumidityPlot from "../../components/humidityPlot/HumidityPlot";
+import MicMap from "../../components/micMap/MicMap";
 
-import './humidity.css'
+import "./humidity.css";
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 
-
 const Humidity = (props) => {
+    const [humidityData, setHumidityData] = useState({
+        data: { x: [], humidity: [], temperature: [] },
+    });
+    const [showHumidityPlot, setShowHumidityPlot] = useState(false);
 
-   const [humidityData, setHumidityData ] = useState({   data : { x : [], humidity: [], temperature : [] } });
-   const [showHumidityPlot, setShowHumidityPlot] = useState(false)
+    useEffect(() => {
+        fetch("/humidity/get-data")
+            .then((res) => res.json())
+            .then((data) => {
+                setHumidityData(data);
+            });
+    }, []);
 
-   useEffect(() => {
-      fetch('/humidity/get-data').then(res => res.json()).then(data => {
-         setHumidityData(data);
-      });
-   }, []);
+    const regionClickHandler = (data) => {
+        setShowHumidityPlot(data.showMap);
+    };
 
-   const regionClickHandler = (data) => {
-      setShowHumidityPlot(data.showMap);
-   }
+    const { mode } = React.useContext(ThemeContext);
+    const styles = humidityStyles(mode);
 
-   const { mode } = React.useContext(ThemeContext);
-   const styles = humidityStyles(mode);
+    console.log(humidityData);
 
+    // For slider Color
+    const test = {
+        mode: mode,
+    };
+    const classes = useStyles(test);
 
-   console.log(humidityData)
+    // Reference
+    const [widthRef, setWidthRef] = React.useState();
+    const ref = useRef(null);
 
-   return (
-      <div style={styles.humidity}>
-         <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
-            <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary">
-            <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Temperature </Typography>
-         </Breadcrumbs>
+    useEffect(() => {
+        const width = ref.current.offsetWidth;
+        setWidthRef(width);
+    }, [widthRef]);
 
-         {showHumidityPlot && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowHumidityPlot(false)}> <CancelIcon style={{fill: styles.humidity.color}} /> </IconButton></Tooltip> }  
+    // For slider
 
+    const [value, setValue] = React.useState([0, 6]);
 
-         <div style={styles.humidityChartWrapper}>
-            { !showHumidityPlot && <MicMap height={600} width={800} onclick={(e) => {regionClickHandler(e)}}/> }
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
-            { showHumidityPlot && <HumidityPlot height={550} width={1200} data={humidityData.data} style={styles.HumidityPlot} /> }
-         </div>
-      </div>
-   )
-}
+    const valuetext = (value) => {
+        return `${value}`;
+    };
 
-export default Humidity
+    const valueLabelFormat = (value) => {
+        return value;
+    };
+
+    return (
+        <div style={styles.humidity}>
+            <Grid container>
+                <Grid item xs={12} className="item-padding">
+                    <Container>
+                        <Paper
+                            style={styles.itemContainer}
+                            className="item-padding"
+                        >
+                            <Slider
+                                getAriaLabel={() => "Temperature range"}
+                                value={value}
+                                onChange={handleChange}
+                                valueLabelFormat={valueLabelFormat}
+                                getAriaValueText={valuetext}
+                                step={null}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                                min={0}
+                                max={24}
+                                className={classes.sliderRoot}
+                            />
+                        </Paper>
+                    </Container>
+                </Grid>
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.itemContainer} ref={ref}>
+                        {widthRef && (
+                            <MicMap
+                                height={560}
+                                width={widthRef}
+                                onclick={(e) => {
+                                    regionClickHandler(e);
+                                }}
+                            />
+                        )}
+                    </Paper>
+                </Grid>
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.itemContainer}>Heat Map Space</Paper>
+                </Grid>
+                <Grid item xs={12} className="item-padding">
+                    <Paper style={styles.itemContainer}>
+                        <HumidityPlot
+                            width={600}
+                            height={560}
+                            data={humidityData.data}
+                            style={styles.HumidityPlot}
+                        />
+                    </Paper>
+                </Grid>
+            </Grid>
+        </div>
+    );
+};
+
+export default Humidity;
 
 const humidityStyles = (mode) => ({
-   humidity: {
-       flex: 4, 
-       backgroundColor: theme[mode].backgroundColor,
-       color: theme[mode].color
-   },
-   
-   humidityChartWrapper: {
-       height: "60vh",
-       width: "96%",
-       marginRight: "15px",
-   },
-
-   HumidityPlot: {
-      color: theme[mode].color
-   }
-
+    humidity: {
+        backgroundColor: theme[mode].backgroundColor,
+        color: theme[mode].color,
+    },
+    HumidityPlot: {
+        color: theme[mode].color,
+    },
+    heatMapCard: {
+        width: "100%",
+        height: "100%",
+    },
+    markers: {
+        color: theme[mode].color,
+    },
+    itemContainer: {
+        backgroundColor: theme[mode].opposite,
+        height: "100%",
+        color: theme[mode].backgroundColor,
+    },
 });
+
+const useStyles = makeStyles({
+    sliderRoot: {
+        // color: "black",
+        color: (props) => props.mode === "light" && "white",
+        "& .MuiSlider-markLabel": {
+            color: (props) => props.mode === "light" && "white",
+        },
+        "& .PrivateValueLabel-label-8": {
+            color: (props) => props.mode === "light" && "black",
+        },
+    },
+});
+
+const marks = [
+    {
+        value: 0,
+        label: "0",
+    },
+    {
+        value: 1,
+        label: "1",
+    },
+    {
+        value: 2,
+        label: "2",
+    },
+    {
+        value: 3,
+        label: "3",
+    },
+    {
+        value: 4,
+        label: "4",
+    },
+    {
+        value: 5,
+        label: "5",
+    },
+    {
+        value: 6,
+        label: "6",
+    },
+    {
+        value: 7,
+        label: "7",
+    },
+    {
+        value: 8,
+        label: "8",
+    },
+    {
+        value: 9,
+        label: "9",
+    },
+    {
+        value: 10,
+        label: "10",
+    },
+    {
+        value: 11,
+        label: "11",
+    },
+    {
+        value: 12,
+        label: "12",
+    },
+    {
+        value: 13,
+        label: "13",
+    },
+    {
+        value: 14,
+        label: "14",
+    },
+    {
+        value: 15,
+        label: "15",
+    },
+    {
+        value: 16,
+        label: "16",
+    },
+    {
+        value: 17,
+        label: "17",
+    },
+    {
+        value: 18,
+        label: "18",
+    },
+    {
+        value: 19,
+        label: "19",
+    },
+    {
+        value: 20,
+        label: "20",
+    },
+    {
+        value: 21,
+        label: "21",
+    },
+    {
+        value: 22,
+        label: "22",
+    },
+    {
+        value: 23,
+        label: "23",
+    },
+    {
+        value: 24,
+        label: "24",
+    },
+];
