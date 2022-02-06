@@ -18,6 +18,9 @@ class Config(object):
     # Setting a secret key to encryption
     SECRET_KEY = config('SECRET_KEY', default='Ja!Shr!Ram')
 
+    # Email Confirmation before login
+    EMAIL_CONFIRMATION_REQUIRED = config('EMAIL_CONFIRMATION_REQUIRED', True)
+
     # This will create a file in <app> FOLDER
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -25,7 +28,7 @@ class Config(object):
     # Defining Server for the Mail Service
     SMTP_SERVER = config('SMTP_SERVER', default="smtp-mail.outlook.com")
     SMTP_PORT = int(config('SMTP_PORT', 465))
-    EMAIL_SENDER = config('EMAIL_SENDER', '')
+    EMAIL_SENDER = config('EMAIL_SENDER', 'ratansingh648@gmail.com')
     EMAIL_PASSWORD = config('EMAIL_PASSWORD', '')
 
     # Defining the log directory
