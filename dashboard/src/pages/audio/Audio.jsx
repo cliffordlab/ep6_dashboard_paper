@@ -25,8 +25,11 @@ const Audio = (props) => {
    const [audioData, setAudioData] = useState({ data: { x: [], Channel1: [], Channel2: [], Channel3: [], Channel4: [] }});
    const [showAudioGraph, setShowAudioGraph] = useState(false);
 
+   // Callback Handler for Region Clicking
    const regionClickHandler = (data) => {
       setShowAudioGraph(data.showMap);
+      let region_id = data.region_id.slice(4);
+      fetch(config.url.API_HOST + '/audio/get-data?region_id='+region_id).then(res => res.json()).then(data => {setAudioData(data)});
    }
 
    useEffect(() => {
@@ -51,7 +54,6 @@ const Audio = (props) => {
   
          <div style={styles.audiochartWrapper}>
             { !showAudioGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
-            
             { showAudioGraph && <AudioPlot height={350} width={600} data={audioData.data} style={styles.audioPlot}/> }
          </div>
       </div>

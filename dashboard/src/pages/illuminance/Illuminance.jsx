@@ -26,6 +26,8 @@ const Illuminance = (props) => {
 
     const regionClickHandler = (data) => {
         setShowIlluminanceGraph(data.showMap);
+        let region_id = data.region_id.slice(4);
+        fetch(config.url.API_HOST + '/illuminance/get-data?region_id='+region_id).then(res => res.json()).then(data => {setIlluminanceData(data)});
     };
 
     useEffect(() => {

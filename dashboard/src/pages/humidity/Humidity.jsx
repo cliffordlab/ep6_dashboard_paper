@@ -35,6 +35,8 @@ const Humidity = (props) => {
 
     const regionClickHandler = (data) => {
         setShowHumidityPlot(data.showMap);
+        let region_id = data.region_id.slice(4);
+        fetch(config.url.API_HOST + '/humidity/get-data?region_id='+region_id).then(res => res.json()).then(data => {setHumidityData(data)});
     };
 
     const { mode } = React.useContext(ThemeContext);
