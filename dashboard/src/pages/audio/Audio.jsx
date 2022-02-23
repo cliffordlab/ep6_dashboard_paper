@@ -34,13 +34,13 @@ const Audio = (props) => {
     }
 
     // Handler for the change in slider
-    const handleSliderChange = (data) => {
-        console.log(data);
+    const handleSliderChange = (event, sliderValue) => {
+        setValue(sliderValue);
     }
 
     // Initializing the plot data for the first time
     useEffect(() => {
-    fetch(config.url.API_HOST + '/audio/get-data').then(res => res.json()).then(data => {
+        fetch(config.url.API_HOST + '/audio/get-data').then(res => res.json()).then(data => {
        setAudioData(data);
     }); }, []);
     
