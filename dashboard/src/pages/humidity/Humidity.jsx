@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -6,10 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MicIcon from '@mui/icons-material/Mic';
 
-
-
 import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
-
 import HumidityPlot from "../../components/humidityPlot/HumidityPlot";
 import MicMap from "../../components/micMap/MicMap";
 
@@ -39,7 +36,7 @@ const Humidity = (props) => {
         fetch(config.url.API_HOST + '/humidity/get-data?region_id='+region_id).then(res => res.json()).then(data => {setHumidityData(data)});
     };
 
-    const { mode } = React.useContext(ThemeContext);
+    const { mode } = useContext(ThemeContext);
     const styles = humidityStyles(mode);
 
     console.log(humidityData);
@@ -77,13 +74,6 @@ const Humidity = (props) => {
 
     return (
         <div style={styles.humidity}>
-         <Breadcrumbs aria-label="breadcrumb" sx={{ml : 3, mt: 3, mb : 1}}>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/"><HomeIcon sx={{ mr: 0.5 }} fontSize="13" font="roboto" />Home</Link>
-            <Link underline="hover" sx={{ display: 'flex', alignItems: 'center' }} color="inherit" href="/getting-started/installation/"> <DashboardIcon sx={{ mr: 0.5 }} fontSize="inherit" />Dashboard</Link>
-            <Typography sx={{ display: 'flex', alignItems: 'center' }} color="text.primary">
-            <MicIcon sx={{ mr: 0.5 }} fontSize="inherit" /> Temperature </Typography>
-         </Breadcrumbs>
-
             <Grid container>
                 <Grid item xs={12} className="item-padding">
                     <Container>

@@ -114,7 +114,7 @@ class Database():
         except Exception as e:
             logging.error("Exception Occured querying the audio data", exc_info=True)
 
-    def query_humidity(self, location, start="-7d"):
+    def query_humidity(self, location, start="-2m"):
         """
         Fetches Humidity and Temperature of given RPIs
         Args:
@@ -134,7 +134,7 @@ class Database():
             logging.error("Exception Occured humidity data", exc_info=True)
             return []
 
-    def query_illuminance(self, location, start="-7d"):
+    def query_illuminance(self, location, start="-2m"):
         """
         Fetches illuminance for the Photo sensor
         Args: 

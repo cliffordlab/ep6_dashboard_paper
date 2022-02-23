@@ -5,12 +5,10 @@ import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import CameraMap from "../../components/cameraMap/CameraMap";
+import {config} from "../../environment";
 
 
 const Visual = (props) => {
-    const [imageData, setImageData] = useState({
-        stats: { mean: 0, median: 0, variance: 0, correlation: 0 },
-    });
     const [showPosnet, setShowPosnet] = useState(false);
 
     const regionClickHandler = (data) => {
@@ -93,7 +91,7 @@ const Visual = (props) => {
                     <Paper style={styles.itemContainer}>Heat Map Space</Paper>
                 </Grid>
                 <Grid item xs={12} className="item-padding">
-                    <Paper style={styles.bigCard}> Big Card Space</Paper>
+                    <img src={config.url.API_HOST +"/visual/get-layout"} alt="img"/>
                 </Grid>
             </Grid>
         </div>

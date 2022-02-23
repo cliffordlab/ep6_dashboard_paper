@@ -65,3 +65,1265 @@ urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection obj
 2021-11-15 03:39:37,698 INFO werkzeug Thread-2 : 127.0.0.1 - - [15/Nov/2021 03:39:37] "GET /audio/get-data HTTP/1.1" 200 -
 2021-11-15 03:40:59,117 INFO werkzeug MainThread :  * Detected change in 'C:\\Users\\ratan\\Documents\\ep6_dashboard\\backend\\run.py', reloading
 2021-11-15 03:40:59,208 INFO werkzeug MainThread :  * Restarting with stat
+2021-11-15 11:41:09,765 INFO app MainThread : DEBUG       = True
+2021-11-15 11:41:09,765 INFO app MainThread : Environment = DEV
+2021-11-15 11:41:09,765 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/db.sqlite3
+2021-11-15 11:41:09,783 INFO werkzeug MainThread :  * Running on http://127.0.0.1:9800/ (Press CTRL+C to quit)
+2021-11-15 11:41:09,868 INFO werkzeug MainThread :  * Restarting with watchdog (fsevents)
+2021-11-15 11:41:10,892 INFO app MainThread : DEBUG       = True
+2021-11-15 11:41:10,892 INFO app MainThread : Environment = DEV
+2021-11-15 11:41:10,892 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/db.sqlite3
+2021-11-15 11:41:10,903 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-15 11:41:10,924 INFO werkzeug MainThread :  * Debugger PIN: 111-724-492
+2021-11-15 11:41:30,071 INFO werkzeug Thread-7 : 127.0.0.1 - - [15/Nov/2021 11:41:30] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 11:41:43,832 INFO werkzeug Thread-9 : 127.0.0.1 - - [15/Nov/2021 11:41:43] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 11:41:44,879 ERROR root Thread-8 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea71ccb80>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:41:44,892 INFO werkzeug Thread-8 : 127.0.0.1 - - [15/Nov/2021 11:41:44] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 11:42:08,975 ERROR root Thread-10 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea7294d30>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:42:08,977 INFO werkzeug Thread-10 : 127.0.0.1 - - [15/Nov/2021 11:42:08] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 11:42:19,094 INFO werkzeug Thread-11 : 127.0.0.1 - - [15/Nov/2021 11:42:19] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 11:49:32,863 INFO werkzeug Thread-12 : 127.0.0.1 - - [15/Nov/2021 11:49:32] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 11:49:49,601 INFO werkzeug Thread-13 : 127.0.0.1 - - [15/Nov/2021 11:49:49] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 11:50:18,755 INFO werkzeug Thread-15 : 127.0.0.1 - - [15/Nov/2021 11:50:18] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 11:50:22,594 ERROR root Thread-14 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea72b8580>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:50:22,596 INFO werkzeug Thread-14 : 127.0.0.1 - - [15/Nov/2021 11:50:22] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 11:50:33,217 INFO werkzeug Thread-17 : 127.0.0.1 - - [15/Nov/2021 11:50:33] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 11:50:35,871 ERROR root Thread-16 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea7201700>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:50:35,873 INFO werkzeug Thread-16 : 127.0.0.1 - - [15/Nov/2021 11:50:35] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 11:50:39,539 INFO werkzeug Thread-19 : 127.0.0.1 - - [15/Nov/2021 11:50:39] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 11:50:46,602 ERROR root Thread-18 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea71cc9d0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:50:46,604 INFO werkzeug Thread-18 : 127.0.0.1 - - [15/Nov/2021 11:50:46] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 11:51:42,750 ERROR root Thread-20 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea7294d30>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:51:42,752 INFO werkzeug Thread-20 : 127.0.0.1 - - [15/Nov/2021 11:51:42] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 11:52:29,973 INFO werkzeug Thread-21 : 127.0.0.1 - - [15/Nov/2021 11:52:29] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 11:53:11,990 INFO werkzeug Thread-22 : 127.0.0.1 - - [15/Nov/2021 11:53:11] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 11:53:24,485 ERROR root Thread-23 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/client/query_api.py", line 100, in query
+    response = self._query_api.post_query(org=org, query=self._create_query(query, self.default_dialect, params),
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/service/query_service.py", line 338, in post_query_with_http_info
+    return self.api_client.call_api(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 341, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 171, in __call_api
+    response_data = self.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/api_client.py", line 386, in request
+    return self.rest_client.POST(url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 304, in POST
+    return self.request("POST", url,
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/influxdb_client/rest.py", line 183, in request
+    r = self.pool_manager.request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 78, in request
+    return self.request_encode_body(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 353, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fbea72015b0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 11:53:24,488 INFO werkzeug Thread-23 : 127.0.0.1 - - [15/Nov/2021 11:53:24] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 12:09:09,086 INFO werkzeug Thread-24 : 127.0.0.1 - - [15/Nov/2021 12:09:09] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:23:48,321 INFO app MainThread : DEBUG       = True
+2021-11-15 14:23:48,321 INFO app MainThread : Environment = DEV
+2021-11-15 14:23:48,321 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/db.sqlite3
+2021-11-15 14:23:48,360 INFO werkzeug MainThread :  * Running on http://127.0.0.1:9800/ (Press CTRL+C to quit)
+2021-11-15 14:23:48,364 INFO werkzeug MainThread :  * Restarting with stat
+2021-11-15 14:23:50,416 INFO app MainThread : DEBUG       = True
+2021-11-15 14:23:50,416 INFO app MainThread : Environment = DEV
+2021-11-15 14:23:50,416 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/db.sqlite3
+2021-11-15 14:23:50,428 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-15 14:23:50,444 INFO werkzeug MainThread :  * Debugger PIN: 482-215-845
+2021-11-15 14:24:46,836 INFO werkzeug Thread-2 : 127.0.0.1 - - [15/Nov/2021 14:24:46] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:25:10,293 ERROR root Thread-3 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb7269f6590>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:25:10,313 INFO werkzeug Thread-3 : 127.0.0.1 - - [15/Nov/2021 14:25:10] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 14:25:12,407 INFO werkzeug Thread-4 : 127.0.0.1 - - [15/Nov/2021 14:25:12] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:25:14,622 INFO werkzeug Thread-5 : 127.0.0.1 - - [15/Nov/2021 14:25:14] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:26:49,969 INFO werkzeug Thread-6 : 127.0.0.1 - - [15/Nov/2021 14:26:49] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:27:01,658 INFO werkzeug Thread-7 : 127.0.0.1 - - [15/Nov/2021 14:27:01] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:27:08,573 INFO werkzeug Thread-8 : 127.0.0.1 - - [15/Nov/2021 14:27:08] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:27:15,970 INFO werkzeug Thread-9 : 127.0.0.1 - - [15/Nov/2021 14:27:15] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:27:53,582 INFO werkzeug Thread-10 : 127.0.0.1 - - [15/Nov/2021 14:27:53] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:28:02,699 INFO werkzeug Thread-11 : 127.0.0.1 - - [15/Nov/2021 14:28:02] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:30:01,310 INFO werkzeug Thread-12 : 127.0.0.1 - - [15/Nov/2021 14:30:01] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:30:19,598 INFO werkzeug Thread-13 : 127.0.0.1 - - [15/Nov/2021 14:30:19] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:30:20,039 INFO werkzeug Thread-14 : 127.0.0.1 - - [15/Nov/2021 14:30:20] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:30:45,497 INFO werkzeug Thread-15 : 127.0.0.1 - - [15/Nov/2021 14:30:45] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:30:52,965 INFO werkzeug Thread-16 : 127.0.0.1 - - [15/Nov/2021 14:30:52] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:31:04,437 INFO werkzeug Thread-17 : 127.0.0.1 - - [15/Nov/2021 14:31:04] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:31:34,584 INFO werkzeug Thread-18 : 127.0.0.1 - - [15/Nov/2021 14:31:34] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:31:37,618 INFO werkzeug Thread-19 : 127.0.0.1 - - [15/Nov/2021 14:31:37] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:31:46,429 INFO werkzeug Thread-20 : 127.0.0.1 - - [15/Nov/2021 14:31:46] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:32:08,334 INFO werkzeug Thread-21 : 127.0.0.1 - - [15/Nov/2021 14:32:08] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:32:18,341 INFO werkzeug Thread-22 : 127.0.0.1 - - [15/Nov/2021 14:32:18] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:32:37,339 INFO werkzeug Thread-23 : 127.0.0.1 - - [15/Nov/2021 14:32:37] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:32:53,199 INFO werkzeug Thread-24 : 127.0.0.1 - - [15/Nov/2021 14:32:53] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:33:08,659 INFO werkzeug Thread-25 : 127.0.0.1 - - [15/Nov/2021 14:33:08] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:33:14,938 INFO werkzeug Thread-26 : 127.0.0.1 - - [15/Nov/2021 14:33:14] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:33:32,487 INFO werkzeug Thread-27 : 127.0.0.1 - - [15/Nov/2021 14:33:32] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:33:35,485 INFO werkzeug Thread-28 : 127.0.0.1 - - [15/Nov/2021 14:33:35] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:34:00,845 INFO werkzeug Thread-29 : 127.0.0.1 - - [15/Nov/2021 14:34:00] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:34:03,951 INFO werkzeug Thread-30 : 127.0.0.1 - - [15/Nov/2021 14:34:03] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:34:37,987 INFO werkzeug Thread-31 : 127.0.0.1 - - [15/Nov/2021 14:34:37] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:34:51,168 INFO werkzeug Thread-32 : 127.0.0.1 - - [15/Nov/2021 14:34:51] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:34:54,186 INFO werkzeug Thread-33 : 127.0.0.1 - - [15/Nov/2021 14:34:54] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:35:11,095 INFO werkzeug Thread-34 : 127.0.0.1 - - [15/Nov/2021 14:35:11] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:35:24,719 INFO werkzeug Thread-35 : 127.0.0.1 - - [15/Nov/2021 14:35:24] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:35:25,427 INFO werkzeug Thread-36 : 127.0.0.1 - - [15/Nov/2021 14:35:25] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:35:36,523 INFO werkzeug Thread-37 : 127.0.0.1 - - [15/Nov/2021 14:35:36] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:35:50,652 INFO werkzeug Thread-38 : 127.0.0.1 - - [15/Nov/2021 14:35:50] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:36:07,412 INFO werkzeug Thread-39 : 127.0.0.1 - - [15/Nov/2021 14:36:07] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:36:44,361 INFO werkzeug Thread-40 : 127.0.0.1 - - [15/Nov/2021 14:36:44] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:36:50,344 INFO werkzeug Thread-41 : 127.0.0.1 - - [15/Nov/2021 14:36:50] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:37:13,439 INFO werkzeug Thread-42 : 127.0.0.1 - - [15/Nov/2021 14:37:13] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:37:28,429 INFO werkzeug Thread-43 : 127.0.0.1 - - [15/Nov/2021 14:37:28] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:37:55,496 INFO werkzeug Thread-44 : 127.0.0.1 - - [15/Nov/2021 14:37:55] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:38:09,184 INFO werkzeug Thread-45 : 127.0.0.1 - - [15/Nov/2021 14:38:09] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:38:24,399 INFO werkzeug Thread-46 : 127.0.0.1 - - [15/Nov/2021 14:38:24] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:06,805 INFO werkzeug Thread-47 : 127.0.0.1 - - [15/Nov/2021 14:39:06] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:17,607 INFO werkzeug Thread-48 : 127.0.0.1 - - [15/Nov/2021 14:39:17] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:32,211 INFO werkzeug Thread-49 : 127.0.0.1 - - [15/Nov/2021 14:39:32] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:32,579 INFO werkzeug Thread-50 : 127.0.0.1 - - [15/Nov/2021 14:39:32] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:55,305 INFO werkzeug Thread-51 : 127.0.0.1 - - [15/Nov/2021 14:39:55] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:39:55,588 INFO werkzeug Thread-52 : 127.0.0.1 - - [15/Nov/2021 14:39:55] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:40:35,550 INFO werkzeug Thread-53 : 127.0.0.1 - - [15/Nov/2021 14:40:35] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:41:10,751 INFO werkzeug Thread-54 : 127.0.0.1 - - [15/Nov/2021 14:41:10] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:41:24,605 INFO werkzeug Thread-55 : 127.0.0.1 - - [15/Nov/2021 14:41:24] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:41:53,755 INFO werkzeug Thread-56 : 127.0.0.1 - - [15/Nov/2021 14:41:53] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:41:54,380 INFO werkzeug Thread-57 : 127.0.0.1 - - [15/Nov/2021 14:41:54] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:11,040 INFO werkzeug Thread-58 : 127.0.0.1 - - [15/Nov/2021 14:42:11] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:24,584 INFO werkzeug Thread-59 : 127.0.0.1 - - [15/Nov/2021 14:42:24] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:39,485 INFO werkzeug Thread-60 : 127.0.0.1 - - [15/Nov/2021 14:42:39] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:50,235 INFO werkzeug Thread-61 : 127.0.0.1 - - [15/Nov/2021 14:42:50] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:51,509 INFO werkzeug Thread-62 : 127.0.0.1 - - [15/Nov/2021 14:42:51] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:42:59,488 INFO werkzeug Thread-63 : 127.0.0.1 - - [15/Nov/2021 14:42:59] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:44:38,122 ERROR root Thread-64 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726a8d6d0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:44:38,133 INFO werkzeug Thread-64 : 127.0.0.1 - - [15/Nov/2021 14:44:38] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 14:44:47,400 INFO werkzeug Thread-65 : 127.0.0.1 - - [15/Nov/2021 14:44:47] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:45:27,249 ERROR root Thread-66 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726ab0cd0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:45:27,269 INFO werkzeug Thread-66 : 127.0.0.1 - - [15/Nov/2021 14:45:27] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 14:45:32,719 INFO werkzeug Thread-68 : 127.0.0.1 - - [15/Nov/2021 14:45:32] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:45:39,821 ERROR root Thread-67 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726ab0190>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:45:39,825 INFO werkzeug Thread-67 : 127.0.0.1 - - [15/Nov/2021 14:45:39] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 14:47:25,035 INFO werkzeug Thread-69 : 127.0.0.1 - - [15/Nov/2021 14:47:25] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:50:57,529 INFO werkzeug Thread-70 : 127.0.0.1 - - [15/Nov/2021 14:50:57] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:51:48,455 INFO werkzeug Thread-71 : 127.0.0.1 - - [15/Nov/2021 14:51:48] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:52:35,780 ERROR root Thread-72 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726a8d750>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:52:35,788 INFO werkzeug Thread-72 : 127.0.0.1 - - [15/Nov/2021 14:52:35] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 14:52:42,471 INFO werkzeug Thread-73 : 127.0.0.1 - - [15/Nov/2021 14:52:42] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:54:02,060 ERROR root Thread-74 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726ab3110>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:54:02,067 INFO werkzeug Thread-74 : 127.0.0.1 - - [15/Nov/2021 14:54:02] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 14:54:12,672 INFO werkzeug Thread-75 : 127.0.0.1 - - [15/Nov/2021 14:54:12] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:55:12,477 INFO werkzeug Thread-76 : 127.0.0.1 - - [15/Nov/2021 14:55:12] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:55:26,281 INFO werkzeug Thread-78 : 127.0.0.1 - - [15/Nov/2021 14:55:26] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:55:28,256 INFO werkzeug Thread-80 : 127.0.0.1 - - [15/Nov/2021 14:55:28] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-15 14:55:35,016 INFO werkzeug Thread-81 : 127.0.0.1 - - [15/Nov/2021 14:55:35] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-15 14:55:35,398 ERROR root Thread-77 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726aa7690>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:55:35,400 INFO werkzeug Thread-77 : 127.0.0.1 - - [15/Nov/2021 14:55:35] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-15 14:55:37,285 ERROR root Thread-79 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726a9fd50>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:55:37,288 INFO werkzeug Thread-79 : 127.0.0.1 - - [15/Nov/2021 14:55:37] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-15 14:55:47,310 ERROR root Thread-82 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/Dashboard/ep6_dashboard/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fb726aa60d0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-15 14:55:47,312 INFO werkzeug Thread-82 : 127.0.0.1 - - [15/Nov/2021 14:55:47] "GET /humidity/get-data HTTP/1.1" 200 -
+2021-11-16 23:01:26,091 INFO app MainThread : DEBUG       = True
+2021-11-16 23:01:26,091 INFO app MainThread : Environment = DEV
+2021-11-16 23:01:26,091 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/EP6/backend/db.sqlite3
+2021-11-16 23:01:26,112 INFO werkzeug MainThread :  * Running on http://127.0.0.1:9800/ (Press CTRL+C to quit)
+2021-11-16 23:01:26,113 INFO werkzeug MainThread :  * Restarting with stat
+2021-11-16 23:01:28,165 INFO app MainThread : DEBUG       = True
+2021-11-16 23:01:28,165 INFO app MainThread : Environment = DEV
+2021-11-16 23:01:28,165 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/EP6/backend/db.sqlite3
+2021-11-16 23:01:28,186 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-16 23:01:28,226 INFO werkzeug MainThread :  * Debugger PIN: 482-215-845
+2021-11-16 23:02:30,621 INFO werkzeug Thread-2 : 127.0.0.1 - - [16/Nov/2021 23:02:30] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-16 23:03:05,274 INFO werkzeug Thread-3 : 127.0.0.1 - - [16/Nov/2021 23:03:05] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-16 23:03:12,862 INFO werkzeug Thread-4 : 127.0.0.1 - - [16/Nov/2021 23:03:12] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-16 23:42:37,733 INFO app MainThread : DEBUG       = True
+2021-11-16 23:42:37,733 INFO app MainThread : Environment = DEV
+2021-11-16 23:42:37,733 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/EP6/backend/db.sqlite3
+2021-11-16 23:42:37,745 INFO werkzeug MainThread :  * Running on http://127.0.0.1:9800/ (Press CTRL+C to quit)
+2021-11-16 23:42:37,746 INFO werkzeug MainThread :  * Restarting with stat
+2021-11-16 23:42:38,803 INFO app MainThread : DEBUG       = True
+2021-11-16 23:42:38,805 INFO app MainThread : Environment = DEV
+2021-11-16 23:42:38,811 INFO app MainThread : DBMS        = sqlite:////Users/anakum/Downloads/EP6/backend/db.sqlite3
+2021-11-16 23:42:38,842 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-16 23:42:38,863 INFO werkzeug MainThread :  * Debugger PIN: 482-215-845
+2021-11-16 23:42:44,106 INFO werkzeug Thread-2 : 127.0.0.1 - - [16/Nov/2021 23:42:44] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-16 23:43:54,449 INFO werkzeug Thread-3 : 127.0.0.1 - - [16/Nov/2021 23:43:54] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-16 23:44:10,533 INFO werkzeug Thread-5 : 127.0.0.1 - - [16/Nov/2021 23:44:10] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-16 23:44:18,835 ERROR root Thread-4 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/EP6/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fa3678fffd0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-16 23:44:18,847 INFO werkzeug Thread-4 : 127.0.0.1 - - [16/Nov/2021 23:44:18] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-17 00:03:45,110 INFO werkzeug Thread-6 : 127.0.0.1 - - [17/Nov/2021 00:03:45] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:03:57,990 ERROR root Thread-7 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/EP6/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fa367997590>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-17 00:03:57,992 INFO werkzeug Thread-7 : 127.0.0.1 - - [17/Nov/2021 00:03:57] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-17 00:04:15,722 INFO werkzeug Thread-8 : 127.0.0.1 - - [17/Nov/2021 00:04:15] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:04:17,572 INFO werkzeug Thread-9 : 127.0.0.1 - - [17/Nov/2021 00:04:17] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:05:27,943 INFO werkzeug Thread-10 : 127.0.0.1 - - [17/Nov/2021 00:05:27] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:06:52,420 INFO werkzeug Thread-11 : 127.0.0.1 - - [17/Nov/2021 00:06:52] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:07:09,352 INFO werkzeug Thread-12 : 127.0.0.1 - - [17/Nov/2021 00:07:09] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:09:14,013 ERROR root Thread-13 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/EP6/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fa36799e850>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-17 00:09:14,016 INFO werkzeug Thread-13 : 127.0.0.1 - - [17/Nov/2021 00:09:14] "GET /audio/get-data HTTP/1.1" 200 -
+2021-11-17 00:13:00,031 INFO werkzeug Thread-14 : 127.0.0.1 - - [17/Nov/2021 00:13:00] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:00,239 INFO werkzeug Thread-15 : 127.0.0.1 - - [17/Nov/2021 00:13:00] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:00,524 INFO werkzeug Thread-16 : 127.0.0.1 - - [17/Nov/2021 00:13:00] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:00,655 INFO werkzeug Thread-17 : 127.0.0.1 - - [17/Nov/2021 00:13:00] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:00,748 INFO werkzeug Thread-18 : 127.0.0.1 - - [17/Nov/2021 00:13:00] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,222 INFO werkzeug Thread-19 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,384 INFO werkzeug Thread-20 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,487 INFO werkzeug Thread-21 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,710 INFO werkzeug Thread-22 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,826 INFO werkzeug Thread-23 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:01,949 INFO werkzeug Thread-24 : 127.0.0.1 - - [17/Nov/2021 00:13:01] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,056 INFO werkzeug Thread-25 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,160 INFO werkzeug Thread-26 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,260 INFO werkzeug Thread-27 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,366 INFO werkzeug Thread-28 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,463 INFO werkzeug Thread-29 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,549 INFO werkzeug Thread-30 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,671 INFO werkzeug Thread-31 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,772 INFO werkzeug Thread-32 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,857 INFO werkzeug Thread-33 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:13:02,945 INFO werkzeug Thread-34 : 127.0.0.1 - - [17/Nov/2021 00:13:02] "[33mGET /babel/parser/lib/index.js HTTP/1.1[0m" 404 -
+2021-11-17 00:15:26,073 INFO werkzeug Thread-35 : 127.0.0.1 - - [17/Nov/2021 00:15:26] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:15:32,304 INFO werkzeug Thread-36 : 127.0.0.1 - - [17/Nov/2021 00:15:32] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:19:27,540 INFO werkzeug Thread-37 : 127.0.0.1 - - [17/Nov/2021 00:19:27] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:20:49,512 INFO werkzeug Thread-38 : 127.0.0.1 - - [17/Nov/2021 00:20:49] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:22:09,479 INFO werkzeug Thread-39 : 127.0.0.1 - - [17/Nov/2021 00:22:09] "GET /visual/get-status HTTP/1.1" 200 -
+2021-11-17 00:22:54,740 INFO werkzeug Thread-41 : 127.0.0.1 - - [17/Nov/2021 00:22:54] "GET /illuminance/get-data HTTP/1.1" 200 -
+2021-11-17 00:23:02,150 ERROR root Thread-40 : Exception occured querying the database
+Traceback (most recent call last):
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 175, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/anakum/Downloads/EP6/backend/app/utils/Database.py", line 34, in __query
+    result = self.__query_api.query(query, org=self.__org)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/client/query_api.py", line 101, in query
+    async_req=False, _preload_content=False, _return_http_data_only=False)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 258, in post_query
+    (data) = self.post_query_with_http_info(**kwargs)  # noqa: E501
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/service/query_service.py", line 353, in post_query_with_http_info
+    urlopen_kw=urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 346, in call_api
+    _preload_content, _request_timeout, urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 175, in __call_api
+    _request_timeout=_request_timeout, **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/api_client.py", line 393, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 311, in POST
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/influxdb_client/rest.py", line 189, in request
+    **urlopen_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 79, in request
+    method, url, fields=fields, headers=headers, **urlopen_kw
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/util/retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 358, in connect
+    conn = self._new_conn()
+  File "/Users/anakum/opt/anaconda3/envs/bmi/lib/python3.7/site-packages/urllib3/connection.py", line 182, in _new_conn
+    % (self.host, self.timeout),
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fa3679909d0>, 'Connection to mcibmi1.bmi.emory.edu timed out. (connect timeout=10.0)')
+2021-11-17 00:23:02,151 INFO werkzeug Thread-40 : 127.0.0.1 - - [17/Nov/2021 00:23:02] "GET /audio/get-data HTTP/1.1" 200 -

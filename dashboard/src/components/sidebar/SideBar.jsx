@@ -82,7 +82,7 @@ export default function SideBar() {
                         <SettingsInputComponentOutlined
                             style={styles.sidebarIcon}
                         />
-                        {sideMenuShow && "Device Components"}
+                        {sideMenuShow && "Components"}
                     </h3>
                     <ul className="sidebarList">
                         <NavLink to="/audio" className="link">
@@ -164,7 +164,7 @@ export default function SideBar() {
                                 style={styles.sidebarIcon}
                             />
                             <span style={styles.team}>
-                                {sideMenuShow && "Arjun"}
+                                {sideMenuShow && "Gari Clifford"}
                             </span>
                         </h3>
                     </ul>
@@ -180,10 +180,11 @@ const sideBarStyles = (mode) => ({
         position: "fixed",
         top: "50px",
         height: "100%",
+        //width: "60px",
         zIndex: 3,
         borderColor: theme[mode].opposite,
         borderStyle: "solid",
-        borderWidth: "0 1px 0 0",
+        borderWidth: "1px 2px 0 0",
     },
     sidebarWrapper: {
         color: theme[mode].color,

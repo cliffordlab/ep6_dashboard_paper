@@ -7,12 +7,19 @@
 """
 
 from flask import jsonify, render_template, redirect, request, url_for, current_app
+import json
 
 from app.humidity import blueprint
 from app.utils.Database import Database
 
 
 db = Database()
+
+try:
+    fileHandle = open("device_mapping.json", "r")
+    devices = json.load(fileHandle)
+except Exception as e:
+    current_app.logger.exception("Exception occured while reading device json", exc_info=True)
 
 
 @blueprint.route('/get-data')
@@ -22,8 +29,12 @@ def humidity_temperature_data():
     This data will be consumed by chart component and stats components
     """
     try:
-        region_id = request.args.get("region_id")
-        device_location = "pi160.pi.bmi.emory.edu"
+        region_id = request.args.get("region_id", "1")
+
+        # Fetch the device. E.g. 192.168.64.101 becomes 101
+        device_id = devices[str(region_id)].split(".")[-1]
+        # Defines the hostname E.g. 192.168.64.101 becomes pi101.pi.bmi.emory.edu
+        device_location = "pi{}.pi.bmi.emory.edu".format(device_id)
 
         response = db.query_humidity(location=device_location)
 
