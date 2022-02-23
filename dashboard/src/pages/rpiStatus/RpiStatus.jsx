@@ -17,49 +17,48 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import WarningIcon from "@mui/icons-material/Warning";
 import RestartAltTwoToneIcon from "@mui/icons-material/RestartAltTwoTone";
 
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
 
-// import "./rpiStatus.css";
 import RpiMap from "../../components/rpiMap/RpiMap";
-
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import {config} from "../../environment";
 import { TableContainer } from "@material-ui/core";
+import StatusModal from "../../components/statusModal/StatusModal";
 
 export default function RpiStatus(props) {
     const [statusData, setStatusData] = useState({ data: [] });
-    console.log("Starman");
-    console.log(process.env);
-    console.log(config.url.API_HOST + "/visual/get-status");
+    const [widthRef, setWidthRef] = React.useState();   //Reference
+    const ref = useRef(null);
+    const [statusModalOpen, setStatusModalOpen] = useState(false);
+    const [regionClicked, setRegionClicked] = useState("");
+
+    // click handler for Region Cell
+    const handleCellClick = (event) => {
+        let region_id = event.region_id.slice(4);
+        setRegionClicked(region_id);
+        setStatusModalOpen(true);
+    }
+    
+    // Closing the modal
+    const closeModal = (event) => {
+        setStatusModalOpen(false);
+    }
+    
+    // Getting the Rpi Status
     useEffect(() => {
         fetch(config.url.API_HOST + "/visual/get-status")
             .then((res) => res.json())
             .then((data) => {
                 setStatusData(data);
-                console.log("response");
-                console.log(data);
-                console.log("Lightyear");
-                console.log(process.env);
             });
     }, []);
 
-    // Reference
-    const [widthRef, setWidthRef] = React.useState();
-    const ref = useRef(null);
-
+    // Setting the initial offset
     useEffect(() => {
         const width = ref.current.offsetWidth;
         setWidthRef(width);
     }, [widthRef]);
 
-    const [tab, setTab] = React.useState("table");
-
-    const handleTabChange = (event, newValue) => {
-        setTab(newValue);
-    };
 
     const statusIcon = (status) => {
         if (status === "connected") {
@@ -79,12 +78,9 @@ export default function RpiStatus(props) {
                 <Grid item xs={6} className="item-padding">
                     <Paper style={styles.mapContainer} ref={ref} heigh>
                         {widthRef && (
-                            <RpiMap
-                                width={widthRef}
-                                height={560}
-                                onclick={(e) => {}}
-                            />
+                            <RpiMap width={widthRef} height={560} onclick={handleCellClick} />
                         )}
+                        <StatusModal open={statusModalOpen} handleClose={closeModal} region_id={regionClicked}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} className="item-padding">
@@ -143,8 +139,6 @@ export default function RpiStatus(props) {
 
                 </Grid>
             </Grid>
-
-            {/* <div style={styles.tableWrapper}></div> */}
         </div>
     );
 }
