@@ -78,12 +78,6 @@ export default function SideBar() {
                         </NavLink>
                     </ul>
 
-                    <h3 style={styles.sidebarTitle}>
-                        <SettingsInputComponentOutlined
-                            style={styles.sidebarIcon}
-                        />
-                        {sideMenuShow && "Components"}
-                    </h3>
                     <ul className="sidebarList">
                         <NavLink to="/audio" className="link">
                             <li
@@ -140,10 +134,7 @@ export default function SideBar() {
                             </li>
                         </NavLink>
                     </ul>
-                    <h3 style={styles.sidebarTitle}>
-                        <SettingsOutlined style={styles.sidebarIcon} />
-                        {sideMenuShow && "Settings"}
-                    </h3>
+
                     <ul className="sidebarList">
                         <div style={styles.otherIconsContainer}>
                             <h3 style={styles.sidebarTitleOther}>
