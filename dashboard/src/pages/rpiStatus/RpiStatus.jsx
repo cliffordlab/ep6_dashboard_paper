@@ -27,6 +27,7 @@ import RpiMap from "../../components/rpiMap/RpiMap";
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import {config} from "../../environment";
+import { TableContainer } from "@material-ui/core";
 
 export default function RpiStatus(props) {
     const [statusData, setStatusData] = useState({ data: [] });
@@ -75,8 +76,8 @@ export default function RpiStatus(props) {
     return (
         <div style={styles.rpiStatus}>
             <Grid container justifyContent="center">
-                <Grid item xs={5} className="item-padding">
-                    <Paper style={styles.itemContainer} ref={ref}>
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.mapContainer} ref={ref} heigh>
                         {widthRef && (
                             <RpiMap
                                 width={widthRef}
@@ -86,116 +87,60 @@ export default function RpiStatus(props) {
                         )}
                     </Paper>
                 </Grid>
-                <Grid item xs={7} className="item-padding">
-                    <Paper style={styles.itemContainer}>
-                        <Table size="small">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell
-                                        align="center"
-                                        sx={{
-                                            color: theme[mode].backgroundColor,
-                                            fontSize: 15,
-                                        }}
-                                    >
-                                        Node Name
+                <Grid item xs={6} className="item-padding">
+                <Paper style={styles.tableContainer}>
+                    <TableContainer>
+                    <Table size="small" stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                    Node Name
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                    IP Address
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                    Status
+                                </TableCell>
+                                <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                    Action
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            {statusData.data.map((row) => (
+                                <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0, color: theme[mode].backgroundColor, }, }} >
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                        {row.name}
                                     </TableCell>
-                                    <TableCell
-                                        align="center"
-                                        sx={{
-                                            color: theme[mode].backgroundColor,
-                                            fontSize: 15,
-                                        }}
-                                    >
-                                        Location
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                        {row.ipAddress}
                                     </TableCell>
-                                    <TableCell
-                                        align="center"
-                                        sx={{
-                                            color: theme[mode].backgroundColor,
-                                            fontSize: 15,
-                                        }}
-                                    >
-                                        IP Address
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                        {statusIcon(row.status)}
                                     </TableCell>
-                                    <TableCell
-                                        align="center"
-                                        sx={{
-                                            color: theme[mode].backgroundColor,
-                                            fontSize: 15,
-                                        }}
-                                    >
-                                        Status
-                                    </TableCell>
-                                    <TableCell
-                                        align="center"
-                                        sx={{
-                                            color: theme[mode].backgroundColor,
-                                            fontSize: 15,
-                                        }}
-                                    >
-                                        Action
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                        {" "}
+                                        <Tooltip title="Reboot">
+                                            <IconButton>
+                                                <RestartAltTwoToneIcon
+                                                    style={{
+                                                        fill: "blue",
+                                                        fontSize: 25,
+                                                    }}
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
                                     </TableCell>
                                 </TableRow>
-                            </TableHead>
+                            ))}
+                        </TableBody>
+                        
+                    </Table>
+                    </TableContainer>
+                </Paper>
 
-                            <TableBody>
-                                {statusData.data.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{
-                                            "&:last-child td, &:last-child th":
-                                                {
-                                                    border: 0,
-                                                    color: theme[mode].backgroundColor,
-                                                },
-                                        }}
-                                    >
-                                        <TableCell
-                                            align="center"
-                                            sx={{ color: theme[mode].backgroundColor }}
-                                        >
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell
-                                            align="center"
-                                            sx={{ color: theme[mode].backgroundColor }}
-                                        >
-                                            {row.location}
-                                        </TableCell>
-                                        <TableCell
-                                            align="center"
-                                            sx={{ color: theme[mode].backgroundColor }}
-                                        >
-                                            {row.ipAddress}
-                                        </TableCell>
-                                        <TableCell
-                                            align="center"
-                                            sx={{ color: theme[mode].backgroundColor }}
-                                        >
-                                            {statusIcon(row.status)}
-                                        </TableCell>
-                                        <TableCell
-                                            align="center"
-                                            sx={{ color: theme[mode].backgroundColor }}
-                                        >
-                                            {" "}
-                                            <Tooltip title="Reboot">
-                                                <IconButton>
-                                                    <RestartAltTwoToneIcon
-                                                        style={{
-                                                            fill: "blue",
-                                                            fontSize: 25,
-                                                        }}
-                                                    />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </Paper>
                 </Grid>
             </Grid>
 
@@ -208,20 +153,17 @@ const rpiStatusStyles = (mode) => ({
     rpiStatus: {
         flexGrow: 1,
         backgroundColor: theme[mode].backgroundColor,
-        minHeight: "94.9vh",
     },
-    itemContainer: {
+    mapContainer: {
         backgroundColor: theme[mode].opposite,
-        height: "100%",
         color: theme[mode].backgroundColor,
+        height : "90vh"
     },
-    // tableWrapper: {
-    //     paddingLeft: "10px",
-    //     paddingRight: "50px",
-    //     paddingTop: "50px",
-    //     textColor: theme[mode].color,
-    // },
-    // textCenter: {
-    //     textAlign: "center",
-    // },
+    tableContainer: {
+        backgroundColor: theme[mode].opposite,
+        color: theme[mode].backgroundColor,
+        overflowY : 'auto',
+        height : "90vh"
+    },
+
 });
