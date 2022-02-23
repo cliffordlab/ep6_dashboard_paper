@@ -11,14 +11,12 @@ import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
 import {config} from "../../environment";
 
 const Audio = (props) => {
+
+    // States for the graph
     const [audioData, setAudioData] = useState({
         data: { x: [], Channel1: [], Channel2: [], Channel3: [], Channel4: [] },
     });
     const [setShowAudioGraph] = useState(false);
-
-    const regionClickHandler = (data) => {
-        setShowAudioGraph(data.showMap);
-    };
 
     useEffect(() => {
         fetch(config.url.API_HOST + '/audio/get-data')
@@ -41,28 +39,31 @@ const Audio = (props) => {
     const [widthRef, setWidthRef] = useState();
     const ref = useRef(null);
 
+
+   // Callback Handler for Region Clicking
+    const regionClickHandler = (data) => {
+    let region_id = data.region_id.slice(4);
+    fetch(config.url.API_HOST + '/audio/get-data?region_id='+region_id).then(res => res.json()).then(data => {setAudioData(data)});
+    }
+
+    // Handler for the change in slider
+    const handleSliderChange = (event, sliderValue) => {
+        setValue(sliderValue);
+    }
+
+    // Initializing the plot data for the first time
+    useEffect(() => {
+    fetch(config.url.API_HOST + '/audio/get-data').then(res => res.json()).then(data => {
+       setAudioData(data);
+    }); }, []);
+    
+    // Setting the width
     useEffect(() => {
         const width = ref.current.offsetWidth;
         setWidthRef(width);
     }, [widthRef]);
 
-    // For slider
-
-    const [value, setValue] = React.useState([0, 6]);
-
-    const handleChange = (event, newValue, label) => {
-        setValue(newValue);
-        console.log(event);
-    };
-
-    const valuetext = (value) => {
-        return `${value} hr`;
-    };
-
-    const valueLabelFormat = (value) => {
-        return value;
-    };
-
+   
     return (
         <div style={styles.audio}>
             <Grid container>
