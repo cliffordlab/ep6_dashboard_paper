@@ -1,6 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
+import { Container,
+         Slider, 
+         makeStyles,
+         TableContainer
+} from "@material-ui/core";
+
+
+import {    Table,
+            TableBody,
+            TableCell,
+            TableRow,
+            TableHead,
+            Grid,
+            Paper,
+} from "@mui/material";
+
+
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import WarningIcon from "@mui/icons-material/Warning";
+
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
@@ -10,44 +30,56 @@ import {config} from "../../environment";
 
 const Visual = (props) => {
     const [showPosnet, setShowPosnet] = useState(false);
-
-    const regionClickHandler = (data) => {
-        setShowPosnet(data.showMap);
-    };
-
+    const [piStatusData, setPiStatusData] = useState({"data" : [{"name" : "pi 101", "status" : "Working"}, {"name" : "pi 101", "status" : " No Image"}, {"name" : "pi 101", "status" : " No Image"}, {"name" : "pi 101", "status" : " No Image"}, {"name" : "pi 101", "status" : " No Image"}]})
     const { mode } = React.useContext(ThemeContext);
     const styles = visualStyles(mode);
 
     // For slider Color
-    const test = {
-        mode: mode,
-    };
+    const test = { mode: mode,};
     const classes = useStyles(test);
 
     // Reference
     const [widthRef, setWidthRef] = React.useState();
     const ref = useRef(null);
 
+    // For slider
+    const [value, setValue] = React.useState([0, 6]);
+    const handleChange = (event, newValue) => { setValue(newValue); };
+    const valuetext = (value) => { return `${value}`; };
+    const valueLabelFormat = (value) => { return value; };
+    
+
+    // Handler for map region click
+    const regionClickHandler = (data) => {
+        setShowPosnet(data.showMap);
+    };
+
+    // Setting current offset
     useEffect(() => {
         const width = ref.current.offsetWidth;
         setWidthRef(width);
     }, [widthRef]);
 
-    // For slider
 
-    const [value, setValue] = React.useState([0, 6]);
+    // Getting the Rpi Status
+    useEffect(() => {
+        fetch(config.url.API_HOST + "/visual/get-pi-status")
+            .then((res) => res.json())
+            .then((data) => {
+                setPiStatusData(data);
+            });
+    }, []);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    // Method to generate status icon
+    const statusIcon = (status) => {
+        if (status.toLowerCase() === "working") {
+            return <CheckCircleIcon style={{ fill: "green", fontSize: 20 }} />;
+        } else if (status.toLowerCase() === "no image") {
+            return <CancelIcon style={{ fill: "red", fontSize: 20 }} />;
+        }
+        return <WarningIcon style={{ fill: "orange", fontSize: 20 }} />;
     };
 
-    const valuetext = (value) => {
-        return `${value}`;
-    };
-
-    const valueLabelFormat = (value) => {
-        return value;
-    };
 
     return (
         <div style={styles.visual}>
@@ -87,12 +119,43 @@ const Visual = (props) => {
                         )}
                     </Paper>
                 </Grid>
+                <Grid item xs={6} className="item-padding"> Heatmap Space </Grid>
                 <Grid item xs={6} className="item-padding">
-                    <Paper style={styles.itemContainer}>Heat Map Space</Paper>
-                </Grid>
-                <Grid item xs={12} className="item-padding">
                     <img src={config.url.API_HOST +"/visual/get-layout"} alt="img"/>
                 </Grid>
+
+                <Grid item xs={6} className="item-padding">
+                    <Paper style={styles.tableContainer}>
+                        <TableContainer>
+                        <Table size="small" stickyHeader>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                        Node Name
+                                    </TableCell>
+                                    <TableCell align="center" sx={{ color: theme[mode].backgroundColor, fontSize: 15, }} >
+                                        Status
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                                {piStatusData.data.map((row) => (
+                                    <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0, color: theme[mode].backgroundColor, }, }} >
+                                        <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                            {row.name}
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ color: theme[mode].backgroundColor }} >
+                                            {statusIcon(row.status)}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                            
+                        </Table>
+                        </TableContainer>
+                    </Paper>
+                </Grid>         
             </Grid>
         </div>
     );
@@ -126,6 +189,12 @@ const visualStyles = (mode) => ({
         backgroundColor: theme[mode].opposite,
         color: theme[mode].backgroundColor,
     },
+    tableContainer: {
+        backgroundColor: theme[mode].opposite,
+        color: theme[mode].backgroundColor,
+        overflowY : 'auto',
+        height : "65vh"
+    }
 });
 
 const useStyles = makeStyles({
