@@ -129,3 +129,27 @@ def reset_password():
         current_app.logger.error("Error Occured while resetting the passowrd : {}".format(str(e)))
         return {"success": False,
                 "msg": "Password Reset Link has expired or is invalid."}, 400
+
+
+@blueprint.route('/validate-token', methods=["POST"])
+def validate_token():
+    try:
+        req_data = request.get_json()
+        token = req_data.get('token', '')
+        _email = jwt.decode(token, key=current_app.config["SECRET_KEY"], algorithms=['HS256']).get('email', '')
+        user_exists = Users.get_by_email(_email)
+
+        if user_exists is None:
+            return {"success": False,
+                    "msg": "Invalid User token."}
+
+        if user_exists.check_jwt_auth_active():
+            return {"success": True,
+                    "msg": "Session is active"}, 200
+        return {"success": False,
+                "msg": "Session has expired."}, 401
+
+    except Exception as e:
+        current_app.logger.error("Exception occured while validating the token : {}".format(str(e)))
+        return {"success": False,
+                "msg": "Session has expired. : {}".format(str(e))}, 400
