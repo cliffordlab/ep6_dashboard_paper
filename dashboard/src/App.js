@@ -15,50 +15,76 @@ import Audio from "./pages/audio/Audio";
 import RpiStatus from "./pages/rpiStatus/RpiStatus";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Illuminance from "./pages/illuminance/Illuminance";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import ForgetPassword from "./pages/forgetPassword/ForgetPassword";
 
 import "./App.css";
 
 import { ThemeContext } from "./theme/ThemeProvider";
 import { theme } from "./theme/Themes";
+import { useState } from "react";
 
 function App() {
     const { mode } = React.useContext(ThemeContext);
     const styles = appStyles(mode);
+    
+    const [isLogin, setIsLogin] = useState(false);
+    const [authToken, setAuthToken] = useState('');
+    const [email, setEmail] = useState('')
+
+    const loginCallback = (data) => {
+        setIsLogin(data.success);
+        setAuthToken(data.token);
+        setEmail(data.email);
+    }     
+
     return (
         <Router>
             <div className="App">
-                <NavBar />
+                { isLogin ? <NavBar /> : null}
                 <div className="container">
-                    <SideBar />
+                    { isLogin ? <SideBar /> : null }
                     <div style={styles.body}>
                         <Switch>
                             <Route path="/status">
-                                <RpiStatus />
+                                {isLogin ? <RpiStatus /> : <Redirect to="/login" /> }
                             </Route>
 
                             <Route path="/audio">
-                                <Audio />
+                                {isLogin ? <Audio /> : <Redirect to="/login" /> }
                             </Route>
 
                             <Route path="/visual">
-                                <Visual />
+                                {isLogin ? <Visual /> : <Redirect to="/login" /> }
                             </Route>
 
                             <Route path="/humidity">
+                                {isLogin ? <Humidity /> : <Redirect to="/login" /> }
                                 <Humidity />
                             </Route>
 
                             <Route path="/illuminance">
+                                {isLogin ? <Illuminance /> : <Redirect to="/login" /> }
                                 <Illuminance />
                             </Route>
 
-                            <Route path="/">
-                                <Redirect to="/status" />
+                            <Route path="/login">
+                                {isLogin ? <Redirect to="/status"/> : <Login onchange={loginCallback}/> }
                             </Route>
 
-                            {/* <Route path="/dashboard">
-                          <Dashboard />
-                      </Route> */}
+                            <Route path="/register">
+                                {isLogin ? <Redirect to="/status"/> : <Register/> }
+                            </Route>
+
+                            <Route path="/forget-password">
+                                {isLogin ? <Redirect to="/status"/> : <ForgetPassword/> }
+                            </Route>
+
+                            <Route path="/">
+                                {isLogin ? <Redirect to="/status"/> : <Redirect to="/login"/> }
+                            </Route>
+
                         </Switch>
                     </div>
                 </div>
