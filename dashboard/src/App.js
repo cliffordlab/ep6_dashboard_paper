@@ -13,7 +13,6 @@ import Humidity from "./pages/humidity/Humidity";
 import Visual from "./pages/visual/Visual";
 import Audio from "./pages/audio/Audio";
 import RpiStatus from "./pages/rpiStatus/RpiStatus";
-import Dashboard from "./pages/dashboard/Dashboard";
 import Illuminance from "./pages/illuminance/Illuminance";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
