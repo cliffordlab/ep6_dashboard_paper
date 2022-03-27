@@ -24,6 +24,8 @@ import "./App.css";
 import { ThemeContext } from "./theme/ThemeProvider";
 import { theme } from "./theme/Themes";
 import { useState } from "react";
+import { useEffect } from "react";
+import { config } from "./environment";
 
 function App() {
     const { mode } = React.useContext(ThemeContext);
@@ -33,10 +35,32 @@ function App() {
     const [authToken, setAuthToken] = useState('');
     const [email, setEmail] = useState('')
 
+    useEffect(() => {
+        let token = localStorage.getItem('token');
+        fetch(config.url.API_HOST + '/validate-token',  
+            {   method : "POST", 
+                headers : { "Content-Type" : "application/json", },
+                body : JSON.stringify({"token" : token})
+            })
+        .then(res => res.json())
+        .then(data => {
+            setIsLogin(data.success);
+            if(data.success){
+                setAuthToken(token);
+            }
+            else{
+                setAuthToken("");
+            }
+        });
+
+    })
+
+
     const loginCallback = (data) => {
         setIsLogin(data.success);
         setAuthToken(data.token);
         setEmail(data.email);
+        localStorage.setItem('token', data.token)
     }     
 
     return (
