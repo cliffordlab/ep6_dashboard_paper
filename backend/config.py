@@ -42,6 +42,9 @@ class Config(object):
     # PosNet Dir
     POSNET_DIR = config('POSNET_DIR', "visual/static/images")
 
+    # Port
+    PORT = config("PORT", "9800")
+
 # Production environment specific configurations go here
 
 
