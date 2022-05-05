@@ -1,12 +1,8 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import json
 from flask import current_app
 import jwt
+from pytz import timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
@@ -48,7 +44,7 @@ class Users(db.Model):
     @classmethod
     def get_reset_token(cls, email, expires=500):
         return jwt.encode({'reset_password': email,
-                           'exp':  datetime.utcnow() + timedelta(seconds=expires)},
+                           'exp':  datetime.now(timezone.utc) + timedelta(seconds=expires)},
                           key=current_app.config["SECRET_KEY"], algorithm='HS256')
 
     @classmethod
