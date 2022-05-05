@@ -15,6 +15,7 @@ from app.base import blueprint
 from app.base.util import login_required
 from app.base.models import Users, JWTTokenBlocklist
 from app.base.email import send_email
+from app.base import email
 
 
 @blueprint.route('/login', methods=["POST"])
@@ -39,7 +40,7 @@ def login():
                 "msg": "Wrong credentials."}, 400
 
     # create access token uwing JWT
-    token = jwt.encode({'email': _email, 'exp': datetime.utcnow() + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
+    token = jwt.encode({'email': _email, 'exp': datetime.now(timezone.utc) + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
 
     user_exists.set_jwt_auth_active(True)
     user_exists.save()
@@ -136,19 +137,27 @@ def validate_token():
     try:
         req_data = request.get_json()
         token = req_data.get('token', '')
-        _email = jwt.decode(token, key=current_app.config["SECRET_KEY"], algorithms=['HS256']).get('email', '')
+        _data = jwt.decode(token, key=current_app.config["SECRET_KEY"], algorithms=['HS256'])
+        _email = _data.get('email', '')
+
         user_exists = Users.get_by_email(_email)
 
+        # If Request is not made from valid user
         if user_exists is None:
             return {"success": False,
                     "msg": "Invalid User token."}
 
-        if user_exists.check_jwt_auth_active():
+        # Check if token has expired
+        # Check if user hasnt logged out
+        _exp = _data.get('exp')
+        if user_exists.check_jwt_auth_active() and (datetime.now(timezone.utc) <= datetime.fromtimestamp(_exp, tz=timezone.utc)):
             return {"success": True,
                     "msg": "Session is active"}, 200
+
         return {"success": False,
                 "msg": "Session has expired."}, 401
+
     except Exception as e:
         current_app.logger.error("Exception occured while validating the token : {}".format(str(e)))
         return {"success": False,
-                "msg": "Session has expired. : {}".format(str(e))}, 400
+                "msg": "Session has expired. : {}".format(str(e))}, 401
