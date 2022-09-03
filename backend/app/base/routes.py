@@ -23,75 +23,115 @@ def login():
     """
     Method to login to the system
     """
-    req_data = request.get_json()
-    current_app.logger.info(req_data)
+    try:
+        req_data = request.get_json()
+        current_app.logger.info(req_data)
 
-    _email = req_data.get("email")
-    _password = req_data.get("password")
+        _email = req_data.get("email")
+        _password = req_data.get("password")
 
-    user_exists = Users.get_by_email(_email)
+        user_exists = Users.get_by_email(_email)
 
-    if not user_exists:
+        if not user_exists:
+            return {"success": False,
+                    "msg": "This email does not exist."}, 400
+
+        if not user_exists.check_password(_password):
+            return {"success": False,
+                    "msg": "Wrong credentials."}, 400
+
+        # create access token uwing JWT
+        token = jwt.encode({'email': _email, 'exp': datetime.now(timezone.utc) + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
+
+        user_exists.set_jwt_auth_active(True)
+        user_exists.save()
+
+        return {"success": True,
+                "token": token,
+                "user": user_exists.toJSON()}, 200
+
+    except Exception as e:
+        current_app.logger.error("Error Occured while login : {}".format(str(e)))
         return {"success": False,
-                "msg": "This email does not exist."}, 400
-
-    if not user_exists.check_password(_password):
-        return {"success": False,
-                "msg": "Wrong credentials."}, 400
-
-    # create access token uwing JWT
-    token = jwt.encode({'email': _email, 'exp': datetime.now(timezone.utc) + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
-
-    user_exists.set_jwt_auth_active(True)
-    user_exists.save()
-
-    return {"success": True,
-            "token": token,
-            "user": user_exists.toJSON()}, 200
+                "msg": "Oops ! Something went wrong."}, 400
 
 
 @blueprint.route('/logout', methods=["POST"])
 @login_required
 def logout(current_user):
-    _jwt_token = request.headers["authorization"]
+    """
+    Method to logout from the system
+    """
+    try:
+        _jwt_token = request.headers["authorization"]
 
-    jwt_block = JWTTokenBlocklist(jwt_token=_jwt_token, created_at=datetime.now(timezone.utc))
-    jwt_block.save()
+        _data = jwt.decode(_jwt_token, key=current_app.config["SECRET_KEY"], algorithms=['HS256'])
+        _email = _data.get('email', '')
+        current_user = Users.get_by_email(_email)
+        print("Step 1")
 
-    current_user.set_jwt_auth_active(False)
-    current_user.save()
+        # If user not found in database
+        if not current_user:
+            return {"success": False,
+                    "msg": "Invalid Token or Request"}, 401
+        print("Step 2")
 
-    return {"success": True}, 200
+        jwt_block = JWTTokenBlocklist(jwt_token=_jwt_token, created_at=datetime.now(timezone.utc))
+        jwt_block.save()
+        print("Step 3")
+
+        current_user.set_jwt_auth_active(False)
+        current_user.save()
+        print("Step 4")
+
+        return {"success": True}, 200
+
+    except Exception as e:
+        current_app.logger.error("Error Occured while doing logout : {}".format(str(e)))
+        return {"success": False,
+                "msg": "Oops ! Something went wrong."}, 400
 
 
 @blueprint.route('/register', methods=["POST"])
 def register():
-    req_data = request.get_json()
+    """
+    Register a new user to the system
+    """
+    try:
+        req_data = request.get_json()
 
-    _username = req_data.get("username")
-    _email = req_data.get("email")
-    _password = req_data.get("password")
+        _username = req_data.get("username")
+        _email = req_data.get("email")
+        _password = req_data.get("password")
 
-    user_exists = Users.get_by_email(_email)
+        user_exists = Users.get_by_email(_email)
 
-    if user_exists:
+        if user_exists:
+            return {"success": False,
+                    "msg": "Email already taken"}, 400
+
+        new_user = Users(username=_username, email=_email)
+
+        new_user.set_password(_password)
+        new_user.save()
+
+        send_email("TEst", "Test", "rsingh388@gatech.edu")
+
+        return {"success": True,
+                "userID": new_user.id,
+                "msg": "The user was successfully registered"}, 200
+
+    except Exception as e:
+        current_app.logger.error("Error Occured while Registering the user : {}".format(str(e)))
         return {"success": False,
-                "msg": "Email already taken"}, 400
-
-    new_user = Users(username=_username, email=_email)
-
-    new_user.set_password(_password)
-    new_user.save()
-
-    send_email("TEst", "Test", "rsingh388@gatech.edu")
-
-    return {"success": True,
-            "userID": new_user.id,
-            "msg": "The user was successfully registered"}, 200
+                "msg": "Oops ! Something went wrong."}, 400
 
 
 @blueprint.route('/forget-password', methods=["POST"])
 def forget_password():
+    """
+    Forgetting the password
+    """
     try:
         req_data = request.get_json()
         _email = req_data.get("username")
@@ -114,6 +154,9 @@ def forget_password():
 
 @blueprint.route('/reset-password', methods=["GET", "POST"])
 def reset_password():
+    """
+    Resetting the password
+    """
     try:
         if request.method == "POST":
             return {"success": True, "msg": "Done"}
@@ -129,11 +172,14 @@ def reset_password():
     except Exception as e:
         current_app.logger.error("Error Occured while resetting the passowrd : {}".format(str(e)))
         return {"success": False,
-                "msg": "Password Reset Link has expired or is invalid."}, 400
+                "msg": "Error occured while processing the request"}, 400
 
 
 @blueprint.route('/validate-token', methods=["POST"])
 def validate_token():
+    """
+    Validating the JWT Token
+    """
     try:
         req_data = request.get_json()
         token = req_data.get('token', '')
@@ -160,4 +206,4 @@ def validate_token():
     except Exception as e:
         current_app.logger.error("Exception occured while validating the token : {}".format(str(e)))
         return {"success": False,
-                "msg": "Session has expired. : {}".format(str(e))}, 401
+                "msg": "Error Occured while processing the token. : {}".format(str(e))}, 401
