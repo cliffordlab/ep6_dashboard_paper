@@ -16,28 +16,15 @@ const Audio = (props) => {
     const [audioData, setAudioData] = useState({
         data: { x: [], Channel1: [], Channel2: [], Channel3: [], Channel4: [] },
     });
-    const [setShowAudioGraph] = useState(false);
-
-    useEffect(() => {
-        fetch(config.url.API_HOST + '/audio/get-data')
-            .then((res) => res.json())
-            .then((data) => {
-                setAudioData(data);
-            });
-    }, []);
-
     const { mode } = useContext(ThemeContext);
     const styles = audioStyles(mode);
-
-    // For slider Color
-    const test = {
-        mode: mode,
-    };
+    const test = { mode: mode,};
     const classes = useStyles(test);
-
-    // Reference
     const [widthRef, setWidthRef] = useState();
     const ref = useRef(null);
+    const [value, setValue] = React.useState([0, 6]);  // For Slider
+    const valuetext = (value) => { return `${value} hr`; };
+    const valueLabelFormat = (value) => { return value; };
 
 
    // Callback Handler for Region Clicking
@@ -53,11 +40,14 @@ const Audio = (props) => {
 
     // Initializing the plot data for the first time
     useEffect(() => {
-    fetch(config.url.API_HOST + '/audio/get-data').then(res => res.json()).then(data => {
-       setAudioData(data);
-    }); }, []);
-    
-    // Setting the width
+        fetch(config.url.API_HOST + '/audio/get-data')
+            .then((res) => res.json())
+            .then((data) => {
+                setAudioData(data);
+            });
+    }, []);
+
+
     useEffect(() => {
         const width = ref.current.offsetWidth;
         setWidthRef(width);
@@ -76,7 +66,7 @@ const Audio = (props) => {
                             <Slider
                                 getAriaLabel={() => "Temperature range"}
                                 value={value}
-                                onChange={handleChange}
+                                onChange={handleSliderChange}
                                 valueLabelFormat={valueLabelFormat}
                                 getAriaValueText={valuetext}
                                 step={null}
@@ -119,17 +109,6 @@ const Audio = (props) => {
                 </Grid>
             </Grid>
         </div>
-
-        // <div style={styles.audio}>
-
-        //       {showAudioGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowAudioGraph(false)}> <CancelIcon style={{fill: styles.audio.color}} /> </IconButton></Tooltip> }
-
-        //    <div style={styles.audiochartWrapper}>
-        //       { !showAudioGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
-
-        //       { showAudioGraph && <AudioPlot height={350} width={600} data={audioData.data} style={styles.audioPlot}/> }
-        //    </div>
-        // </div>
     );
 };
 
