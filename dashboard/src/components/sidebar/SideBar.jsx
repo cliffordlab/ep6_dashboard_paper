@@ -35,25 +35,29 @@ import { theme } from "../../theme/Themes.js";
 import { config } from "../../environment";
 
 
-export default function SideBar() {
+const Sidebar = (props) => {
+
+    // Setting the states
+    const username = props.user;
     const [sideMenuShow, setSideMenuShow] = React.useState(false);
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
 
     const { setTheme, mode } = useContext(ThemeContext);
-    console.log("mode", mode);
-
     const styles = sideBarStyles(mode);
 
+    // Toggle theme callback
     const ToggleBtn = (e) => {
+        localStorage.setItem("mode", e);
         setTheme(e);
-        console.log(mode);
     };
 
-    const logout = (e) => {
-        let token = localStorage.getItem('token')
 
+    // Logout callback
+    const logout = (e) => {
+        // fetch JWT token
+        let token = localStorage.getItem('token')
         // Sending Logout request
         fetch(config.url.API_HOST + '/logout',  
         {   method : "POST", 
@@ -86,6 +90,9 @@ export default function SideBar() {
                         {sideMenuShow && <h3 style={styles.heading}>Status</h3>}
                     </div>
 
+
+
+                    {/*Start of 1st Section of bar*/}
                     <ul style={styles.sidebarList}>
                         <NavLink to="/status" className="link">
                             <li
@@ -102,8 +109,14 @@ export default function SideBar() {
                             </li>
                         </NavLink>
                     </ul>
+                    {/* End of 1st section of sidebar */}
 
+
+
+
+                    {/*Start of 2nd Section of bar*/}
                     <ul className="sidebarList">
+                        {/*Audio Tab*/}
                         <NavLink to="/audio" className="link">
                             <li
                                 className={
@@ -116,6 +129,10 @@ export default function SideBar() {
                                 {sideMenuShow && "Audio"}
                             </li>
                         </NavLink>
+
+
+
+                        {/*Illuminance Tab*/}
                         <NavLink to="/illuminance" className="link">
                             <li
                                 className={
@@ -130,6 +147,9 @@ export default function SideBar() {
                                 {sideMenuShow && "Illuminance"}
                             </li>
                         </NavLink>
+
+
+                        {/*Humidity Tab*/}
                         <NavLink to="/humidity" className="link">
                             <li
                                 className={
@@ -144,6 +164,9 @@ export default function SideBar() {
                                 {sideMenuShow && "Temperature"}
                             </li>
                         </NavLink>
+
+
+                        {/*Visual Tab*/}
                         <NavLink to="/visual" className="link">
                             <li
                                 className={
@@ -159,8 +182,13 @@ export default function SideBar() {
                             </li>
                         </NavLink>
                     </ul>
+                    {/* End of Section on the bar */}
 
+
+
+                    {/* Start of 3rd Section in Sidebar*/}
                     <ul className="sidebarList">
+                        {/* Theme Button*/}
                         <div style={styles.otherIconsContainer}>
                             <h3 style={styles.sidebarTitleOther}>
                                 <MUISwitch
@@ -175,21 +203,30 @@ export default function SideBar() {
                                 </span>
                             </h3>
                         </div>
-                        <h3 style={styles.sidebarTitleOther}>
-                            <PowerSettingsNewOutlined
-                                style={styles.sidebarIcon}
-                                onClick={logout}    
-                            />
-                            <span style={styles.team}>
-                                {sideMenuShow && "Gari Clifford"}
-                            </span>
-                        </h3>
+
+
+                        {/* Logout Button*/}
+                        <div style={styles.otherIconsContainer}>
+                            <h3 style={styles.sidebarTitleOther}>
+                                <PowerSettingsNewOutlined
+                                    style={styles.sidebarIcon}
+                                    onClick={logout}
+                                />
+                                <span style={styles.team}>
+                                    {sideMenuShow && username}
+                                </span>
+                            </h3>
+                        </div>
                     </ul>
+                    {/* End of 3rd Section in Sidebar*/}
+
                 </div>
             </div>
         </div>
     );
 }
+
+export default Sidebar;
 
 const sideBarStyles = (mode) => ({
     sidebar: {
