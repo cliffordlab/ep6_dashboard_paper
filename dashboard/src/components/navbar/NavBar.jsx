@@ -5,19 +5,21 @@ import { Tooltip, IconButton } from "@mui/material";
 import { ThemeContext } from "../../theme/ThemeProvider";
 import { theme } from "../../theme/Themes";
 import { AccountCircleOutlined } from "@material-ui/icons";
+import Avatar from 'react-avatar';
 
-export default function NavBar() {
+export default function NavBar(props) {
     const { mode } = React.useContext(ThemeContext);
     const styles = navBarStyles(mode);
     return (
         <div style={styles.navbar}>
             <div style={styles.navbarWrapper}>
                 <span style={styles.logo}>EP6 Dashboard</span>
-                <img
+                <Avatar name={props.user} round="20px" size="35px"></Avatar>
+                {/* <img
                     src="http://gdclifford.info/assets/img/gari_square.jpg"
                     style={styles.icons}
                     alt="Person"
-                />
+                    /> */ }
             </div>
         </div>
     );
