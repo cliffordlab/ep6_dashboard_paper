@@ -198,12 +198,18 @@ def validate_token():
         _exp = _data.get('exp')
         if user_exists.check_jwt_auth_active() and (datetime.now(timezone.utc) <= datetime.fromtimestamp(_exp, tz=timezone.utc)):
             return {"success": True,
+                    "username": user_exists.username,
+                    "email": user_exists.email,
                     "msg": "Session is active"}, 200
 
         return {"success": False,
+                "username": "",
+                "email": "",
                 "msg": "Session has expired."}, 401
 
     except Exception as e:
         current_app.logger.error("Exception occured while validating the token : {}".format(str(e)))
         return {"success": False,
+                "username": "",
+                "email": "",
                 "msg": "Error Occured while processing the token. : {}".format(str(e))}, 401
