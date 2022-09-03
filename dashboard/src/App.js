@@ -33,6 +33,7 @@ function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [authToken, setAuthToken] = useState('');
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
 
     useEffect(() => {
         let token = localStorage.getItem('token');
@@ -45,9 +46,13 @@ function App() {
         .then(data => {
             setIsLogin(data.success);
             if(data.success){
+                setEmail(data.email);
+                setUsername(data.username);
                 setAuthToken(token);
             }
             else{
+                setEmail("");
+                setUsername("");
                 setAuthToken("");
             }
         });
@@ -59,15 +64,16 @@ function App() {
         setIsLogin(data.success);
         setAuthToken(data.token);
         setEmail(data.email);
-        localStorage.setItem('token', data.token)
+        setUsername(data.username);
+        localStorage.setItem('token', data.token);
     }     
 
     return (
         <Router>
             <div className="App">
-                { isLogin ? <NavBar /> : null}
+                { isLogin ? <NavBar user={username} /> : null}
                 <div className="container">
-                    { isLogin ? <SideBar /> : null }
+                    { isLogin ? <SideBar user={username}/> : null }
                     <div style={styles.body}>
                         <Switch>
                             <Route path="/status">
