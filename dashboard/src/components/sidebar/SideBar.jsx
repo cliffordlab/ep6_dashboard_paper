@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Redirect } from "react-router-dom";
 import clsx from "clsx";
 
 import {
@@ -15,6 +15,12 @@ import {
     PhotoCameraOutlined,
 } from "@material-ui/icons";
 
+import {
+    ConnectedTvOutlined,
+    SettingsInputComponentOutlined,
+    ThermostatAutoOutlined,
+} from "@mui/icons-material";
+
 import NetworkCheckOutlinedIcon from "@mui/icons-material/NetworkCheckOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
@@ -26,11 +32,8 @@ import "./sidebar.css";
 
 import { ThemeContext } from "../../theme/ThemeProvider";
 import { theme } from "../../theme/Themes.js";
-import {
-    ConnectedTvOutlined,
-    SettingsInputComponentOutlined,
-    ThermostatAutoOutlined,
-} from "@mui/icons-material";
+import { config } from "../../environment";
+
 
 export default function SideBar() {
     const [sideMenuShow, setSideMenuShow] = React.useState(false);
@@ -47,6 +50,28 @@ export default function SideBar() {
         setTheme(e);
         console.log(mode);
     };
+
+    const logout = (e) => {
+        let token = localStorage.getItem('token')
+
+        // Sending Logout request
+        fetch(config.url.API_HOST + '/logout',  
+        {   method : "POST", 
+            headers : { "Content-Type" : "application/json", "authorization" : token},
+            body : JSON.stringify({"token" : token})
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.success){
+                console.log("Ratan");
+                <Redirect to="/login" />
+            }
+            else{
+                alert(data.msg);
+            }
+         })
+    }
 
     return (
         <div
@@ -153,6 +178,7 @@ export default function SideBar() {
                         <h3 style={styles.sidebarTitleOther}>
                             <PowerSettingsNewOutlined
                                 style={styles.sidebarIcon}
+                                onClick={logout}    
                             />
                             <span style={styles.team}>
                                 {sideMenuShow && "Gari Clifford"}
