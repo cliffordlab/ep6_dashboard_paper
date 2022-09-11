@@ -24,6 +24,7 @@ import {
 import NetworkCheckOutlinedIcon from "@mui/icons-material/NetworkCheckOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import BluetoothOutlinedIcon from '@mui/icons-material/BluetoothOutlined';
 
 import { style, styled } from "@mui/system";
 import { useSwitch } from "@mui/core/SwitchUnstyled";
@@ -181,8 +182,28 @@ const Sidebar = (props) => {
                                 {sideMenuShow && "Visuals"}
                             </li>
                         </NavLink>
+
+
+                        {/*Bluetooth Tab*/}
+                        <NavLink to="/bluetooth" className="link">
+                            <li
+                                className={
+                                    splitLocation[1] === "bluetooth"
+                                        ? "sidebarListItem active"
+                                        : "sidebarListItem"
+                                }
+                            >
+                                <BluetoothOutlinedIcon
+                                    style={styles.sidebarIcon}
+                                />
+                                {sideMenuShow && "Bluetooth"}
+                            </li>
+                        </NavLink>
+
                     </ul>
                     {/* End of Section on the bar */}
+
+
 
 
 
