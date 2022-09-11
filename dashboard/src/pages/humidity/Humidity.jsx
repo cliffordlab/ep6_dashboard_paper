@@ -1,77 +1,59 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import MicIcon from '@mui/icons-material/Mic';
+import React, { useEffect, useRef, useState , useContext} from "react";
 
-import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
-import HumidityPlot from "../../components/humidityPlot/HumidityPlot";
 import MicMap from "../../components/micMap/MicMap";
+import HumidityPlot from "../../components/humidityPlot/HumidityPlot";
 
 import "./humidity.css";
 
 import { theme } from "../../theme/Themes";
 import { ThemeContext } from "../../theme/ThemeProvider";
+import { Container, Grid, Paper, Slider, makeStyles } from "@material-ui/core";
 import {config} from "../../environment";
 
 const Humidity = (props) => {
-    const [humidityData, setHumidityData] = useState({
-        data: { x: [], humidity: [], temperature: [] },
-    });
-    const [showHumidityPlot, setShowHumidityPlot] = useState(false);
 
+    // States for the graph
+    const [humidityData, setHumidityData] = useState({
+        data: { x: [], Temperature: [], Humidity: []},
+    });
+    const { mode } = useContext(ThemeContext);
+    const styles = humidityStyles(mode);
+    const test = { mode: mode,};
+    const classes = useStyles(test);
+    const [widthRef, setWidthRef] = useState();
+    const ref = useRef(null);
+    const [value, setValue] = React.useState([0, 6]);  // For Slider
+    const valuetext = (value) => { return `${value} hr`; };
+    const valueLabelFormat = (value) => { return value; };
+
+
+   // Callback Handler for Region Clicking
+    const regionClickHandler = (data) => {
+    let region_id = data.region_id.slice(4);
+    fetch(config.url.API_HOST + '/humidity/get-data?region_id='+region_id).then(res => res.json()).then(data => {setHumidityData(data)});
+    }
+
+    // Handler for the change in slider
+    const handleSliderChange = (event, sliderValue) => {
+        setValue(sliderValue);
+    }
+
+    // Initializing the plot data for the first time
     useEffect(() => {
-        fetch(config.url.API_HOST +"/humidity/get-data")
+        fetch(config.url.API_HOST + '/humidity/get-data')
             .then((res) => res.json())
             .then((data) => {
                 setHumidityData(data);
             });
     }, []);
 
-    const regionClickHandler = (data) => {
-        setShowHumidityPlot(data.showMap);
-        let region_id = data.region_id.slice(4);
-        fetch(config.url.API_HOST + '/humidity/get-data?region_id='+region_id).then(res => res.json()).then(data => {setHumidityData(data)});
-    };
-
-    const { mode } = useContext(ThemeContext);
-    const styles = humidityStyles(mode);
-
-    console.log(humidityData);
-
-    // For slider Color
-    const test = {
-        mode: mode,
-    };
-    const classes = useStyles(test);
-
-    // Reference
-    const [widthRef, setWidthRef] = React.useState();
-    const ref = useRef(null);
 
     useEffect(() => {
         const width = ref.current.offsetWidth;
         setWidthRef(width);
     }, [widthRef]);
 
-    // For slider
-
-    const [value, setValue] = React.useState([0, 6]);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    const valuetext = (value) => {
-        return `${value}`;
-    };
-
-    const valueLabelFormat = (value) => {
-        return value;
-    };
-
+   
     return (
         <div style={styles.humidity}>
             <Grid container>
@@ -82,9 +64,9 @@ const Humidity = (props) => {
                             className="item-padding"
                         >
                             <Slider
-                                getAriaLabel={() => "Temperature range"}
+                                getAriaLabel={() => "Hour range"}
                                 value={value}
-                                onChange={handleChange}
+                                onChange={handleSliderChange}
                                 valueLabelFormat={valueLabelFormat}
                                 getAriaValueText={valuetext}
                                 step={null}
@@ -101,8 +83,8 @@ const Humidity = (props) => {
                     <Paper style={styles.itemContainer} ref={ref}>
                         {widthRef && (
                             <MicMap
-                                height={560}
                                 width={widthRef}
+                                height={560}
                                 onclick={(e) => {
                                     regionClickHandler(e);
                                 }}
@@ -111,15 +93,17 @@ const Humidity = (props) => {
                     </Paper>
                 </Grid>
                 <Grid item xs={6} className="item-padding">
-                    <Paper style={styles.itemContainer}>Heat Map Space</Paper>
+                    <Paper style={styles.itemContainer}>
+                        keep Heat Map here
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} className="item-padding">
                     <Paper style={styles.itemContainer}>
                         <HumidityPlot
+                            height={350}
                             width={600}
-                            height={560}
                             data={humidityData.data}
-                            style={styles.HumidityPlot}
+                            style={styles.humidityPlot}
                         />
                     </Paper>
                 </Grid>
@@ -131,24 +115,30 @@ const Humidity = (props) => {
 export default Humidity;
 
 const humidityStyles = (mode) => ({
-    humidity: {
-        backgroundColor: theme[mode].backgroundColor,
-        color: theme[mode].color,
-    },
-    HumidityPlot: {
+    markers: {
         color: theme[mode].color,
     },
     heatMapCard: {
         width: "100%",
         height: "100%",
     },
-    markers: {
+    humidity: {
+        flexGrow: 1,
+        backgroundColor: theme[mode].backgroundColor,
         color: theme[mode].color,
+    },
+    humidityPlot: {
+        color: theme[mode].color,
+        // flexGrow: 1,
+        width: "100%",
     },
     itemContainer: {
         backgroundColor: theme[mode].opposite,
         height: "100%",
         color: theme[mode].backgroundColor,
+    },
+    slider: {
+        color: theme[mode].opposite,
     },
 });
 

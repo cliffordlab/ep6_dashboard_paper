@@ -125,16 +125,6 @@ const Illuminance = (props) => {
                 </Grid>
             </Grid>
         </div>
-        // <div style={styles.illuminance}>
-
-        //       {showIlluminanceGraph && <Tooltip title="Close Graph"><IconButton aria-label="Close Graph" className="close-button" onClick={() => setShowIlluminanceGraph(false)}> <CancelIcon style={{fill: styles.illuminance.color}} /> </IconButton></Tooltip> }
-
-        //    <div style={styles.illuminancechartWrapper}>
-        //       { !showIlluminanceGraph && <MicMap height={350} width={450} onclick={(e) => {regionClickHandler(e)}}/> }
-
-        //       { showIlluminanceGraph && <IlluminancePlot height={350} width={600} data={illuminanceData.data} style={styles.illuminancePlot}/> }
-        //    </div>
-        // </div>
     );
 };
 
