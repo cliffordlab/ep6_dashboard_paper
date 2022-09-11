@@ -14,6 +14,7 @@ import Visual from "./pages/visual/Visual";
 import Audio from "./pages/audio/Audio";
 import RpiStatus from "./pages/rpiStatus/RpiStatus";
 import Illuminance from "./pages/illuminance/Illuminance";
+import Bluetooth from "./pages/bluetooth/Bluetooth";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/forgetPassword/ForgetPassword";
@@ -96,6 +97,11 @@ function App() {
                             <Route path="/illuminance">
                                 {isLogin ? <Illuminance /> : <Redirect to="/login" /> }
                                 <Illuminance />
+                            </Route>
+
+                            <Route path="/bluetooth">
+                                {isLogin ? <Bluetooth /> : <Redirect to="/login" /> }
+                                <Bluetooth />
                             </Route>
 
                             <Route path="/login">
