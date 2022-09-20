@@ -134,9 +134,9 @@ cd build
 nohup python3 -m http.server 6800 &
 ```
 
-The dashboard would be accessible at [http://localhost:6800/](http://localhost:6800/)
+The dashboard would be accessible at [http://mcibmi1.bmi.emory.edu:6800/](http://mcibmi1.bmi.emory.edu:6800/)
 
-# Running using Docker container
+# Deploying on EP6 using Docker Containers
 
 Instead of following above complex steps, we decided to resort to Docker containers which are quick and easy to deploy.
 We can create the container of Application Server (backend) using following steps:
@@ -155,4 +155,9 @@ docker build . -t dashboard
 docker run -dp 80:80 dashboard
 ```
 
-The dashboard would be accessible at [http://localhost/](http://localhost/)
+The dashboard would be accessible at [http://mcibmi1.bmi.emory.edu/](http://mcibmi1.bmi.emory.edu/)
+
+## Future Work
+
+- Improving Site Security
+- Setting up Kubernetes cluster _if active users go beyond 500_
