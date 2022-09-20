@@ -40,7 +40,7 @@
 ├──  nginx
 │    └── ep6_dashboard.service      - service file for daemon if added as linux service
 │    └── ep6-dashboard.conf         - Nginx configuration file
-││
+│
 │
 ├── .env                            - Contains environment specific variables
 ├── cache.py                        - Caching layer
