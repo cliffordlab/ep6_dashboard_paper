@@ -24,18 +24,23 @@ def login():
     Method to login to the system
     """
     try:
+        # fetching the data
         req_data = request.get_json()
         current_app.logger.info(req_data)
 
+        # parsing email and password
         _email = req_data.get("email")
         _password = req_data.get("password")
 
+        # fetch user from SQLite
         user_exists = Users.get_by_email(_email)
 
+        # if user is not present in DB
         if not user_exists:
             return {"success": False,
                     "msg": "This email does not exist."}, 400
 
+        # if password doesnt match
         if not user_exists.check_password(_password):
             return {"success": False,
                     "msg": "Wrong credentials."}, 400
@@ -43,6 +48,7 @@ def login():
         # create access token uwing JWT
         token = jwt.encode({'email': _email, 'exp': datetime.now(timezone.utc) + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
 
+        # set the JWT auth token active for session
         user_exists.set_jwt_auth_active(True)
         user_exists.save()
 
@@ -63,26 +69,28 @@ def logout(current_user):
     Method to logout from the system
     """
     try:
+        # parse the token from the request
         _jwt_token = request.headers["authorization"]
 
+        # decode the JWT token ot get email of user
         _data = jwt.decode(_jwt_token, key=current_app.config["SECRET_KEY"], algorithms=['HS256'])
         _email = _data.get('email', '')
+
+        # search user in the database
         current_user = Users.get_by_email(_email)
-        print("Step 1")
 
         # If user not found in database
         if not current_user:
             return {"success": False,
                     "msg": "Invalid Token or Request"}, 401
-        print("Step 2")
 
+        # Disable the Session Token
         jwt_block = JWTTokenBlocklist(jwt_token=_jwt_token, created_at=datetime.now(timezone.utc))
         jwt_block.save()
-        print("Step 3")
 
+        # disable the JWT auth
         current_user.set_jwt_auth_active(False)
         current_user.save()
-        print("Step 4")
 
         return {"success": True}, 200
 
@@ -98,24 +106,27 @@ def register():
     Register a new user to the system
     """
     try:
+        # parse the user data
         req_data = request.get_json()
-
         _username = req_data.get("username")
         _email = req_data.get("email")
         _password = req_data.get("password")
 
+        # search the user in SQLite database
         user_exists = Users.get_by_email(_email)
 
+        # if user is already registered
         if user_exists:
             return {"success": False,
                     "msg": "Email already taken"}, 400
 
+        # create a new user in the model
         new_user = Users(username=_username, email=_email)
-
         new_user.set_password(_password)
         new_user.save()
 
-        send_email("TEst", "Test", "rsingh388@gatech.edu")
+        # send the email
+        #send_email("TEst", "Test", "rsingh388@gatech.edu")
 
         return {"success": True,
                 "userID": new_user.id,
@@ -133,16 +144,21 @@ def forget_password():
     Forgetting the password
     """
     try:
+        # parse the username from the request
         req_data = request.get_json()
         _email = req_data.get("username")
 
+        # create a reset token for the user
         reset_token = Users.get_reset_token(_email)
+
+        # create the email with the data
         subject = "EP6 Dashboard - Reset Your Password"
         body = "Please Click on Following Link to reset your Password."
         current_app.logger.info(current_app.config)
         reset_link = "{} : {}/reset-password?token={}".format(socket.getfqdn(), current_app.config["PORT"], reset_token)
         msg = "{} : {}".format(body, reset_link)
         send_email(subject, msg, _email)
+
         return {"success": True,
                 "msg": msg}, 200
 
@@ -158,11 +174,19 @@ def reset_password():
     Resetting the password
     """
     try:
+        # A post request sent indicates when userlink is correct
         if request.method == "POST":
             return {"success": True, "msg": "Done"}
+
+        # Request of get indicates that the user wants to reset the password
         elif request.method == "GET":
+            # parse the token
             token = request.args.get("token")
+
+            # search the user in SQLite DB
             user = Users.check_reset_token(token)
+
+            # if user doesnt exist implies that token isnt active any more.
             if user is None:
                 return {"success": False,
                         "msg": "Password Reset Link has expired or is invalid."}, 400
@@ -181,11 +205,13 @@ def validate_token():
     Validating the JWT Token
     """
     try:
+        # parse the token and decode the email of users
         req_data = request.get_json()
         token = req_data.get('token', '')
         _data = jwt.decode(token, key=current_app.config["SECRET_KEY"], algorithms=['HS256'])
         _email = _data.get('email', '')
 
+        # search the user in SQLite database
         user_exists = Users.get_by_email(_email)
 
         # If Request is not made from valid user

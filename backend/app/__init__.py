@@ -15,17 +15,21 @@ from flask import Flask, url_for
 # SQL Alchemy database to register minor status if needed
 db = SQLAlchemy()
 
+# Registering DB to app
+
 
 def register_extensions(app):
     db.init_app(app)
 
 
+# Registering the Blueprints to App
 def register_blueprints(app):
     for module_name in ('base', 'audio', 'visual', 'humidity', 'illuminance', 'mail'):
         module = import_module('app.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
 
+# Database setup and teardown
 def configure_database(app):
 
     @app.before_first_request
@@ -37,6 +41,7 @@ def configure_database(app):
         db.session.remove()
 
 
+# Creating the app
 def create_app(config):
     app = Flask(__name__, static_folder='base/static')
     app.config.from_object(config)

@@ -7,4 +7,5 @@
 """
 from flask_caching import Cache
 
+# wrapper for cache
 cache = Cache()

@@ -54,8 +54,13 @@ def login_required(f):
 
         # Decode the User data
         try:
+            # get the data from JWT token
             data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
+
+            # search the user in SQLite and get the data
             current_user = Users.get_by_email(data["email"])
+
+            # if user doesnt exist implies auth token is not valid
             if not current_user:
                 return {"success": False,
                         "msg": "Sorry. Wrong auth token. This user does not exist."}, 400

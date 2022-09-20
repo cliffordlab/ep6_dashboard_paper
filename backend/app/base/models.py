@@ -1,3 +1,10 @@
+"""
+  Author : Ratan Singh
+  Email : [ratansingh648@gmail.com]
+  Date Created : 2021-09-18 21:19:58
+  Last Modified : 2021-09-18 21:19:58
+  Description : This is Model Schema file for the SQLite Database
+"""
 from datetime import datetime, timedelta, timezone
 import json
 from flask import current_app
@@ -9,6 +16,16 @@ from app import db
 
 
 class Users(db.Model):
+    """
+    Schema for Users Table
+    Columns:
+        id              : int
+        username        : varchar(32)
+        email           : varchar(64)
+        password        : text
+        jwt_auth_active : boolean
+        date_joined     : datetime 
+    """
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(64), nullable=False)
@@ -75,6 +92,14 @@ class Users(db.Model):
 
 
 class JWTTokenBlocklist(db.Model):
+    """
+    Schema for JWTTokenBlock Table
+    Columns:
+        id              : int
+        jwt_token       : text
+        created_at      : datetime 
+    """
+
     id = db.Column(db.Integer(), primary_key=True)
     jwt_token = db.Column(db.String(), nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False)

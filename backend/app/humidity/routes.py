@@ -15,6 +15,7 @@ from app.utils.Database import Database
 
 db = Database()
 
+# static fileHandle to know which Pi maps to which number
 try:
     fileHandle = open("device_mapping.json", "r")
     devices = json.load(fileHandle)
@@ -29,18 +30,23 @@ def humidity_temperature_data():
     This data will be consumed by chart component and stats components
     """
     try:
+        # get the region of interest from the reuest
         region_id = request.args.get("region_id", "1")
 
         # Fetch the device. E.g. 192.168.64.101 becomes 101
         device_id = devices[str(region_id)].split(".")[-1]
+
         # Defines the hostname E.g. 192.168.64.101 becomes pi101.pi.bmi.emory.edu
         device_location = "pi{}.pi.bmi.emory.edu".format(device_id)
 
+        # query the influx database to get the humidity data
         response = db.query_humidity(location=device_location)
 
+        # parsing the response from influx DB to get temperature and humidity
         temp = list(filter(lambda x: x['measurement'] == "temperature", response))
         humid = list(filter(lambda x: x['measurement'] == "humidity", response))
 
+        # parse the response to get a list
         x = list(map(lambda x: x['time'], temp))
         temperature = list(map(lambda x: x['value'], temp))
         humidity = list(map(lambda x: x['value'], humid))

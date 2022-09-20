@@ -36,21 +36,21 @@ def audio_data():
         # Defines the hostname E.g. 192.168.64.101 becomes pi101.pi.bmi.emory.edu
         device_location = "pi{}.pi.bmi.emory.edu".format(device_id)
 
+        # Requesting the data query from Influx DB
         response = db.query_audio(location=device_location)
 
+        # Separating channel responses
         ch1 = list(filter(lambda x: x['channel'] == 0, response))
         ch2 = list(filter(lambda x: x['channel'] == 1, response))
         ch3 = list(filter(lambda x: x['channel'] == 2, response))
         ch4 = list(filter(lambda x: x['channel'] == 3, response))
 
+        # mapping the value of responses
         x = list(map(lambda x: x['time'], ch1))
         y0 = list(map(lambda x: x['value'], ch1))
         y1 = list(map(lambda x: x['value'], ch2))
         y2 = list(map(lambda x: x['value'], ch3))
         y3 = list(map(lambda x: x['value'], ch4))
-
-        print(len(x))
-        print("-"*10)
 
         return {"data": {'x': x,
                          'Channel1': y0,

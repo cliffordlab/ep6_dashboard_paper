@@ -14,21 +14,34 @@ from datetime import datetime
 
 
 class Database():
+    """
+    Client to connect to EP6 Influx DB instance. 
+    Token is defined on the InfluxDB instance to enable auth
+    """
 
-    def __init__(self, token="X5hQbaQGGwiGvvBGWECL8lSmMyYLmxCNX9_HJ8xwnx75VvW8TD2ZQ5FYS016gpbOi69I7YcpTGxup68PtmemaQ==", org="EP6", url="https://mcibmi1.bmi.emory.edu:8086", verify_ssl=False):
+    def __init__(self,  token="X5hQbaQGGwiGvvBGWECL8lSmMyYLmxCNX9_HJ8xwnx75VvW8TD2ZQ5FYS016gpbOi69I7YcpTGxup68PtmemaQ==",
+                 org="EP6",
+                 url="https://mcibmi1.bmi.emory.edu:8086",
+                 verify_ssl=False):
+
         self.__token = token
         self.__org = org
         self.__url = url
 
+        # try establishing the connection with the server
         try:
             self.__client = InfluxDBClient(url=self.__url, token=self.__token, verify_ssl=verify_ssl)
         except Exception as e:
             logging.error("Exception occured in initializing the instance of DB", exc_info=True)
             print("Failed creating Influx DB Client.")
 
+        # store the Query API pointer
         self.__query_api = self.__client.query_api()
 
     def __query(self, query):
+        """
+        Method to accept query as argument, execute the query and returns the result
+        """
         try:
             result = self.__query_api.query(query, org=self.__org)
         except Exception as e:
@@ -37,13 +50,19 @@ class Database():
         return result
 
     def __create_query(self, location, bucket, start, measurement, fields):
+        """
+        Method to generate the query template from location, bucket, start, measurement
+        and fields associated
+        """
         try:
+            # base query template
             query_template = """
             from(bucket:"{}")
                 |> range(start:{})
                 |> filter(fn: (r) => r["location"] == "{}")
             """.format(bucket, start, location)
 
+            # Adding measurement
             query_template += '\n |> filter(fn: (r) => r["_measurement"] == "{}"'.format(measurement[0])
             if len(measurement) > 1:
                 for measure in measurement[1:]:
@@ -57,16 +76,20 @@ class Database():
                     query_template += ' or r["_field"] == "{}"'.format(field)
             query_template += ")"
 
-            print(query_template)
             return query_template
         except Exception as e:
             logging.error("Exception occured in creating a query", exc_info=True)
             return ""
 
     def __process_audio_data(self, data):
+        """
+        Method to process the audio data fetched from the Influx
+        """
         result = []
         try:
+            # iterate over each of 4 channel
             for index, table in enumerate(data):
+                # iterate over time series data for given channel
                 for record in table.records:
                     result.append({"channel": index, "time": record["_time"].strftime("%H:%M:%S"), "value": record["_value"]})
         except Exception as e:
@@ -74,6 +97,9 @@ class Database():
         return result
 
     def __process_humidity_data(self, data):
+        """
+        Method to process the humidity data fetched from the Influx
+        """
         result = []
         try:
             for index, table in enumerate(data):
@@ -85,6 +111,9 @@ class Database():
             return result
 
     def __process_illuminance_data(self, data):
+        """
+        Method to process the illuminance data fetched from t
+        """
         result = []
         try:
             for index, table in enumerate(data):

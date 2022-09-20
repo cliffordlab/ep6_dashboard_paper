@@ -30,6 +30,9 @@ def visual_data():
 
 @blueprint.route('/get-layout')
 def get_layout():
+    """
+    API to send the PoseNet data from Vision Pipeline
+    """
     try:
         file_path = os.path.join(current_app.config['POSNET_DIR'], "ep6_map_positions.jpg")
         return send_file(file_path, mimetype="image/jpg")
@@ -105,18 +108,26 @@ def get_points():
 @ blueprint.route('/get-status')
 @cache.cached(timeout=300)
 def get_status():
+    """
+    API to fetch status of RPIs. It caches the result for 5 mins
+    """
+    # default value for case of local running
     rows = {"data": [{"name": "Kitchen PI - 04", "location": "Kitchen", "ipAddress": "192.168.0.13", "status": "connected"},
                      {"name": "Kitchen PI - 01", 'location': 'Kitchen', 'ipAddress': '192.168.0.7', 'status': 'disconnected'},
                      {"name": "Kitchen PI - 02", 'location': 'Kitchen', 'ipAddress': '192.168.0.19', 'status': 'disconnected'},
                      {"name": "Kitchen PI - 03", 'location': 'Kitchen', 'ipAddress': '192.168.0.29', 'status': 'booting'}]}
 
     try:
+        # Reading the mapping of device to region
         fileHandle = open("device_mapping.json", "r")
         devices = json.load(fileHandle)
 
         status = []
+        # iterate through all PI IP addresses
         for device_id, ip in devices.items():
+            # execute ping command
             output = subprocess.check_output(["ping", ip, "-c", str(1)])
+
             # If all packets are reached then PI is ok
             device_status = "disconnected"
             if("1 received" in str(output)):

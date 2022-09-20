@@ -14,6 +14,8 @@ from app.utils.Database import Database
 
 
 db = Database()
+
+# static fileHandle to know which Pi maps to which number
 try:
     fileHandle = open("device_mapping.json", "r")
     devices = json.load(fileHandle)
@@ -28,15 +30,19 @@ def illuminance_data():
     This data will be consumed by chart component and stats components
     """
     try:
+        # get the region of interest from the reuest
         region_id = request.args.get("region_id", "1")
 
         # Fetch the device. E.g. 192.168.64.101 becomes 101
         device_id = devices[str(region_id)].split(".")[-1]
+
         # Defines the hostname E.g. 192.168.64.101 becomes pi101.pi.bmi.emory.edu
         device_location = "pi{}.pi.bmi.emory.edu".format(device_id)
 
+        # fetch the illuminance data from influxdb
         response = db.query_illuminance(location=device_location)
 
+        # filter individual channel response from the raw response
         R_channel = list(filter(lambda x: x['channel'] == 0, response))
         G_channel = list(filter(lambda x: x['channel'] == 1, response))
         B_channel = list(filter(lambda x: x['channel'] == 2, response))
@@ -44,6 +50,7 @@ def illuminance_data():
         Lux_channel = list(filter(lambda x: x['channel'] == 4, response))
         Luxnc_channel = list(filter(lambda x: x['channel'] == 5, response))
 
+        # parsing the individual responses to arrays
         x = list(map(lambda x: x['time'], R_channel))
         y0 = list(map(lambda x: x['value'], R_channel))
         y1 = list(map(lambda x: x['value'], G_channel))
