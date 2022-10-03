@@ -63,19 +63,16 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+As detection techniques have improved over the years, Alzheimer's and other different forms of dementia have come to receive an increasing amount of attention. In addition to being the sixth most common cause of mortality in the US, Alzheimer's disease is also thought to be the possible cause of dementia in more than 6 million people. While the average person experiences a natural reduction in cognitive function with aging, some people experience a far more rapid decline, which frequently progresses to Alzheimer's disease or another form of dementia. These people are classified as having mild cognitive impairment, making them the study's population.
+
+![Architecture Diagram of EP6 Dashboard](assets/Architecture_Diagram.png)
+
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
+`EP6 Dashboard` is an unified portal developed using python packages and React framework to monitor the indoor activities through audio, visual and spatial tracking. 
+
+an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
 flexibility or ease-of-use in the user-interface. The API for `Gala` was
 designed to provide a class-based and user-friendly interface to fast (C or
