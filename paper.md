@@ -98,16 +98,19 @@ Section A) in fig. II represents position of each Raspberry Pi on EP6 schematic 
 
 As part of audio pipeline, we collect the audio features of the participants through respeaker USB microphone arrays placed on ceiling. We don't store the audio itself but its computed feature to preserve participant privacy. Through these features, we perform speaker diarization followed by tagging the respective participants groups. Through these, we are measuring the degree of engagement in each group. 
 
-Occupancy analysis plays an important role in identification of how physical location of the EP6 correlates with the interaction among the participants. fig. III represents the image of Audio section on EP6 dashboard. Section A) shows the physical location of microphone arrays in the EP6 lab. To have an hour dependent view of occupancy, we also plot the heatmap of occupancy based on the audio signals as shown in section C) which can be controlled through slider shown in section B) of fig. III. One can vary the hours and see the occupancy change with respect to hours. 
-
 ![Audio Pipeline (A) EP6 Schematic with position of microphone arrays (B) Slider to analyze the activity between two specified hours (C) Heatmap depicting the activity level in EP6](assets/EP6_Dashboard_Audio.png)
 
+Occupancy analysis plays an important role in identification of how physical location of the EP6 correlates with the interaction among the participants. fig. III represents the image of Audio section on EP6 dashboard. Section A) shows the physical location of microphone arrays in the EP6 lab. To have an hour dependent view of occupancy, we also plot the heatmap of occupancy based on the audio signals as shown in section C) which can be controlled through slider shown in section B) of fig. III. One can vary the hours and see the occupancy change with respect to hours. 
+
+![Audio Channels for a particular microphone array](assets/Audio_graph.png)
 
 # Visual Pipeline Analysis
 
 Through the means of vision pipeline, we are trying to record and analyze the features in movement, action, and interaction of participants/patients through computer vision techniques, which are later displayed in the vision segment of the dashboard. With movement, we are trying to analyze the path taken on the EP6 floor in a certain time frame over multiple iteration for every individual human subject. With action, we try to analyze posture of every single individual (sitting, standing, leaning to talk). With interactions, we aim to register f-formations for further research purposes that occurs during participants interactions. All the above-mentioned processing is done through the collection of Image feed from all the individual raspberry Pi’s at every second. However, it is unsaid truth that Pi’s don’t always gather data at every instance of time due to processing fluctuations. With the said state of image collection, an algorithm manages to stitch images from all the cameras, of the given instance in time, into one singular image that shows the overview of the EP6 floor and activity going on.
 
 Dashboard displays the processed data in 4 different ways, Heatmap, Occupancy Map, and Camera Location. Heatmap, as the name suggests, displays the occupancy in terms of heat signature to visualize the population distribution throughout the EP6 floor. On contrary, Occupancy Map gives more specific location of all the individuals, at any given time, in the EP6. Lastly, Camera Location provides the location of the places from where the image originates.
+
+![People's location on EP6](assets/EP6_occupancy.jpg)
 
 
 # Bluetooth Pipeline Analysis
