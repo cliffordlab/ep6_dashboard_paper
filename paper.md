@@ -71,10 +71,10 @@ As detection techniques have improved over the years, Alzheimer's and other diff
 
 
 `EP6 Dashboard` is an unified portal developed using python packages and React framework to monitor the indoor activities through audio, visual and spatial tracking. It monitors following activities:
-a) Audio
-b) Visual
-c) Indoor Temperature and Humidity
-d) Bluetooth
+1. Audio
+2. Visual
+3. Indoor Temperature and Humidity
+4. Bluetooth
 
 
 # System Architecture 
