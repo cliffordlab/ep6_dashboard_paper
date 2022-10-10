@@ -70,8 +70,11 @@ At Executive Park 6, we developed a low-cost indoor monitoring system preserving
 As detection techniques have improved over the years, Alzheimer's and other different forms of dementia have come to receive an increasing amount of attention. In addition to being the sixth most common cause of mortality in the US, Alzheimer's disease is also thought to be the possible cause of dementia in more than 6 million people. While the average person experiences a natural reduction in cognitive function with aging, some people experience a far more rapid decline, which frequently progresses to Alzheimer's disease or another form of dementia. These people are classified as having mild cognitive impairment, making them the study's population.
 
 
-`EP6 Dashboard` is an unified portal developed using python packages and React framework to monitor the indoor activities through audio, visual and spatial tracking. 
-
+`EP6 Dashboard` is an unified portal developed using python packages and React framework to monitor the indoor activities through audio, visual and spatial tracking. It monitors following activities:
+a) Audio
+b) Visual
+c) Indoor Temperature and Humidity
+d) Bluetooth
 
 
 # System Architecture 
@@ -93,7 +96,11 @@ Section A) in fig. II represents position of each Raspberry Pi on EP6 schematic 
 
 # Audio Pipeline Analysis
 
+As part of audio pipeline, we collect the audio features of the participants through respeaker USB microphone arrays placed on ceiling. We don't store the audio itself but its computed feature to preserve participant privacy. Through these features, we perform speaker diarization followed by tagging the respective participants groups. Through these, we are measuring the degree of engagement in each group. 
 
+Occupancy analysis plays an important role in identification of how physical location of the EP6 correlates with the interaction among the participants. fig. III represents the image of Audio section on EP6 dashboard. Section A) shows the physical location of microphone arrays in the EP6 lab. To have an hour dependent view of occupancy, we also plot the heatmap of occupancy based on the audio signals as shown in section C) which can be controlled through slider shown in section B) of fig. III. One can vary the hours and see the occupancy change with respect to hours. 
+
+![Audio Pipeline (A) EP6 Schematic with position of microphone arrays (B) Slider to analyze the activity between two specified hours (C) Heatmap depicting the activity level in EP6](assets/EP6_Dashboard_Audio.png)
 
 
 # Visual Pipeline Analysis
@@ -103,44 +110,6 @@ Section A) in fig. II represents position of each Raspberry Pi on EP6 schematic 
 
 
 # Mathematics
-
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
-
-Double dollars make self-standing equations:
-
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
-
-# Citations
-
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
 
 # Acknowledgements
 
