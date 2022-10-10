@@ -105,6 +105,10 @@ Occupancy analysis plays an important role in identification of how physical loc
 
 # Visual Pipeline Analysis
 
+Through the means of vision pipeline, we are trying to record and analyze the features in movement, action, and interaction of participants/patients through computer vision techniques, which are later displayed in the vision segment of the dashboard. With movement, we are trying to analyze the path taken on the EP6 floor in a certain time frame over multiple iteration for every individual human subject. With action, we try to analyze posture of every single individual (sitting, standing, leaning to talk). With interactions, we aim to register f-formations for further research purposes that occurs during participants interactions. All the above-mentioned processing is done through the collection of Image feed from all the individual raspberry Pi’s at every second. However, it is unsaid truth that Pi’s don’t always gather data at every instance of time due to processing fluctuations. With the said state of image collection, an algorithm manages to stitch images from all the cameras, of the given instance in time, into one singular image that shows the overview of the EP6 floor and activity going on.
+
+Dashboard displays the processed data in 4 different ways, Heatmap, Occupancy Map, and Camera Location. Heatmap, as the name suggests, displays the occupancy in terms of heat signature to visualize the population distribution throughout the EP6 floor. On contrary, Occupancy Map gives more specific location of all the individuals, at any given time, in the EP6. Lastly, Camera Location provides the location of the places from where the image originates.
+
 
 # Bluetooth Pipeline Analysis
 
