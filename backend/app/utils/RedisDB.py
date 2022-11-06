@@ -2,19 +2,18 @@
   Author : Ratan Singh
   Email : [ratansingh648@gmail.com]
   Date Created : 2022-09-24 20:10:33
-  Last Modified : 2021-09-24 20:10:33
+  Last Modified : 2022-09-24 20:10:33
   Description : Redis Client to store and fetch the data
 """
 
 import logging
-from typing_extensions import assert_type
 from redis import Redis
 from time import time
 
 
-class Redis(object):
+class RedisDB(object):
 
-    def __init__(self, host="localhost", port=6739) -> None:
+    def __init__(self, host="localhost", port=6379) -> None:
         """
         Initializing the redis client for connection
         """
