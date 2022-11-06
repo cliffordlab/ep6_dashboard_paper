@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useLocation, Redirect } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
 import {
@@ -48,6 +48,8 @@ const Sidebar = (props) => {
     const { setTheme, mode } = useContext(ThemeContext);
     const styles = sideBarStyles(mode);
 
+    let navigate = useNavigate();
+
     // Toggle theme callback
     const ToggleBtn = (e) => {
         localStorage.setItem("mode", e);
@@ -59,6 +61,7 @@ const Sidebar = (props) => {
     const logout = (e) => {
         // fetch JWT token
         let token = localStorage.getItem('token')
+
         // Sending Logout request
         fetch(config.url.API_HOST + '/logout',  
         {   method : "POST", 
@@ -67,10 +70,10 @@ const Sidebar = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.success){
-                console.log("Ratan");
-                <Redirect to="/login" />
+                localStorage.removeItem('token');
+                alert("You have logged out");
+                navigate("/login");
             }
             else{
                 alert(data.msg);
