@@ -9,22 +9,27 @@
 from os import path
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
 from importlib import import_module
+from sched import scheduler
+from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, url_for
 
 # SQL Alchemy database to register minor status if needed
 db = SQLAlchemy()
+scheduler = APScheduler()
 
-# Registering DB to app
+# Registering DB and scheduler to app
 
 
 def register_extensions(app):
     db.init_app(app)
+    scheduler.init_app(app)
+    scheduler.start()
 
 
 # Registering the Blueprints to App
 def register_blueprints(app):
-    for module_name in ('base', 'audio', 'visual', 'humidity', 'illuminance', 'mail'):
+    for module_name in ('base', "bluetooth", 'audio', 'visual', 'humidity', 'illuminance', 'mail'):
         module = import_module('app.{}.routes'.format(module_name))
         app.register_blueprint(module.blueprint)
 
