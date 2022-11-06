@@ -2,8 +2,8 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Switch,
-    Redirect,
+    Routes,
+    Navigate,
 } from "react-router-dom";
 
 import NavBar from "./components/navbar/NavBar";
@@ -56,6 +56,9 @@ function App() {
                 setUsername("");
                 setAuthToken("");
             }
+        })
+        .catch(function(error){
+            console.log(error);
         });
 
     })
@@ -76,51 +79,48 @@ function App() {
                 <div className="container">
                     { isLogin ? <SideBar user={username}/> : null }
                     <div style={styles.body}>
-                        <Switch>
-                            <Route path="/status">
-                                {isLogin ? <RpiStatus /> : <Redirect to="/login" /> }
-                            </Route>
+                        <Routes>
+                            <Route path="/status"
+                                element={isLogin ? <RpiStatus /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/audio">
-                                {isLogin ? <Audio /> : <Redirect to="/login" /> }
-                            </Route>
+                            <Route path="/audio"
+                                element={isLogin ? <Audio /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/visual">
-                                {isLogin ? <Visual /> : <Redirect to="/login" /> }
-                            </Route>
+                            <Route path="/visual"
+                                element={isLogin ? <Visual /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/humidity">
-                                {isLogin ? <Humidity /> : <Redirect to="/login" /> }
-                                <Humidity />
-                            </Route>
+                            <Route path="/humidity"
+                                element={isLogin ? <Humidity /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/illuminance">
-                                {isLogin ? <Illuminance /> : <Redirect to="/login" /> }
-                                <Illuminance />
-                            </Route>
+                            <Route path="/illuminance"
+                                element={isLogin ? <Illuminance /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/bluetooth">
-                                {isLogin ? <Bluetooth /> : <Redirect to="/login" /> }
-                                <Bluetooth />
-                            </Route>
+                            <Route path="/bluetooth"
+                                element={isLogin ? <Bluetooth /> : <Navigate to="/login" /> }
+                            />
 
-                            <Route path="/login">
-                                {isLogin ? <Redirect to="/status"/> : <Login onchange={loginCallback}/> }
-                            </Route>
+                            <Route path="/login"
+                                element={isLogin ? <Navigate to="/status"/> : <Login onchange={loginCallback}/> }
+                            />
 
-                            <Route path="/register">
-                                {isLogin ? <Redirect to="/status"/> : <Register/> }
-                            </Route>
+                            <Route path="/register"
+                                element={isLogin ? <Navigate to="/status"/> : <Register/> }
+                            />
 
-                            <Route path="/forget-password">
-                                {isLogin ? <Redirect to="/status"/> : <ForgetPassword/> }
-                            </Route>
+                            <Route path="/forget-password"
+                                element={isLogin ? <Navigate to="/status"/> : <ForgetPassword/> }
+                            />
 
-                            <Route path="/">
-                                {isLogin ? <Redirect to="/status"/> : <Redirect to="/login"/> }
-                            </Route>
+                            <Route path="/"
+                                element={isLogin ? <Navigate to="/status"/> : <Navigate to="/login"/> }
+                            />
 
-                        </Switch>
+                        </Routes>
                     </div>
                 </div>
             </div>
