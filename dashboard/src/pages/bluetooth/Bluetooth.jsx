@@ -23,22 +23,6 @@ const Bluetooth = (props) => {
     const { mode } = useContext(ThemeContext);
     const styles = bluetoothStyles(mode);
     const [widthRef, setWidthRef] = useState();
-    const ref = useRef(null);
-
-
-   // Callback Handler for Region Clicking - To be removed later
-    const regionClickHandler = (data) => {
-    let region_id = data.region_id.slice(4);
-    fetch(config.url.API_HOST + '/audio/get-data?region_id='+region_id).then(res => res.json()).then(data => {setCohortData(data)});
-    }
-
-    // Handler for the change in dropdown
-    const handleDropdownChange = (event) => {
-        // Change the value in dropdown menu
-        setDropdownValue(event.target.value);
-
-        //Code to update the image goes here
-    }
 
     // Initializing the plot data for the first time
     useEffect(() => {
@@ -50,15 +34,18 @@ const Bluetooth = (props) => {
     }, []);
 
 
-    useEffect(() => {
-        const width = ref.current.offsetWidth;
-        setWidthRef(width);
-    }, [widthRef]);
+    // Handler for the change in dropdown
+    const handleDropdownChange = (event) => {
+        // Change the value in dropdown menu
+        setDropdownValue(event.target.value);
 
+        //Code to update the image goes here
+    }
+    
    
     return (
         // Style from the bottom of the style dictionary
-        <div style={styles.audio}>
+        <div style={styles.bluetooth}>
             <Grid container>
                 <Grid item xs={12} className="item-padding">
                     <Container>
@@ -79,27 +66,20 @@ const Bluetooth = (props) => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Twenty</MenuItem>
-                                <MenuItem value={21}>Twenty one</MenuItem>
-                                <MenuItem value={22}>Twenty one and a half</MenuItem>
+                                <MenuItem value={10}>7</MenuItem>
+                                <MenuItem value={21}>8</MenuItem>
+                                <MenuItem value={22}>9</MenuItem>
                                 </Select>
                             </FormControl>
                         </Paper>
                     </Container>
                 </Grid>
-                <Grid item xs={6} className="item-padding">
-                    <Paper style={styles.itemContainer} ref={ref}>
-                        {widthRef && (
-                            <MicMap
-                                width={widthRef}
-                                height={560}
-                                onclick={(e) => {
-                                    regionClickHandler(e);
-                                }}
-                            />
-                        )}
-                    </Paper>
+
+                
+                <Grid item xs={6}  className="item-padding">
+                    <img src={config.url.API_HOST +"/bluetooth/get-data"} alt="img" />
                 </Grid>
+
             </Grid>
         </div>
     );
@@ -108,29 +88,14 @@ const Bluetooth = (props) => {
 export default Bluetooth;
 
 const bluetoothStyles = (mode) => ({
-    markers: {
-        color: theme[mode].color,
-    },
-    heatMapCard: {
-        width: "100%",
-        height: "100%",
-    },
-    audio: {
+    bluetooth: {
         flexGrow: 1,
         backgroundColor: theme[mode].backgroundColor,
         color: theme[mode].color,
-    },
-    audioPlot: {
-        color: theme[mode].color,
-        // flexGrow: 1,
-        width: "100%",
     },
     itemContainer: {
         backgroundColor: theme[mode].opposite,
         height: "100%",
         color: theme[mode].backgroundColor,
-    },
-    slider: {
-        color: theme[mode].opposite,
     },
 });
