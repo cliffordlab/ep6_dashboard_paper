@@ -40,12 +40,12 @@ def login():
             return {"success": False,
                     "msg": "This email does not exist."}, 400
 
-        # if password doesnt match
+        # if password doesn't match
         if not user_exists.check_password(_password):
             return {"success": False,
                     "msg": "Wrong credentials."}, 400
 
-        # create access token uwing JWT
+        # create access token using JWT
         token = jwt.encode({'email': _email, 'exp': datetime.now(timezone.utc) + timedelta(minutes=30)}, current_app.config["SECRET_KEY"])
 
         # set the JWT auth token active for session
@@ -95,7 +95,7 @@ def logout(current_user):
         return {"success": True}, 200
 
     except Exception as e:
-        current_app.logger.error("Error Occured while doing logout : {}".format(str(e)))
+        current_app.logger.error("Error Occurred while doing logout : {}".format(str(e)))
         return {"success": False,
                 "msg": "Oops ! Something went wrong."}, 400
 
@@ -133,7 +133,7 @@ def register():
                 "msg": "The user was successfully registered"}, 200
 
     except Exception as e:
-        current_app.logger.error("Error Occured while Registering the user : {}".format(str(e)))
+        current_app.logger.error("Error Occurred while Registering the user : {}".format(str(e)))
         return {"success": False,
                 "msg": "Oops ! Something went wrong."}, 400
 
@@ -163,7 +163,7 @@ def forget_password():
                 "msg": msg}, 200
 
     except Exception as e:
-        current_app.logger.error("Error Occured while resetting the passowrd : {}".format(str(e)))
+        current_app.logger.error("Error Occurred while resetting the passowrd : {}".format(str(e)))
         return {"success": False,
                 "msg": "Oops ! Something went wrong."}, 400
 
@@ -192,11 +192,11 @@ def reset_password():
                         "msg": "Password Reset Link has expired or is invalid."}, 400
 
             return {"success": True,
-                    "msg": "Password is resetted"}, 200
+                    "msg": "Password is reset"}, 200
     except Exception as e:
-        current_app.logger.error("Error Occured while resetting the passowrd : {}".format(str(e)))
+        current_app.logger.error("Error Occurred while resetting the passowrd : {}".format(str(e)))
         return {"success": False,
-                "msg": "Error occured while processing the request"}, 400
+                "msg": "Error occurred while processing the request"}, 400
 
 
 @blueprint.route('/validate-token', methods=["POST"])
@@ -234,8 +234,8 @@ def validate_token():
                 "msg": "Session has expired."}, 401
 
     except Exception as e:
-        current_app.logger.error("Exception occured while validating the token : {}".format(str(e)))
+        current_app.logger.error("Exception occurred while validating the token : {}".format(str(e)))
         return {"success": False,
                 "username": "",
                 "email": "",
-                "msg": "Error Occured while processing the token. : {}".format(str(e))}, 401
+                "msg": "Error Occurred while processing the token. : {}".format(str(e))}, 401
