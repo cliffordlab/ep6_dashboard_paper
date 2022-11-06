@@ -22,7 +22,7 @@ const Audio = (props) => {
     const classes = useStyles(test);
     const [widthRef, setWidthRef] = useState();
     const ref = useRef(null);
-    const [value, setValue] = React.useState([0, 6]);  // For Slider
+    const [value, setValue] = useState([0, 6]);  // For Slider
     const valuetext = (value) => { return `${value} hr`; };
     const valueLabelFormat = (value) => { return value; };
 
