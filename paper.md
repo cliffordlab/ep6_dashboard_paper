@@ -41,7 +41,7 @@ authors:
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
     affiliation: 2
   
-  - name: Dr. Gari Clifford
+  - name: Dr. Gari D. Clifford
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
     affiliation: 2
 
@@ -49,8 +49,10 @@ authors:
 affiliations:
  - name: Department of Electrical and Computer Engineering, Georgia Institute of Technology, USA
    index: 1
- - name: Department of Biomedical Engineering, Emory University, USA
+ - name: Department of Biomedical Informatics, Emory University, USA
    index: 2
+ - name: Department of Biomedical Engineering, Georgia Institute of Technology, USA
+   index: 3
 
 date: 13 August 2017
 bibliography: paper.bib
@@ -110,17 +112,20 @@ Through the means of vision pipeline, we are trying to record and analyze the fe
 
 Dashboard displays the processed data in 4 different ways, Heatmap, Occupancy Map, and Camera Location. Heatmap, as the name suggests, displays the occupancy in terms of heat signature to visualize the population distribution throughout the EP6 floor. On contrary, Occupancy Map gives more specific location of all the individuals, at any given time, in the EP6. Lastly, Camera Location provides the location of the places from where the image originates.
 
-![People's location on EP6](assets/EP6_occupancy.jpg)
+![Location of individuals (red dots) within floor plan layout of EP6](assets/EP6_occupancy.jpg)
 
 
 # Bluetooth Pipeline Analysis
 
+In the Bluetooth pipeline analysis, we gather the BLE signals from the BLE Beacons carried by the participants through the Raspberry Pi's placed in the ceiling. We only store the MAC address and the corresponding RSSI of the BLE Beacons thus preserving participant privacy. With this, we perform RNSI weighted RSSI based Tri-lateration. Through these, we are tracking the movement and thereby activities of the participants during their interactions in EP6.
 
-# Mathematics
+![Audio Pipeline (A) EP6 Schematic with position of microphone arrays (B) Slider to analyze the activity between two specified hours (C) Heatmap depicting the activity level in EP6](assets/EP6_Dashboard_Audio.png)
+
+Occupancy analysis of different areas in EP6 helps us correspond the movements of participants and their activites in   fig. IV represents the image of Bluetooth Localisation section on EP6 dashboard. Section A) shows the location of Raspberry Pi's in the EP6 lab. Section B) shows the real-time location of participants in EP6
+
 
 # Acknowledgements
-
-We would like to express our thanks to Cognitive Empowerment program which made this work feasible. Authors would also like to thank Robert Tweedy for his continuous support with Executive Park 6 Systems.
+This work is part of the Cognitive Empowerment Program, which is supported by a generous investment from the James M. Cox Foundation and Cox Enterprises, Inc., in support of Emory’s Brain Health Center and Georgia Institute of Technology.
 
 # References
 
