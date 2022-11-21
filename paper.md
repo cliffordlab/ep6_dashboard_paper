@@ -11,27 +11,27 @@ authors:
   - name: Arjunsinh Nakum
     orcid: 0000-0000-0000-0000
     equal-contrib: true
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: 1
 
   - name: Krishna MVS
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: 1
   
   - name: Ratan Singh
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: 1
   
   - name: Nicolas Shu
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: 1
   
   - name: Chaitra Hegde
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: 1
   
   - name: Pradyumna B. Suresha
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: 1
   
   - name: Dr. Hyeokhyen Kwon
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
@@ -43,7 +43,7 @@ authors:
   
   - name: Dr. Gari D. Clifford
     equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
+    affiliation: "2, 3" # (Multiple affiliations must be quoted)
 
 
 affiliations:
@@ -65,14 +65,14 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-At Executive Park 6, we developed a low-cost indoor monitoring system preserving the privacy using Raspberry Pi 4, Respeaker USB microphone array, Raspberry Pi Camera and Google Coral USB TPU for people sufferingfrom cognitive impairment diseases like Dementia, Alzheimer's disease etc. with their privacy presevered. With custom real-time algorithms, we detect the position of participants and try to assess their engagement with each other through poses. To collate all the data and effective monitoring, we developed `EP6 Dashboard` which helps combining all the data from Audio, Camera and Bluetooth pipelines together and presents the analysis of this data using Computer Vision, Signal Processing and Machine Learning Techniques. `EP6 Dashboard` is one stop solution for monitoring the sensor network, analyzing and visualizing the multimodal data collected.
+A low-cost indoor distributed monitoring system is described, which captures audio, video, Bluetooth strength, temperature and humidity. A Google Coral USB TPU is used for edge-computing to preserve the privacy of the monitored subjects. Custom real-time algorithms are provided to detect the position of individuals wearing Bluetooth beacons moving around a built environment. A dashboard is provided to allow observers monitor human activity and motion. A demonstration of the system using 39 edge computing systems connected to a fog server layer, and its use in monitoring users in a mild cognitive impairment therapy unit is described.
 
 # Statement of need
 
-As detection techniques have improved over the years, Alzheimer's and other different forms of dementia have come to receive an increasing amount of attention. In addition to being the sixth most common cause of mortality in the US, Alzheimer's disease is also thought to be the possible cause of dementia in more than 6 million people. While the average person experiences a natural reduction in cognitive function with aging, some people experience a far more rapid decline, which frequently progresses to Alzheimer's disease or another form of dementia. These people are classified as having mild cognitive impairment, making them the study's population.
+As detection techniques have improved over the years, Alzheimer's and other different forms of dementia have come to receive an increasing amount of attention. In addition to being the sixth most common cause of mortality in the US, Alzheimer's disease is also thought to be the possible cause of dementia in more than 6 million people [@alzheimer_dementia]. While the average person experiences a natural reduction in cognitive function with aging, some people experience a far more rapid decline, which frequently progresses to Alzheimer's disease or another form of dementia. These people are classified as having mild cognitive impairment, making them the study's population.
 
 
-`EP6 Dashboard` is an unified portal developed using python packages and React framework to monitor the indoor activities through audio, visual and spatial tracking. It monitors following activities:
+`EP6 Dashboard` is an unified portal developed using python [@Python] packages and React [@React] framework to monitor the indoor activities through audio, visual and spatial tracking. It monitors following activities:
 1. Audio
 2. Visual
 3. Indoor Temperature and Humidity
@@ -81,7 +81,7 @@ As detection techniques have improved over the years, Alzheimer's and other diff
 
 # System Architecture 
 
-To implement the aforementioned system, we have followed a scalable three tier architecture using Flask as application server hosted with nginx as load balancer and reverse proxy. Frontend is designed with React for and served through nginx as webserver. We are using influxdb as database for storing the time series data generated by the edge devices. Redis is used as key-value store to interact with background python processes, whose output is consumed on the dashboard. MySQL database is used for storing the authentication and authorization of users.
+To implement the aforementioned system, we have followed a scalable three tier architecture using Flask [@Flask] as application server hosted with Nginx [@Nginx] as load balancer and reverse proxy. Frontend is designed with React [@React] for and served through Nginx as webserver. We are using InfluxDB [@InfluxDB] as database for storing the time series data generated by the edge devices. Redis [@Redis] is used as key-value store to interact with background python [@Python] processes, whose output is consumed on the dashboard. MySQL [@MySQL] database is used for storing the authentication and authorization of users.
 
 ![Architecture Diagram of EP6 Dashboard](assets/Architecture_Diagram.png)
 
@@ -112,7 +112,7 @@ Through the means of vision pipeline, we are trying to record and analyze the fe
 
 Dashboard displays the processed data in 4 different ways, Heatmap, Occupancy Map, and Camera Location. Heatmap, as the name suggests, displays the occupancy in terms of heat signature to visualize the population distribution throughout the EP6 floor. On contrary, Occupancy Map gives more specific location of all the individuals, at any given time, in the EP6. Lastly, Camera Location provides the location of the places from where the image originates.
 
-![Location of individuals (red dots) within floor plan layout of EP6](assets/EP6_occupancy.jpg)
+![Location of individuals (red dots) within floor plan layout of the built environment](assets/EP6_occupancy.jpg)
 
 
 # Bluetooth Pipeline Analysis
@@ -128,63 +128,3 @@ Occupancy analysis of different areas in EP6 helps us correspond the movements o
 This work is part of the Cognitive Empowerment Program, which is supported by a generous investment from the James M. Cox Foundation and Cox Enterprises, Inc., in support of Emory’s Brain Health Center and Georgia Institute of Technology.
 
 # References
-
-@article{Pearson:2017,
-  	url = {http://adsabs.harvard.edu/abs/2017arXiv170304627P},
-  	Archiveprefix = {arXiv},
-  	Author = {{Pearson}, S. and {Price-Whelan}, A.~M. and {Johnston}, K.~V.},
-  	Eprint = {1703.04627},
-  	Journal = {ArXiv e-prints},
-  	Keywords = {Astrophysics - Astrophysics of Galaxies},
-  	Month = mar,
-  	Title = {{Gaps in Globular Cluster Streams: Pal 5 and the Galactic Bar}},
-  	Year = 2017
-}
-
-@book{Binney:2008,
-  	url = {http://adsabs.harvard.edu/abs/2008gady.book.....B},
-  	Author = {{Binney}, J. and {Tremaine}, S.},
-  	Booktitle = {Galactic Dynamics: Second Edition, by James Binney and Scott Tremaine.~ISBN 978-0-691-13026-2 (HB).~Published by Princeton University Press, Princeton, NJ USA, 2008.},
-  	Publisher = {Princeton University Press},
-  	Title = {{Galactic Dynamics: Second Edition}},
-  	Year = 2008
-}
-
-@article{gaia,
-    author = {{Gaia Collaboration}},
-    title = "{The Gaia mission}",
-    journal = {Astronomy and Astrophysics},
-    archivePrefix = "arXiv",
-    eprint = {1609.04153},
-    primaryClass = "astro-ph.IM",
-    keywords = {space vehicles: instruments, Galaxy: structure, astrometry, parallaxes, proper motions, telescopes},
-    year = 2016,
-    month = nov,
-    volume = 595,
-    doi = {10.1051/0004-6361/201629272},
-    url = {http://adsabs.harvard.edu/abs/2016A%26A...595A...1G},
-}
-
-@article{astropy,
-    author = {{Astropy Collaboration}},
-    title = "{Astropy: A community Python package for astronomy}",
-    journal = {Astronomy and Astrophysics},
-    archivePrefix = "arXiv",
-    eprint = {1307.6212},
-    primaryClass = "astro-ph.IM",
-    keywords = {methods: data analysis, methods: miscellaneous, virtual observatory tools},
-    year = 2013,
-    month = oct,
-    volume = 558,
-    doi = {10.1051/0004-6361/201322068},
-    url = {http://adsabs.harvard.edu/abs/2013A%26A...558A..33A}
-}
-
-@misc{fidgit,
-  author = {A. M. Smith and K. Thaney and M. Hahnel},
-  title = {Fidgit: An ungodly union of GitHub and Figshare},
-  year = {2020},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  url = {https://github.com/arfon/fidgit}
-}
