@@ -76,7 +76,7 @@ For a distributed sensor network application like this, it becomes very importan
 
 ![Raspberry Pi attached with sensors. (A) Raspberry Pi v4, (B) Bluetooth sensor, (c) Temperature and humidity sensor, (d) Camera sensor, (3) Microphone, (e) Google Coral USB TPU](assets/Rpi_and_sensors.png)
 
-The study space is installed with 39 Raspberry Pis [@RaspberryPi] having multiple sensors, as shown in Figure 1. It senses Bluetooth beacon [@Bluetooth] carried by patients, ambient temperature and humidity sensors [@TempHumid], camera [@Camera], microphone [@Respeak], and Google Coral USB TPU [@Coral] for acceleration.
+The study space is installed with 39 Raspberry Pis [@RaspberryPi] having multiple sensors, as shown in Figure 1. It senses Bluetooth beacon [@Bluetooth] carried by patients, ambient temperature and humidity sensors [@TempHumid], camera [@Camera], microphone [@Respeaker], and Google Coral USB TPU [@Coral] for acceleration.
 
 ![Overall computer network architectures.](assets/computing_environment_hori.png)
 
@@ -103,7 +103,7 @@ Section (A) in Figure 4 represents the position of each Raspberry Pi on our buil
 
 ![Audio Channels for a particular microphone array](assets/Audio_graph.png)
 
-As part of the audio capture and analysis pipeline, we collect the environmental acoustic signals in a built-in environment through respeaker USB microphone arrays [@Respeak] placed on the ceiling. Since the microphone can capture the conversations of patients, we process raw acoustic signals to extract unidentified acoustic features, which are Melspectogram [@Melspectogram] and MFCC [@MFCC], to preserve patient privacy. Through these features, we perform speaker diarization [@Diarizaion] followed by tagging the respective participants' groups [@Tagging]. Through these, our system can measure conversation or environmental audio cues related to ongoing patients’ activities. Figure 5 shows the power of acoustic signal measured in decibel captured at a Raspberry Pi.
+As part of the audio capture and analysis pipeline, we collect the environmental acoustic signals in a built-in environment through respeaker USB microphone arrays [@Respeak] placed on the ceiling. Since the microphone can capture the conversations of patients, we process raw acoustic signals to extract unidentified acoustic features, which are Melspectogram [@Melspectogram] and MFCC [@Melspectogram], to preserve patient privacy. Through these features, we perform speaker diarization [@Diarizaion] followed by tagging the respective participants' groups [@Tagging]. Through these, our system can measure conversation or environmental audio cues related to ongoing patients’ activities. Figure 5 shows the power of acoustic signal measured in decibel captured at a Raspberry Pi.
 
 ![Audio Pipeline (A) Study space schematic with the position of microphone arrays (B) Slider to analyze the activity between two specified hours (C) Heatmap depicting the activity level in the study space](assets/EP6_Dashboard_Audio.png)
 

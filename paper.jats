@@ -188,8 +188,8 @@ a Creative Commons Attribution 4.0 International License (CC BY
   camera
   (<xref alt="Camera" rid="ref-Camera" ref-type="bibr"><italic>Camera</italic></xref>),
   microphone
-  (<xref alt="Respeak" rid="ref-Respeak" ref-type="bibr"><italic>Respeak</italic></xref>),
-  and Google Coral USB TPU
+  (<xref alt="Zuo, n.d." rid="ref-Respeaker" ref-type="bibr">Zuo,
+  n.d.</xref>), and Google Coral USB TPU
   (<xref alt="Coral" rid="ref-Coral" ref-type="bibr"><italic>Coral</italic></xref>)
   for acceleration.</p>
   <fig>
@@ -268,16 +268,16 @@ a Creative Commons Attribution 4.0 International License (CC BY
   <p>As part of the audio capture and analysis pipeline, we collect the
   environmental acoustic signals in a built-in environment through
   respeaker USB microphone arrays
-  (<xref alt="Respeak" rid="ref-Respeak" ref-type="bibr"><italic>Respeak</italic></xref>)
+  (<xref alt="Respeak?" rid="ref-Respeak" ref-type="bibr"><bold>Respeak?</bold></xref>)
   placed on the ceiling. Since the microphone can capture the
   conversations of patients, we process raw acoustic signals to extract
   unidentified acoustic features, which are Melspectogram
-  (<xref alt="Melspectogram" rid="ref-Melspectogram" ref-type="bibr"><italic>Melspectogram</italic></xref>)
-  and MFCC
-  (<xref alt="MFCC" rid="ref-MFCC" ref-type="bibr"><italic>MFCC</italic></xref>),
-  to preserve patient privacy. Through these features, we perform
-  speaker diarization
-  (<xref alt="Diarizaion" rid="ref-Diarizaion" ref-type="bibr"><italic>Diarizaion</italic></xref>)
+  (<xref alt="Lederle &amp; Wilhelm, 2018" rid="ref-Melspectogram" ref-type="bibr">Lederle
+  &amp; Wilhelm, 2018</xref>) and MFCC
+  (<xref alt="Lederle &amp; Wilhelm, 2018" rid="ref-Melspectogram" ref-type="bibr">Lederle
+  &amp; Wilhelm, 2018</xref>), to preserve patient privacy. Through
+  these features, we perform speaker diarization
+  (<xref alt="Diarizaion?" rid="ref-Diarizaion" ref-type="bibr"><bold>Diarizaion?</bold></xref>)
   followed by tagging the respective participants’ groups
   (<xref alt="Tagging" rid="ref-Tagging" ref-type="bibr"><italic>Tagging</italic></xref>).
   Through these, our system can measure conversation or environmental
@@ -447,31 +447,27 @@ a Creative Commons Attribution 4.0 International License (CC BY
       <uri></uri>
     </element-citation>
   </ref>
-  <ref id="ref-Diarizaion">
-    <element-citation publication-type="article-journal">
-      <article-title>Diarizaion</article-title>
-      <source></source>
-      <uri></uri>
-    </element-citation>
-  </ref>
-  <ref id="ref-MFCC">
-    <element-citation publication-type="article-journal">
-      <article-title>MFCC</article-title>
-      <source></source>
-      <uri></uri>
-    </element-citation>
-  </ref>
   <ref id="ref-Melspectogram">
-    <element-citation publication-type="article-journal">
-      <article-title>Melspectogram</article-title>
-      <source></source>
-      <uri></uri>
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Lederle</surname><given-names>Marcel</given-names></name>
+        <name><surname>Wilhelm</surname><given-names>Benjamin</given-names></name>
+      </person-group>
+      <article-title>Combining high-level features of raw audio waves and mel-spectrograms for audio tagging</article-title>
+      <publisher-name>arXiv</publisher-name>
+      <year iso-8601-date="2018">2018</year>
+      <uri>https://arxiv.org/abs/1811.10708</uri>
+      <pub-id pub-id-type="doi">10.48550/ARXIV.1811.10708</pub-id>
     </element-citation>
   </ref>
-  <ref id="ref-Respeak">
-    <element-citation publication-type="book">
-      <source>Respeak</source>
-      <uri></uri>
+  <ref id="ref-Respeaker">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Zuo</surname><given-names>Baozhu</given-names></name>
+      </person-group>
+      <article-title>Respeaker 4-MIC array for raspberry pi</article-title>
+      <source>seeedstudio</source>
+      <uri>https://wiki.seeedstudio.com/ReSpeaker_4_Mic_Array_for_Raspberry_Pi/</uri>
     </element-citation>
   </ref>
   <ref id="ref-RaspberryPi">
