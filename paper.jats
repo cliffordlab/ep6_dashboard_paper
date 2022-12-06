@@ -171,10 +171,13 @@ a Creative Commons Attribution 4.0 International License (CC BY
 </sec>
 <sec id="system-architecture">
   <title>System Architecture</title>
-  <p><named-content content-type="image">Raspberry Pi attached with
-  sensors. (A) Raspberry Pi v4, (B) Bluetooth sensor, (c) Temperature
-  and humidity sensor, (d) Camera sensor, (3) Microphone, (e) Google
-  Coral USB TPU</named-content></p>
+  <fig>
+    <caption><p>Raspberry Pi attached with sensors. (A) Raspberry Pi v4,
+    (B) Bluetooth sensor, (c) Temperature and humidity sensor, (d)
+    Camera sensor, (3) Microphone, (e) Google Coral USB
+    TPU</p></caption>
+    <graphic mimetype="image" mime-subtype="png" xlink:href="media/assets/Rpi_and_sensors.png" xlink:title="" />
+  </fig>
   <p>The study space is installed with 39 Raspberry Pis
   (<xref alt="RaspberryPi" rid="ref-RaspberryPi" ref-type="bibr"><italic>RaspberryPi</italic></xref>)
   having multiple sensors, as shown in Figure 1. It senses Bluetooth
@@ -189,8 +192,10 @@ a Creative Commons Attribution 4.0 International License (CC BY
   and Google Coral USB TPU
   (<xref alt="Coral" rid="ref-Coral" ref-type="bibr"><italic>Coral</italic></xref>)
   for acceleration.</p>
-  <p><named-content content-type="image">Overall computer network
-  architectures.</named-content></p>
+  <fig>
+    <caption><p>Overall computer network architectures.</p></caption>
+    <graphic mimetype="image" mime-subtype="png" xlink:href="media/assets/computing_environment_hori.png" xlink:title="" />
+  </fig>
   <p>Overall computer network architecture is shown in Figure 2. 39
   Raspberry Pis are transferring multi-modal sensor data to the
   on-premise fog computing node in real-time. One day volume of data
