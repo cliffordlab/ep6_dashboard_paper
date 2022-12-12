@@ -9,6 +9,7 @@
 import os
 from smtplib import SMTP_PORT
 from decouple import config
+from urllib.parse import quote_plus
 
 
 class Config(object):
@@ -59,7 +60,7 @@ class ProductionConfig(Config):
     # Production uses MYSQL DB
     DB_USERNAME = config("DB_USERNAME", "root")
     DB_PASSWORD = config("DB_PASSWORD", "rs@648")
-    SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@localhost/ep6'.format(DB_USERNAME, DB_PASSWORD)
+    SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@localhost/ep6'.format(DB_USERNAME, quote_plus(DB_PASSWORD))
 
 
 # UAT Specific configurations go here
@@ -74,8 +75,8 @@ class DevConfig(Config):
     ENV = "DEV"
 
     DB_USERNAME = config("DB_USERNAME", "root")
-    DB_PASSWORD = config("DB_PASSWORD", "rs648")
-    SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@localhost/ep6'.format(DB_USERNAME, DB_PASSWORD)
+    DB_PASSWORD = config("DB_PASSWORD", "rs@648")
+    SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@localhost/ep6'.format(DB_USERNAME, quote_plus(DB_PASSWORD))
 
 
 # Load all possible configurations
