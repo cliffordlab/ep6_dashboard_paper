@@ -110,3 +110,83 @@ class JWTTokenBlocklist(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+
+
+class Cohorts(db.Model):
+    """
+    Schema for Cohort Data
+    columns:
+        id              : int
+        active          : boolean
+        created_at      : datetime
+        last_updated    : datetime
+    """
+    id = db.Column(db.Integer(), primary_key=True)
+    active = db.Column(db.Boolean(), nullable=False)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow())
+    last_updated = db.Column(db.DateTime(), onupdate=datetime.utcnow())
+
+    def __init__(self, id) -> None:
+        self.id = id
+        self.active = True
+
+    def __repr__(self):
+        return f"Cohort ID {self.id}"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update_active(self, status):
+        self.active = status
+
+    @classmethod
+    def get_active_cohorts(cls):
+        active_cohorts = cls.query.filter_by(active=True).all()
+        return active_cohorts
+
+    @classmethod
+    def get_last_cohort(cls):
+        cohorts = cls.query.all()
+        last_cohort = max(list(lambda x: x.id, cohorts))
+        return last_cohort
+
+
+class Participants(db.Model):
+    """
+    Schema for participants
+    columns: 
+        id              : int
+        cohort_id       : int
+        name            : varchar(255)
+        created_at      : datetime
+        last_updated    : datetime
+    """
+
+    id = db.Column(db.Integer(), primary_key=True)
+    cohort_id = db.Column(db.Integer(), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    beacon_id = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow())
+    last_updated = db.Column(db.DateTime(), onupdate=datetime.utcnow())
+
+    def __init__(self, cohort_id, name, beacon_id) -> None:
+        self.cohort_id = cohort_id
+        self.name = name
+        self.beacon_id = beacon_id
+
+    def __repr__(self):
+        return f"Participant {self.name} , Cohort ID {self.cohort_id}, Beacon ID {self.beacon_id}"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).all()
+
+    @classmethod
+    def get_by_cohort_id(cls, cohort_id):
+        return cls.query.filter_by(cohort_id=cohort_id).all()
