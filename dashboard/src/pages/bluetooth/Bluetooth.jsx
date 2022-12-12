@@ -18,7 +18,7 @@ import Select from '@mui/material/Select';
 const Bluetooth = (props) => {
 
     // States for the graph
-    const [cohortData, setCohortData] = useState(['AS006', 'RS007', 'KM008']);
+    const [cohortData, setCohortData] = useState([]);
     const [dropdownValue, setDropdownValue] = useState('');
     const { mode } = useContext(ThemeContext);
     const styles = bluetoothStyles(mode);
@@ -26,11 +26,14 @@ const Bluetooth = (props) => {
 
     // Initializing the plot data for the first time
     useEffect(() => {
-        fetch(config.url.API_HOST + '/audio/get-data')
+        fetch(config.url.API_HOST + '/bluetooth/get-active-cohorts')
             .then((res) => res.json())
             .then((data) => {
+                console.log("Viktor");
+                console.log(data);
                 setCohortData(data);
-            });
+            })
+            .catch((error) => console.log(error));
     }, []);
 
 
@@ -66,6 +69,7 @@ const Bluetooth = (props) => {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
+                                {cohortData.map(cohortID => <MenuItem value={cohortID}>{cohortID}</MenuItem>)};
                                 <MenuItem value={10}>7</MenuItem>
                                 <MenuItem value={21}>8</MenuItem>
                                 <MenuItem value={22}>9</MenuItem>
