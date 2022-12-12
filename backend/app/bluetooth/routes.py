@@ -12,6 +12,7 @@ import json
 import os
 
 from app.bluetooth import blueprint
+from app.base.models import Cohorts, Participants
 from app.utils.Database import Database
 from app.utils.RedisDB import RedisDB
 
@@ -39,7 +40,7 @@ def static_data():
         current_app.logger.error("Exception Occured", exc_info=True)
 
 
-@blueprint.route('/get-position')
+@blueprint.route('/get-participants')
 def get_bluetooth_position():
     """
     API to fetch the position of people plotted from Bluetooth beacon
@@ -47,10 +48,32 @@ def get_bluetooth_position():
     """
     try:
         # get the data from redis and store it in media
-        image_path = os.path.join("bluetooth", "static", "images", "bluetooth_position.jpg")
+        cohort_id = request.args.get('cohort_id')
+        if cohort_id:
+            image_path = os.path.join("bluetooth", "static", "images", f"bluetooth_position_{cohort_id}.jpg")
+        else:
+            image_path = os.path.join("bluetooth", "static", "images", "bluetooth_position.jpg")
         redis.get_image("bluetooth_position", image_path)
     except Exception as e:
         image_path = os.path.join("visual", "static", "images", "ep6_map_positions.jpg")
         current_app.logger.exception("Exception occurred in fetching the data : {}".format(str(e)))
     finally:
         return send_file(image_path, mimetype='image/jpg')
+
+
+@blueprint.route('/get-cohort-data')
+def get_cohort_data():
+    """
+    API to fetch the active cohorts from the database
+    This data is consumed to show dropdowns of active cohorts
+    """
+    try:
+        # getting active active cohorts objects
+        active_cohorts = Cohorts.get_active_cohorts()
+        # mapping objects to IDs
+        active_cohorts = list(map(lambda x : x.id, active_cohorts))
+    except Exception as e:
+        active_cohorts = []
+        current_app.logger.exception("Exception occurred in fetching the cohort data : {}".format(str(e)))
+    finally:
+        return { "active_cohorts" : active_cohorts }, 200
