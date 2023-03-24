@@ -20,10 +20,6 @@ authors:
     equal-contrib: true
     affiliation: 1
 
-  - name: Robert Tweedy
-    equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
-
   - name: Hyeokhyen Kwon
     equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
     affiliation: 2
@@ -43,7 +39,11 @@ authors:
   - name: Nicolas Shu
     equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
     affiliation: 1
-  
+    
+  - name: Robert Tweedy
+    equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
+    affiliation: 2
+    
   - name: Gari D. Clifford
     corresponding: true # (This is how you can denote equal contributions between multiple authors)
     affiliation: 2 # (Multiple affiliations must be quoted)
