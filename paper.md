@@ -20,6 +20,10 @@ authors:
     equal-contrib: true
     affiliation: 1
 
+  - name: Robert Tweedy
+    equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
+    affiliation: 2
+
   - name: Hyeokhyen Kwon
     equal-contrib: false # (This is how you can denote equal contributions between multiple authors)
     affiliation: 2
