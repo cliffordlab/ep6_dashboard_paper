@@ -4,3 +4,6 @@ backend/logs
 *.pyc 
 settings.json
 *.log
+paper.pdf
+paper.zip
+assets.zip
